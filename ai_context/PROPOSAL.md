@@ -112,12 +112,14 @@ sections/safety/                # promoted to its own top-level section (10 pts)
   estop.tex                     # physical + RF e-stop; incl. the BUTTON CIRCUIT
                                 #   schematic the jury flagged as missing
   wheel_lock.tex  indicators_delays.tex  human_detection.tex
-  emergency_esp.tex             # Dmytro's new system — slot reserved
+  emergency_esp.tex             # Mykola's new system — slot reserved
   reliability_analysis.tex  test_evidence.tex   # test results, figures, photos
 teams/<team>/                   # arm, drone, electronics, ground_station,
-  tests.tex                     #   navigation, science, suspension
-  lessons.tex                   # NEW: \<team>llrows macro, same pattern as tests
-  figures/                      # team-owned assets (photos, exported PDFs)
+  figures/                      #   navigation, science, suspension -
+                                #   team-owned assets (photos, exported PDFs)
+                                # NOTE: tests/lessons are NOT per-team files -
+                                # both tables are owner-edited, rows inserted
+                                # all at once (decision 2026-07-09)
 tables/
   moc_summary.tex  test_plan.tex  rio_table.tex  lessons_learnt.tex
 figures/                        # shared assets only (cover, system-level diagrams)
@@ -163,7 +165,7 @@ evidence cannot say:
 | Innovative solutions highlight | `design/{rover,drone}/innovations.tex` | all leads propose, PM curates |
 | Test **results** + design modifications | test table gains *Results* and *Passed/Failed* columns | test team |
 | Risk **trend chart** (ECSS-M-ST-80C fig. 5-7 style; phases: Preliminary → Final; **Risk IDs must match the Preliminary Report**) | `sections/05_rio_analysis.tex` + external figure | PM + test team |
-| Lessons Learnt (ID, root cause, description, recommendation, impact) | `teams/*/lessons.tex` → `tables/lessons_learnt.tex` | every team |
+| Lessons Learnt (ID, root cause, description, recommendation, impact) | `tables/lessons_learnt.tex`, curator-edited; teams send candidates | curator (Mykola) |
 | Regional Geology (composite map + ≤800 words) | `sections/07_science_geology.tex` | Bohdan |
 
 The new test-plan table columns (per template): *Test No. · Name · Description
@@ -177,7 +179,7 @@ Every item below is treated as a merge-blocking requirement for its section.
 | Jury feedback (O/PRR) | Action in the Final Report | Where |
 |---|---|---|
 | MoC: table was great, but "text would streamline the experience" | short prose paragraph interpreting the compliance summary, not counts alone | `01_matrix_of_compliance.tex` |
-| Test Plan: "run the tests, report the achieved value against each criterion, add results and status columns" — design praised, data missing | *Results* + *Passed/Failed* columns; every executed test states the **measured value vs its criterion**; not-yet-run tests keep an honest status; keep the 37 Preliminary test IDs (SUS-01 … DRO-07); state design modifications that followed from failures | `02_test_plan.tex`, `teams/*/tests.tex` |
+| Test Plan: "run the tests, report the achieved value against each criterion, add results and status columns" — design praised, data missing | *Results* + *Passed/Failed* columns; every executed test states the **measured value vs its criterion**; not-yet-run tests keep an honest status; keep the 37 Preliminary test IDs (SUS-01 … DRO-07); state design modifications that followed from failures | `02_test_plan.tex`, `tables/test_plan.tex` (owner-edited) |
 | Design (b): "missing emergency stop button circuit" | E-stop button circuit schematic included | `safety/estop.tex` |
 | Design (b): "more detailed pictures of rover elements, cross-section, and overall dimensions" | dimensioned drawings + cross-sections per the FDD content rule above | `design/rover/*` |
 | Design (c): drone description extensive "but it is not shown how the drone looks at all" | real photos + labeled overview figure of the built drone, first thing in the drone chapter | `design/drone/platform.tex` |
@@ -214,7 +216,7 @@ highlighted and justified.
    `preamble.tex` and `tables/` masters are changed only via `infra/` PRs.
 2. Title: `<TYPE> <scope>: short title` — e.g. `DES rover/comms: link budget analysis`.
 3. Open as **Draft** immediately (work-in-progress visible), mark **Ready for
-   review** when done; maintainer (Dmytro) merges — same as last time.
+   review** when done; the maintainer merges — same as last time.
 4. PR description (enforced by the PR template): what the PR adds,
    cross-references added, what remains.
 5. **No screenshots needed anymore** — CI uploads the compiled PDF as an
@@ -262,7 +264,7 @@ files committed (`.gitignore` covers aux files and editor droppings).
    Preliminary — do we compress subsections that are unchanged since then and
    spend the freed pages on photos/drawings/test data? (35 pages is tight;
    FDD excellence = evidence, not prose.)
-2. **emergency-esp**: safety slot reserved above — Dmytro to pitch the idea
+2. **emergency-esp**: safety slot reserved above — Mykola to pitch the idea
    before we commit page budget to it.
 3. **WBS/OBS format**: single combined diagram per structure or per-vehicle?
    (PTs stay per-vehicle as in the Preliminary.)

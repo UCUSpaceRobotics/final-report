@@ -40,10 +40,10 @@ Goal: `latexmk -pdf main.tex` produces a complete 8-section PDF with stubs.
       L/S/RI for R/O/I),
       `lessons_learnt.tex` (*ID · Title · Root cause · Description ·
       Recommendation · Impact*)
-- [ ] `teams/<team>/` for all 7 teams (arm, drone, electronics,
-      ground_station, navigation, science, suspension): `tests.tex` and
-      `lessons.tex` with empty `\<team>testrows` / `\<team>llrows` macros so
-      the masters compile; `figures/` with `.gitkeep`
+- [ ] `teams/<team>/figures/` for all 7 teams (arm, drone, electronics,
+      ground_station, navigation, science, suspension) — figure assets only.
+      (Revised 2026-07-09: no per-team tests/lessons macro files; both tables
+      are owner-edited, rows inserted all at once.)
 - [ ] `figures/` for shared assets; `appendix/` placeholder for `moc.xlsx`
 - [ ] Compile check locally; commit the verified skeleton
 
@@ -71,10 +71,10 @@ These ports unblock everyone and satisfy "IDs must match" constraints:
       `tables/rio_table.tex` with statuses as of today; add L/S to O/I rows
       (jury ask); collect RI values for the trend chart
       (16 / 12 / 12 / 10 / 9 / 9 / 9 / 8 / 6 / 6)
-- [ ] `test/port-preliminary` (per team, 7 PRs): the 37 tests
-      (SUS-01…DRO-07) from the Preliminary appendix into `teams/*/tests.tex`,
-      re-shaped to the new columns; *Results/Status* honest — measured value
-      where a test ran, `Planned` otherwise
+- [ ] `test/port-preliminary` (one PR, test-plan owner): the 37 tests
+      (SUS-01…DRO-07) from the Preliminary appendix into
+      `tables/test_plan.tex`, re-shaped to the new columns; *Results/Status*
+      honest — measured value where a test ran, `Planned` otherwise
 - [ ] `moc/summary`: compliance summary table (72 requirements baseline) +
       the prose paragraph the jury asked for (stub until second-iteration
       statuses are assessed)
@@ -105,14 +105,14 @@ this do `des/*` and `safety/*` content PRs start.
 - [ ] §1 MoC second-iteration pass: leads review their requirements, then a
       dedicated session (test team + Dmytro + Ozhhovych) resolves statuses;
       update `moc.xlsx` + summary
-- [ ] §2 test execution results as tests run — each result lands as a small
-      `test/<team>` PR updating the team's rows
+- [ ] §2 test execution results as tests run — teams report measured values
+      to the test-plan owner, who lands them in batched `test/*` PRs
 - [ ] §3/§4 per the Phase 3 trees (`des/*`, `safety/*` branches)
 - [ ] §5 RIO update: re-assess every risk (unchanged-majority scores low),
       make generic risks subsystem-specific, finish the trend chart
-- [ ] §6 Lessons Learnt: every team submits candidates via `ll/<team>` PRs;
-      Dmytro curates to fit 3 pages; include the budget-transparency LL from
-      the jury feedback
+- [ ] §6 Lessons Learnt: teams send candidates to the curator (Mykola), who
+      inserts the curated set all at once (~3 pages); include the
+      budget-transparency LL from the jury feedback
 - [ ] §7 Science geology (Bohdan): composite map (location + regional
       geological + CTX/HiRISE close-up with ellipse, path, 3 ROIs) + ≤800 words
 

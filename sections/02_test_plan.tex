@@ -14,7 +14,8 @@
 %     report the achieved value against each criterion, add results and
 %     status columns."
 %   - Keep the Preliminary test IDs (SUS-01 ... DRO-07, 37 tests).
-%   - Teams edit ONLY their teams/<team>/tests.tex file.
+%   - The table is owner-edited: rows are inserted all at once in
+%     tables/test_plan.tex; teams hand their results to the owner.
 % =============================================================================
 
 \section{Test Plan}
@@ -30,14 +31,5 @@ campaign for the \teamname\ rover and drone system.
 
 \subsection{Test Descriptions and Results}
 \label{subsec:tp_descriptions}
-
-% Team-owned test row macros (each defines \<team>testrows).
-\input{teams/suspension/tests}
-\input{teams/arm/tests}
-\input{teams/science/tests}
-\input{teams/navigation/tests}
-\input{teams/electronics/tests}
-\input{teams/ground_station/tests}
-\input{teams/drone/tests}
 
 \input{tables/test_plan}

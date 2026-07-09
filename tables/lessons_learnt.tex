@@ -1,10 +1,12 @@
 % =============================================================================
 % tables/lessons_learnt.tex  -  Master Lessons Learnt table
+% Teams: curator (Mykola) / Status: stub (filled in Phase 4)
 %
-% Do NOT add rows here - each team defines its \<team>llrows macro in
-% teams/<team>/lessons.tex. Row shape (6 cells):
+% OWNERSHIP: this table is edited directly by its curator - the selected
+% lessons are inserted all at once. Teams send candidates to the curator
+% instead of editing this file. Row shape (6 cells):
 %   ID & Title & Root cause & Description & Recommendation & Impact \\
-% ID scheme: LL-<TEAM>-NN (e.g. LL-SUS-01).
+% ID scheme: LL-<TEAM>-NN (e.g. LL-SUS-01) to keep provenance visible.
 % =============================================================================
 
 \setlength{\tabcolsep}{3pt}
@@ -28,26 +30,9 @@
     \bottomrule
     \endlastfoot
 
-    \multicolumn{6}{l}{\textbf{Suspension Team}} \\
-    \suspensionllrows
-
-    \multicolumn{6}{l}{\textbf{Robotic Arm Team}} \\
-    \armllrows
-
-    \multicolumn{6}{l}{\textbf{Science Team}} \\
-    \sciencellrows
-
-    \multicolumn{6}{l}{\textbf{Navigation Team}} \\
-    \navigationllrows
-
-    \multicolumn{6}{l}{\textbf{General Electronics Team}} \\
-    \electronicsllrows
-
-    \multicolumn{6}{l}{\textbf{Ground Station Team}} \\
-    \groundstationllrows
-
-    \multicolumn{6}{l}{\textbf{Drone Team}} \\
-    \dronellrows
+    % Phase 4: curated lessons land here, e.g.
+    % LL-SUS-01 & Motor delivery delay & ... & ... & ... & ... \\
+    \multicolumn{6}{l}{\itshape Curated lessons land here in Phase 4.} \\
 
 \end{longtable}
 \setlength{\tabcolsep}{6pt}

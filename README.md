@@ -42,7 +42,7 @@ metadata.tex             # team name, project name, revision, date
 sections/                # one file per report section (00_cover ... 07_science_geology)
                          #   03 and 04 are stubs - structure pending team session
 tables/                  # single source of truth for every large table
-teams/<team>/            # tests.tex + lessons.tex (row macros) + figures/
+teams/<team>/figures/    # team-owned figure assets (photos, exported PDFs)
 figures/                 # shared assets only (logos, system-level diagrams)
 appendix/                # MoC .xlsx (embedded into the PDF at release)
 ai_context/              # design record: proposal, implementation plan, feedback

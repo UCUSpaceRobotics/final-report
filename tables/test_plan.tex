@@ -1,14 +1,17 @@
 % =============================================================================
 % tables/test_plan.tex  -  Master test table (single source of truth)
+% Teams: test-plan owner / Status: stub (Phase 2 ports the 37 Preliminary tests)
 %
 % Columns follow the official Final Report template:
 %   No | Name | Description (incl. approach) | Req. | Pass/Fail | Results | Status
 % The Req. column is the ONLY place requirements are referenced in the report.
 %
-% Do NOT add rows here - each team defines its \<team>testrows macro in
-% teams/<team>/tests.tex. Row shape (7 cells):
+% OWNERSHIP: this table is edited directly by its owner - rows are inserted
+% all at once, grouped by team. Teams hand their results to the owner instead
+% of editing this file. Row shape (7 cells):
 %   ID & Name & Description & Req. & Pass/Fail criteria & Results & Status \\
-% Results = measured value vs the criterion; Status = Passed / Failed / Planned.
+% Keep the Preliminary test IDs (SUS-01 ... DRO-07). Results = measured value
+% vs the criterion; Status = Passed / Failed / Planned.
 % =============================================================================
 
 \setlength{\tabcolsep}{3pt}
@@ -32,26 +35,12 @@
     \bottomrule
     \endlastfoot
 
-    \multicolumn{7}{l}{\textbf{Suspension Team}} \\
-    \suspensiontestrows
-
-    \multicolumn{7}{l}{\textbf{Robotic Arm Team}} \\
-    \armtestrows
-
-    \multicolumn{7}{l}{\textbf{Science Team}} \\
-    \sciencetestrows
-
-    \multicolumn{7}{l}{\textbf{Navigation Team}} \\
-    \navigationtestrows
-
-    \multicolumn{7}{l}{\textbf{General Electronics Team}} \\
-    \electronicstestrows
-
-    \multicolumn{7}{l}{\textbf{Ground Station Team}} \\
-    \groundstationtestrows
-
-    \multicolumn{7}{l}{\textbf{Drone Team}} \\
-    \dronetestrows
+    % Phase 2 (test/port-preliminary) replaces this stub row with the 37
+    % tests carried over from the Preliminary, grouped like this:
+    %
+    % \multicolumn{7}{l}{\textbf{Suspension Team}} \\
+    % SUS-01 & Turning radius test & ... & FUN-030 & ... & ... & Planned \\
+    \multicolumn{7}{l}{\itshape Tests ported from the Preliminary in Phase 2.} \\
 
 \end{longtable}
 \setlength{\tabcolsep}{6pt}
