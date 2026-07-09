@@ -10,6 +10,12 @@
 
 <!-- Anything intentionally left for a follow-up PR. Write "nothing" if complete. -->
 
+## Screenshot
+
+<!-- REQUIRED: a screenshot of the compiled section/page(s) this PR changes,
+     pasted directly below (drag-and-drop the image into this box).
+     Reviewers should be able to see your change without downloading the PDF. -->
+
 ## Checklist
 
 - [ ] One content file changed (plus its own figures)
@@ -18,5 +24,4 @@
 - [ ] All quantities via `siunitx` (`\qty`, `\qtyrange`, `\ang`, `\num`, …)
 - [ ] Diagrams are exported PDFs (drawn outside LaTeX), figures in the right folder
 - [ ] Compiles locally: `latexmk -pdf main.tex`
-
-<!-- CI attaches the compiled PDF as an artifact - no screenshots needed. -->
+- [ ] Screenshot of the changed section pasted above

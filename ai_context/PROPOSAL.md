@@ -229,8 +229,10 @@ after release.
    visible), mark **Ready for review** when done; the maintainer merges.
 4. PR description (enforced by the PR template): what the PR adds,
    cross-references added, what remains.
-5. **No screenshots needed anymore** — CI uploads the compiled PDF as an
-   artifact on every PR, so the reviewer reads the real output.
+5. **Paste a screenshot of the compiled section into the PR** — the
+   maintainer reviews from the PR itself, not by downloading the PDF. CI also
+   uploads the full compiled PDF as an artifact on every PR, for checking the
+   rest of the document.
 6. Tiny contract kept at the top of every content file
    (`% Teams: … / Status: …`) — update, never delete. (The old `Requirements`
    field is dropped: we no longer reference requirements inside the report;

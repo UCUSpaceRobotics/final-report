@@ -1,7 +1,7 @@
 # =============================================================================
 # CI for the ERC 2026 Final Report
 #   build : compile the PDF with latexmk, upload it as an artifact (reviewers
-#           read the real output - no screenshots in PRs)
+#           can check the rest of the document beyond the PR's own screenshot)
 #   pages : effective page count vs the 35-page limit (warn now, hard fail
 #           at freeze week - flip the marked line)
 #   lint  : placeholder patterns must not reach main ("\todo" joins the list

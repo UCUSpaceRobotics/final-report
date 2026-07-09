@@ -56,9 +56,11 @@ needed, tags are enough since revisions are never patched after the fact.
    (work-in-progress stays visible).
 2. Title: `<TYPE> <scope>: short title`, e.g. `TEST suspension: wheel load results`.
 3. Fill the PR template: what the PR adds, cross-references, what remains.
-4. Mark **Ready for review** when done — the maintainer merges into `develop`.
-5. CI attaches the compiled PDF to every PR — check your pages there;
-   no screenshots needed.
+4. **Paste a screenshot of your compiled section into the PR** — the
+   maintainer reviews from the PR itself and shouldn't have to download the
+   PDF to see your change. CI also attaches the full compiled PDF as an
+   artifact, for checking the rest of the document.
+5. Mark **Ready for review** when done — the maintainer merges into `develop`.
 
 ## Where to write what
 
@@ -125,6 +127,7 @@ exception is the test table's *Req.* column, which the rubric scores.)
 - [ ] Compiles: `latexmk -pdf main.tex` — **CI**
 - [ ] No placeholders `[X]`, `[Add content …]`, `\lipsum` — **CI**
 - [ ] Page count within budget — **CI warning** (hard fail at freeze)
+- [ ] Screenshot of the compiled section pasted into the PR — reviewer
 - [ ] Tiny contract updated — reviewer
 - [ ] Units via siunitx, labels present — reviewer
 
