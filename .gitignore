@@ -330,5 +330,7 @@ TSWLatexianTemp*
 # Uncomment the next line to have this generated file ignored.
 #*Notes.bib
 
+old_report/*
+
 ## Build output:
 main.pdf
