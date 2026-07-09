@@ -197,14 +197,12 @@ highlighted and justified.
 
 ## 3. Workflow
 
-### Branching model (decided 2026-07-09)
+### Branching model
 
-Two long-lived branches: `main` (always a clean released state, tagged at
-each release, e.g. `v1.0-final-draft`, before `develop` merges in) and
-`develop` (integration branch for reviewed content PRs). Content branches
-are cut **from `main`** — so every new branch starts from the last
-known-good state, not from whatever is mid-flight in `develop` — and PR'd
-**into `develop`**. Releases: tag `main`'s current tip (preserves the
+Two long-lived branches: `develop` (the working trunk — all content branches
+are cut from here and PR'd back into here) and `main` (always a clean
+released state, tagged at each release, e.g. `v1.0-final-draft`, before
+`develop` merges in). Releases: tag `main`'s current tip (preserves the
 outgoing revision) → merge `develop` → `main` → bump `\revisionnum`. No
 `rel/*` branches: tags are sufficient since revisions are never patched
 after release.

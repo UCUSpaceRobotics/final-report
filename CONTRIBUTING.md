@@ -18,20 +18,13 @@ teams hand in their material instead of editing those files (see below).
 
 Two long-lived branches:
 
+- **`develop`** — the working trunk. All content branches are cut from here,
+  and all content PRs merge back into here.
 - **`main`** — always a clean, released state. Only ever updated by the
   maintainer merging `develop` in, as a deliberate release step (see below).
-  Never commit to it directly.
-- **`develop`** — the integration branch where reviewed content PRs land.
+  Never commit to it directly, never branch from it.
 
-Rules that follow from this:
-
-- **Cut your branch from `main`**, not from `develop`. This means every
-  content branch starts from the last known-good release state, not from
-  whatever half-finished work happens to be sitting in `develop`.
-- **Merge your PR into `develop`**, not `main`.
-- Because branches start from `main`, two branches in flight at the same time
-  won't see each other's work until the next release. That's expected — with
-  1 file = 1 PR, cross-branch conflicts should be rare anyway.
+**Cut your branch from `develop`, and merge your PR into `develop`.**
 
 ### Releases (maintainer only)
 
@@ -59,7 +52,7 @@ needed, tags are enough since revisions are never patched after the fact.
 
 ## PR flow
 
-1. Branch from `main` → open a **Draft PR against `develop`** immediately
+1. Branch from `develop` → open a **Draft PR against `develop`** immediately
    (work-in-progress stays visible).
 2. Title: `<TYPE> <scope>: short title`, e.g. `TEST suspension: wheel load results`.
 3. Fill the PR template: what the PR adds, cross-references, what remains.
