@@ -1,0 +1,46 @@
+% =============================================================================
+% tables/test_plan.tex  -  Master test table (single source of truth)
+% Teams: test-plan owner / Status: stub (Phase 2 ports the 37 Preliminary tests)
+%
+% Columns follow the official Final Report template:
+%   No | Name | Description (incl. approach) | Req. | Pass/Fail | Results | Status
+% The Req. column is the ONLY place requirements are referenced in the report.
+%
+% OWNERSHIP: this table is edited directly by its owner - rows are inserted
+% all at once, grouped by team. Teams hand their results to the owner instead
+% of editing this file. Row shape (7 cells):
+%   ID & Name & Description & Req. & Pass/Fail criteria & Results & Status \\
+% Keep the Preliminary test IDs (SUS-01 ... DRO-07). Results = measured value
+% vs the criterion; Status = Passed / Failed / Planned.
+% =============================================================================
+
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{C{0.85cm} L{1.9cm} L{3.3cm} C{1.1cm} L{2.6cm} L{2.6cm} C{1.15cm}}
+    \caption{Final Test Plan}
+    \label{tab:test_plan} \\
+    \toprule
+    \textbf{ID} & \textbf{Test Name} & \textbf{Description \& Setup}
+        & \textbf{Req.} & \textbf{Pass/Fail Criteria} & \textbf{Results} & \textbf{Status} \\
+    \midrule
+    \endfirsthead
+    \multicolumn{7}{c}{\small\itshape (continued from previous page)} \\
+    \toprule
+    \textbf{ID} & \textbf{Test Name} & \textbf{Description \& Setup}
+        & \textbf{Req.} & \textbf{Pass/Fail Criteria} & \textbf{Results} & \textbf{Status} \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{7}{r}{\small\itshape (continued on next page)} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+
+    % Phase 2 (test/port-preliminary) replaces this stub row with the 37
+    % tests carried over from the Preliminary, grouped like this:
+    %
+    % \multicolumn{7}{l}{\textbf{Suspension Team}} \\
+    % SUS-01 & Turning radius test & ... & FUN-030 & ... & ... & Planned \\
+    \multicolumn{7}{l}{\itshape Tests ported from the Preliminary in Phase 2.} \\
+
+\end{longtable}
+\setlength{\tabcolsep}{6pt}

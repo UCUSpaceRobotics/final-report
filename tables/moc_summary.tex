@@ -1,0 +1,26 @@
+% =============================================================================
+% tables/moc_summary.tex  -  Compliance status summary (second iteration)
+%
+% Single source of truth for tab:moc_summary. Included ONLY from
+% sections/01_matrix_of_compliance.tex.
+% Fill counts after the second-iteration MoC pass (Preliminary baseline:
+% 72 requirements, all C).
+% =============================================================================
+
+\begin{table}[H]
+    \centering
+    \caption{Compliance status summary}
+    \label{tab:moc_summary}
+    \begin{tabular}{lcc}
+        \toprule
+        \textbf{Status} & \textbf{Symbol} & \textbf{Count} \\
+        \midrule
+        Compliant             & \compliant{}       & -- \\
+        Partially Compliant   & \partlycompliant{} & -- \\
+        Non-Compliant         & \noncompliant{}    & -- \\
+        Not Applicable        & \notapplicable{}   & -- \\
+        \midrule
+        \textbf{Total requirements} &              & -- \\
+        \bottomrule
+    \end{tabular}
+\end{table}

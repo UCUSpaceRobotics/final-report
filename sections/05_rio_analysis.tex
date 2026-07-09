@@ -1,0 +1,67 @@
+% =============================================================================
+% sections/05_rio_analysis.tex  -  Section 5: RIO Analysis (second iteration)
+% Teams: PM + test team / Status: stub (methodology in, data ported in Phase 2)
+%
+% SCORING (0-20 pts):
+%   Quality of updates to the Preliminary qualitative assessment (0-15):
+%     risks, descriptions, mitigation actions and status; opportunities and
+%     issues mentioned. LOW SCORE if the majority of risks are unchanged
+%     (= risk assessment not performed). (0-10)
+%   Trend chart (0-5): risk index changes across phases
+%     (Preliminary Report -> Final Report), style: ECSS-M-ST-80C Fig. 5-7.
+%
+% NOTES:
+%   - Risk IDs MUST match the Preliminary Report (R-01..R-10, O-01,
+%     I-01..I-03). Removals/additions highlighted and justified.
+%   - Jury feedback: L/S scale TABLES in the methodology; track L/S for
+%     Issues and Opportunities as well; make generic risks
+%     subsystem-specific (e.g. R-01).
+%   - Font size 8 pt is allowed in RIO tables only.
+% =============================================================================
+
+\section{RIO Analysis}
+\label{sec:rio}
+
+\subsection{Methodology}
+\label{subsec:rio_method}
+
+The team applies a project-specific qualitative method during weekly subsystem
+reviews (mechanical, electrical, software, science). For each identified risk,
+issue, or opportunity, the owner defines the root cause, operational impact,
+and actions, then assigns \textbf{Likelihood} (L) and \textbf{Severity} (S) on
+a 1--5 scale (Table~\ref{tab:rio_scales}). The \textbf{Risk Index} is
+$\mathrm{RI} = L \times S$. Likelihood and severity are tracked for
+opportunities and issues as well as for risks. Response strategies:
+\textit{Avoid}, \textit{Mitigate}, \textit{Accept}, \textit{Transfer},
+\textit{Escalate} for risks and issues; \textit{Exploit}, \textit{Share},
+\textit{Enhance}, \textit{Accept}, \textit{Escalate} for opportunities.
+
+\begin{table}[H]
+    \centering
+    \caption{Likelihood and Severity scales}
+    \label{tab:rio_scales}
+    \begin{tabular}{C{0.5cm} L{5.6cm} | C{0.5cm} L{6.6cm}}
+        \toprule
+        \multicolumn{2}{c|}{\textbf{Likelihood (L)}} & \multicolumn{2}{c}{\textbf{Severity (S)}} \\
+        \midrule
+        1 & Rare ($p < 10\,\%$)                & 1 & Negligible (no replanning) \\
+        2 & Unlikely ($10\,\% \leq p < 30\,\%$) & 2 & Minor (local workaround) \\
+        3 & Possible ($30\,\% \leq p < 50\,\%$) & 3 & Moderate (subsystem rework or test delay) \\
+        4 & Likely ($50\,\% \leq p < 70\,\%$)   & 4 & Major (milestone slip or partial task loss) \\
+        5 & Almost certain ($p \geq 70\,\%$)    & 5 & Catastrophic (safety/compliance failure or mission task loss) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsection{Risk Trend Chart}
+\label{subsec:rio_trend}
+
+\todo[inline]{Phase 2/4: trend chart (drawn outside \LaTeX, exported PDF)
+with RI values per phase: Preliminary $\to$ Final. Preliminary baseline:
+R-01:16, R-02:12, R-03:12, R-04:10, R-05:9, R-06:9, R-07:9, R-08:8, R-09:6,
+R-10:6.}
+
+\subsection{Qualitative Risks, Opportunities, and Issues Assessment}
+\label{subsec:rio_register}
+
+\input{tables/rio_table}

@@ -1,0 +1,28 @@
+% =============================================================================
+% main.tex  -  Entry point. Assembles the ERC 2026 Final Report.
+%              Do not write content here; edit files under sections/.
+% =============================================================================
+\documentclass[10pt,a4paper]{article}
+
+\input{metadata}
+\input{preamble}
+
+\begin{document}
+
+\input{sections/00_cover}
+
+% --- Table of contents (excluded from the 35-page limit) ---------------------
+\pagenumbering{roman}
+\tableofcontents
+\newpage
+\pagenumbering{arabic}
+
+\input{sections/01_matrix_of_compliance}
+\input{sections/02_test_plan}
+\input{sections/03_final_design_description}
+\input{sections/04_safety_systems}
+\input{sections/05_rio_analysis}
+\input{sections/06_lessons_learnt}
+\input{sections/07_science_geology}
+
+\end{document}

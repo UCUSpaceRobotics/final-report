@@ -1,0 +1,38 @@
+% =============================================================================
+% tables/lessons_learnt.tex  -  Master Lessons Learnt table
+% Teams: curator (Mykola) / Status: stub (filled in Phase 4)
+%
+% OWNERSHIP: this table is edited directly by its curator - the selected
+% lessons are inserted all at once. Teams send candidates to the curator
+% instead of editing this file. Row shape (6 cells):
+%   ID & Title & Root cause & Description & Recommendation & Impact \\
+% ID scheme: LL-<TEAM>-NN (e.g. LL-SUS-01) to keep provenance visible.
+% =============================================================================
+
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{C{0.9cm} L{2.0cm} L{2.7cm} L{3.5cm} L{3.0cm} L{2.2cm}}
+    \caption{Lessons Learnt}
+    \label{tab:lessons_learnt} \\
+    \toprule
+    \textbf{ID} & \textbf{Title} & \textbf{Root Cause} & \textbf{Description}
+        & \textbf{Recommendation} & \textbf{Impact} \\
+    \midrule
+    \endfirsthead
+    \multicolumn{6}{c}{\small\itshape (continued from previous page)} \\
+    \toprule
+    \textbf{ID} & \textbf{Title} & \textbf{Root Cause} & \textbf{Description}
+        & \textbf{Recommendation} & \textbf{Impact} \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{6}{r}{\small\itshape (continued on next page)} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+
+    % Phase 4: curated lessons land here, e.g.
+    % LL-SUS-01 & Motor delivery delay & ... & ... & ... & ... \\
+    \multicolumn{6}{l}{\itshape Curated lessons land here in Phase 4.} \\
+
+\end{longtable}
+\setlength{\tabcolsep}{6pt}
