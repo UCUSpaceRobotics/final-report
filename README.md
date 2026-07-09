@@ -7,6 +7,11 @@ LaTeX source of the **Final Report** for the European Rover Challenge 2026
 
 **Read [CONTRIBUTING.md](CONTRIBUTING.md) before writing anything.**
 
+**Branching model** (details in CONTRIBUTING.md): `main` is always a clean
+released state, tagged at each release (`v1.0-final-draft`, …) before
+`develop` merges in. Content branches are cut from `main` and PR'd into
+`develop`. No `rel/*` branches — tags preserve old revisions.
+
 ## Deliverable requirements
 
 | Parameter | Value |

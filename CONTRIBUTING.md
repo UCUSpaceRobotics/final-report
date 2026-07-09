@@ -14,6 +14,36 @@ Assembler files (`main.tex`, section files that only `\input` others) and
 and lessons tables are each owned by one person and filled all at once —
 teams hand in their material instead of editing those files (see below).
 
+## Branching model
+
+Two long-lived branches:
+
+- **`main`** — always a clean, released state. Only ever updated by the
+  maintainer merging `develop` in, as a deliberate release step (see below).
+  Never commit to it directly.
+- **`develop`** — the integration branch where reviewed content PRs land.
+
+Rules that follow from this:
+
+- **Cut your branch from `main`**, not from `develop`. This means every
+  content branch starts from the last known-good release state, not from
+  whatever half-finished work happens to be sitting in `develop`.
+- **Merge your PR into `develop`**, not `main`.
+- Because branches start from `main`, two branches in flight at the same time
+  won't see each other's work until the next release. That's expected — with
+  1 file = 1 PR, cross-branch conflicts should be rare anyway.
+
+### Releases (maintainer only)
+
+1. Tag the current tip of `main` with the outgoing revision
+   (e.g. `v1.0-final-draft`) — this preserves exactly what was released
+   before it gets superseded.
+2. Merge `develop` → `main`.
+3. Bump `\revisionnum` in `metadata.tex`, commit on `main`.
+
+Old revisions are recovered via `git checkout <tag>` — no `rel/*` branches
+needed, tags are enough since revisions are never patched after the fact.
+
 ## Branch naming
 
 `<type>/<scope>-<short-slug>` — lowercase, hyphens:
@@ -29,10 +59,11 @@ teams hand in their material instead of editing those files (see below).
 
 ## PR flow
 
-1. Branch → open a **Draft PR** immediately (work-in-progress stays visible).
+1. Branch from `main` → open a **Draft PR against `develop`** immediately
+   (work-in-progress stays visible).
 2. Title: `<TYPE> <scope>: short title`, e.g. `TEST suspension: wheel load results`.
 3. Fill the PR template: what the PR adds, cross-references, what remains.
-4. Mark **Ready for review** when done — the maintainer merges.
+4. Mark **Ready for review** when done — the maintainer merges into `develop`.
 5. CI attaches the compiled PDF to every PR — check your pages there;
    no screenshots needed.
 

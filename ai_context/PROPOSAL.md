@@ -197,6 +197,18 @@ highlighted and justified.
 
 ## 3. Workflow
 
+### Branching model (decided 2026-07-09)
+
+Two long-lived branches: `main` (always a clean released state, tagged at
+each release, e.g. `v1.0-final-draft`, before `develop` merges in) and
+`develop` (integration branch for reviewed content PRs). Content branches
+are cut **from `main`** — so every new branch starts from the last
+known-good state, not from whatever is mid-flight in `develop` — and PR'd
+**into `develop`**. Releases: tag `main`'s current tip (preserves the
+outgoing revision) → merge `develop` → `main` → bump `\revisionnum`. No
+`rel/*` branches: tags are sufficient since revisions are never patched
+after release.
+
 ### Branch naming (requested: clear rules)
 
 `<type>/<scope>-<short-slug>`, lowercase, hyphens:
@@ -215,8 +227,8 @@ highlighted and justified.
 1. One PR changes **one** content file (plus its own figures). Assemblers,
    `preamble.tex` and `tables/` masters are changed only via `infra/` PRs.
 2. Title: `<TYPE> <scope>: short title` — e.g. `DES rover/comms: link budget analysis`.
-3. Open as **Draft** immediately (work-in-progress visible), mark **Ready for
-   review** when done; the maintainer merges — same as last time.
+3. Open as a **Draft PR against `develop`** immediately (work-in-progress
+   visible), mark **Ready for review** when done; the maintainer merges.
 4. PR description (enforced by the PR template): what the PR adds,
    cross-references added, what remains.
 5. **No screenshots needed anymore** — CI uploads the compiled PDF as an
