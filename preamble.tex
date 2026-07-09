@@ -1,0 +1,116 @@
+% =============================================================================
+% preamble.tex  -  LaTeX preamble for the ERC 2026 Final Report
+% Ported from the Preliminary Report repo; changes: no lipsum, Final metadata.
+% todonotes stays until freeze week (IMPLEMENTATION_PLAN.md, Phase 5).
+% =============================================================================
+
+% --- Page geometry (ERC: margins >= 2.54 cm from all edges) ------------------
+\usepackage[a4paper,
+            top=2.54cm, bottom=2.54cm,
+            left=2.54cm, right=2.54cm]{geometry}
+
+% --- Encoding & fonts (ERC: minimum font size 10 pt) -------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+
+% --- Language ----------------------------------------------------------------
+\usepackage[english]{babel}
+
+% --- Colour ------------------------------------------------------------------
+\usepackage[dvipsnames,table]{xcolor}
+\definecolor{ercblue}{RGB}{0,70,127}
+
+% --- Graphics & figures ------------------------------------------------------
+\usepackage{graphicx}
+\graphicspath{{figures/}}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+
+% --- Tables ------------------------------------------------------------------
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{tabularx}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% --- Math --------------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% --- Measurement units (siunitx is MANDATORY for all quantities) -------------
+\usepackage{siunitx}
+\DeclareSIUnit{\fps}{fps}
+\DeclareSIUnit{\mAh}{mAh}
+\DeclareSIUnit{\pixel}{px}
+
+% --- Lists -------------------------------------------------------------------
+\usepackage{enumitem}
+
+% --- Hyperlinks & PDF metadata -----------------------------------------------
+\usepackage[
+    pdftitle={Final Report -- European Rover Challenge 2026},
+    pdfauthor={UCU Space Robotics Team},
+    pdfsubject={European Rover Challenge 2026},
+    pdfkeywords={Mars Rover, ERC 2026, Final Report},
+    colorlinks=true,
+    linkcolor=ercblue,
+    urlcolor=ercblue,
+    citecolor=ercblue,
+    bookmarks=true,
+    bookmarksopen=true
+]{hyperref}
+
+% --- Header & footer ---------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\textcolor{ercblue}{\teamname\ -- Final Report}}
+\fancyhead[R]{\small\textcolor{ercblue}{ERC 2026}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14pt}
+
+% --- Section formatting ------------------------------------------------------
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries\color{ercblue}}{{\thesection}}{1em}{}[\titlerule]
+\titleformat{\subsection}{\normalsize\bfseries\color{ercblue}}{{\thesubsection}}{1em}{}
+\titleformat{\subsubsection}{\normalsize\bfseries}{{\thesubsubsection}}{1em}{}
+\titleformat{\paragraph}[hang]{\normalsize\bfseries}{{\theparagraph}}{1em}{}
+\titlespacing*{\paragraph}{0pt}{1.0ex plus 0.2ex minus 0.1ex}{0.5ex}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+% --- Autoref names -----------------------------------------------------------
+\AtBeginDocument{
+    \renewcommand{\sectionautorefname}{\S}
+    \renewcommand{\subsectionautorefname}{\S}
+    \renewcommand{\subsubsectionautorefname}{\S}
+    \renewcommand{\paragraphautorefname}{\S}
+}
+
+% --- PDF attachments (for embedding the MoC .xlsx) ---------------------------
+\usepackage{attachfile2}
+
+% --- Miscellaneous -----------------------------------------------------------
+\usepackage{microtype}
+\usepackage{parskip}
+\setlength{\parindent}{0pt}
+\usepackage{todonotes}   % removed at freeze week
+
+% --- Compliance status helper commands ---------------------------------------
+\newcommand{\compliant}{\textcolor{Green}{\textbf{C}}}          % Compliant
+\newcommand{\partlycompliant}{\textcolor{Orange}{\textbf{PC}}}  % Partially Compliant
+\newcommand{\noncompliant}{\textcolor{Red}{\textbf{NC}}}        % Non-Compliant
+\newcommand{\notapplicable}{\textbf{N/A}}                       % Not Applicable
+
+% --- Risk level helper commands -----------------------------------------------
+\newcommand{\riskhigh}{\colorbox{red!40}{\textbf{High}}}
+\newcommand{\riskmedium}{\colorbox{orange!40}{\textbf{Medium}}}
+\newcommand{\risklow}{\colorbox{green!30}{\textbf{Low}}}

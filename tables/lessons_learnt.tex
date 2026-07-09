@@ -1,0 +1,53 @@
+% =============================================================================
+% tables/lessons_learnt.tex  -  Master Lessons Learnt table
+%
+% Do NOT add rows here - each team defines its \<team>llrows macro in
+% teams/<team>/lessons.tex. Row shape (6 cells):
+%   ID & Title & Root cause & Description & Recommendation & Impact \\
+% ID scheme: LL-<TEAM>-NN (e.g. LL-SUS-01).
+% =============================================================================
+
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{C{0.9cm} L{2.0cm} L{2.7cm} L{3.5cm} L{3.0cm} L{2.2cm}}
+    \caption{Lessons Learnt}
+    \label{tab:lessons_learnt} \\
+    \toprule
+    \textbf{ID} & \textbf{Title} & \textbf{Root Cause} & \textbf{Description}
+        & \textbf{Recommendation} & \textbf{Impact} \\
+    \midrule
+    \endfirsthead
+    \multicolumn{6}{c}{\small\itshape (continued from previous page)} \\
+    \toprule
+    \textbf{ID} & \textbf{Title} & \textbf{Root Cause} & \textbf{Description}
+        & \textbf{Recommendation} & \textbf{Impact} \\
+    \midrule
+    \endhead
+    \midrule
+    \multicolumn{6}{r}{\small\itshape (continued on next page)} \\
+    \endfoot
+    \bottomrule
+    \endlastfoot
+
+    \multicolumn{6}{l}{\textbf{Suspension Team}} \\
+    \suspensionllrows
+
+    \multicolumn{6}{l}{\textbf{Robotic Arm Team}} \\
+    \armllrows
+
+    \multicolumn{6}{l}{\textbf{Science Team}} \\
+    \sciencellrows
+
+    \multicolumn{6}{l}{\textbf{Navigation Team}} \\
+    \navigationllrows
+
+    \multicolumn{6}{l}{\textbf{General Electronics Team}} \\
+    \electronicsllrows
+
+    \multicolumn{6}{l}{\textbf{Ground Station Team}} \\
+    \groundstationllrows
+
+    \multicolumn{6}{l}{\textbf{Drone Team}} \\
+    \dronellrows
+
+\end{longtable}
+\setlength{\tabcolsep}{6pt}

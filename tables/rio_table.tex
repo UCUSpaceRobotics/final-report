@@ -1,0 +1,44 @@
+% =============================================================================
+% tables/rio_table.tex  -  RIO register (risks + opportunities + issues)
+%
+% Single table per the official Final Report template. 8 pt font is allowed
+% in RIO tables only (hence \footnotesize under the 10 pt document font).
+% Owned centrally (PM) - IDs MUST match the Preliminary Report:
+%   R-01..R-10, O-01, I-01..I-03. Highlight and justify removals/additions.
+% L/S/RI are tracked for opportunities and issues too (jury ask).
+%
+% Row shape (11 cells):
+%   ID & Name & Description & Category & Impact type & Owner
+%      & L & S & RI & Response & Actions \\
+% RI cell colour: \cellcolor{red!40} >=15, \cellcolor{orange!40} 6-14,
+%   \cellcolor{green!30} <=5.
+% =============================================================================
+
+\begingroup\footnotesize
+\setlength{\tabcolsep}{3pt}
+\begin{longtable}{C{0.8cm} L{1.5cm} L{2.3cm} C{0.95cm} C{1.1cm} L{1.4cm} C{0.35cm} C{0.35cm} C{0.5cm} L{1.45cm} L{2.6cm}}
+    \caption{Qualitative risks, opportunities, and issues assessment (second iteration)}
+    \label{tab:rio} \\
+    \toprule
+    \textbf{ID} & \textbf{Name} & \textbf{Description} & \textbf{Cat.}
+        & \textbf{Impact} & \textbf{Owner} & \textbf{L} & \textbf{S}
+        & \textbf{RI} & \textbf{Response} & \textbf{Actions} \\
+    \midrule
+    \endfirsthead
+    \multicolumn{11}{c}{\small\itshape (continued from previous page)} \\
+    \toprule
+    \textbf{ID} & \textbf{Name} & \textbf{Description} & \textbf{Cat.}
+        & \textbf{Impact} & \textbf{Owner} & \textbf{L} & \textbf{S}
+        & \textbf{RI} & \textbf{Response} & \textbf{Actions} \\
+    \midrule
+    \endhead
+    \bottomrule
+    \endlastfoot
+
+    % Phase 2 (rio/port-preliminary) replaces this stub row with
+    % R-01..R-10, O-01, I-01..I-03 carried over from the Preliminary.
+    \multicolumn{11}{l}{\itshape Register ported from the Preliminary in Phase 2.} \\
+
+\end{longtable}
+\setlength{\tabcolsep}{6pt}
+\endgroup

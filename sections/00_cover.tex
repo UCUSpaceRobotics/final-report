@@ -1,0 +1,53 @@
+% =============================================================================
+% sections/00_cover.tex  -  Cover page (excluded from the 35-page limit)
+% =============================================================================
+\thispagestyle{empty}
+
+\begin{center}
+
+    \vspace*{2cm}
+
+    % University / affiliation logo
+    \IfFileExists{figures/university_logo.pdf}{%
+        \includegraphics[width=0.35\textwidth]{university_logo}%
+    }{%
+        \fbox{\parbox[c][1.5cm][c]{0.35\textwidth}{\centering University logo}}%
+    }%
+    \hfill
+    \IfFileExists{figures/erc_logo.pdf}{%
+        \includegraphics[width=0.20\textwidth]{erc_logo}%
+    }{}%
+
+    \vspace{1.5cm}
+
+    {\LARGE\bfseries\color{ercblue} European Rover Challenge 2026}
+
+    \vspace{0.5cm}
+    \rule{\textwidth}{1pt}
+    \vspace{0.5cm}
+
+    {\Huge\bfseries Final Report}
+
+    \vspace{1.5cm}
+
+    {\Large\bfseries\color{ercblue} \teamname}
+
+    \vspace{0.3cm}
+
+    {\large \projectname}
+
+    \vspace{1cm}
+
+    \begin{tabular}{rl}
+        \textbf{Affiliation:}      & Ukrainian Catholic University \\[4pt]
+        \textbf{Submission date:}  & \submissiondate \\[4pt]
+        \textbf{Revision:}         & \revisionnum \\
+    \end{tabular}
+
+    \vfill
+
+    {\small \textit{File name: UCU\_Space\_Robotics\_FinalReport\_ERC2026.pdf}}
+
+\end{center}
+
+\newpage
