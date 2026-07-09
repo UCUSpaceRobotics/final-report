@@ -1,0 +1,74 @@
+# =============================================================================
+# CI for the ERC 2026 Final Report
+#   build : compile the PDF with latexmk, upload it as an artifact (reviewers
+#           read the real output - no screenshots in PRs)
+#   pages : effective page count vs the 35-page limit (warn now, hard fail
+#           at freeze week - flip the marked line)
+#   lint  : placeholder patterns must not reach main ("\todo" joins the list
+#           at freeze week)
+# =============================================================================
+name: build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    name: Compile PDF
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile with latexmk
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+
+      - name: Upload compiled PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: report-pdf
+          path: main.pdf
+
+      - name: Page count vs 35-page limit
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+          total=$(pdfinfo main.pdf | awk '/^Pages:/{print $2}')
+          # The Rules exclude the cover and ToC/LoF/LoT from the limit.
+          # Adjust NON_COUNTED when the ToC grows beyond one page.
+          NON_COUNTED=2   # 1 cover + 1 ToC page
+          effective=$(( total - NON_COUNTED ))
+          echo "Total: ${total} pages; effective (minus cover/ToC): ${effective} / 35"
+          if [ "${effective}" -gt 35 ]; then
+            echo "::warning::Report is ${effective} effective pages - over the 35-page limit."
+            # exit 1   # <- enable at freeze week (Phase 5)
+          fi
+
+  lint:
+    name: Placeholder lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check for placeholder patterns
+        run: |
+          fail=0
+          files=$(find sections tables teams -name '*.tex'; ls main.tex preamble.tex metadata.tex)
+          for f in $files; do
+            # strip LaTeX comments (unescaped %) so commented examples don't trip the lint
+            stripped=$(sed 's/\(^\|[^\\]\)%.*/\1/' "$f")
+            for pat in '[X]' '[Add content' '\lipsum'; do
+              if printf '%s\n' "$stripped" | grep -Fq -- "$pat"; then
+                echo "::error file=${f}::placeholder \"${pat}\" found - replace with real content"
+                fail=1
+              fi
+            done
+            # \todo joins the lint at freeze week (Phase 5) - uncomment then:
+            # if printf '%s\n' "$stripped" | grep -Fq -- '\todo'; then
+            #   echo "::error file=${f}::\\todo left in content"
+            #   fail=1
+            # fi
+          done
+          exit $fail
