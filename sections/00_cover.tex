@@ -1,5 +1,5 @@
 % =============================================================================
-% sections/00_cover.tex  -  Cover page (excluded from the 35-page limit)
+% sections/cover.tex  -  Cover page
 % =============================================================================
 \thispagestyle{empty}
 
@@ -8,14 +8,12 @@
     \vspace*{2cm}
 
     % University / affiliation logo
-    \IfFileExists{figures/university_logo.pdf}{%
-        \includegraphics[width=0.35\textwidth]{university_logo}%
-    }{%
-        \fbox{\parbox[c][1.5cm][c]{0.35\textwidth}{\centering University logo}}%
-    }%
+    \IfFileExists{ucu_logo.png}{%
+        \includegraphics[width=0.5\textwidth]{ucu_logo.png}% replace with your logo file
+    }
     \hfill
-    \IfFileExists{figures/erc_logo.pdf}{%
-        \includegraphics[width=0.20\textwidth]{erc_logo}%
+    \IfFileExists{erc_logo.png}{%
+        \includegraphics[width=0.5\textwidth]{erc_logo}% ERC logo (optional)
     }{}%
 
     \vspace{1.5cm}
@@ -36,6 +34,9 @@
 
     {\large \projectname}
 
+    \vspace{0.8cm}
+        \includegraphics[width=0.4\textwidth]{ucu_space_robotics_logo.jpg}
+
     \vspace{1cm}
 
     \begin{tabular}{rl}
@@ -45,8 +46,6 @@
     \end{tabular}
 
     \vfill
-
-    {\small \textit{File name: UCU\_Space\_Robotics\_FinalReport\_ERC2026.pdf}}
 
 \end{center}
 
