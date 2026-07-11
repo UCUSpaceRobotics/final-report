@@ -20,6 +20,15 @@ the Test Plan table's *Req.* column, because "all requirements to be
 verified by test are mentioned" is explicitly worth points (0–1 pt,
 Test Plan structure).
 
+**Every figure and table must be referenced from the prose around it,
+always via `\autoref` — `\ref` is forbidden.** A `\label` alone isn't
+enough — orphan figures that are labeled but never cited in the
+surrounding text are treated as a review mistake (see `CONTRIBUTING.md`,
+"Common mistakes"). `\autoref` inserts the right name ("Figure", "Table",
+"§") automatically, so content never hand-types `Figure~`/`Table~` before
+a reference — one less thing to get out of sync if a label's target type
+changes.
+
 **Design content leads with evidence, not prose ("FDD content rule").**
 The Preliminary Report scored well on structure but the jury explicitly
 asked for more photos, dimensioned drawings, cross-sections, and asked why

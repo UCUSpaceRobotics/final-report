@@ -1,0 +1,22 @@
+% =============================================================================
+% sections/design/rover/budgets/data_link.tex  -  Data Link Budget
+% Teams: ground_station / navigation (best guess - unconfirmed) / Status: stub
+%
+% Content required: ground station <-> rover link budget. Open question:
+% should onboard/internal communication be covered here too? Decide before
+% writing.
+% =============================================================================
+
+H.265 bitrate targets are set on the Main computer using NVENC. NVENC is separate from CPU/GPU cores, 
+so encoding load is low. We assume a conservative usable link capacity of 
+\qty{40}{\mega\bit\per\second} (about 20\% of the \qty{200}{\mega\bit\per\second} 
+802.11ac \qty{40}{\mega\hertz} peak) to account for overhead, retries, and interference.
+
+Per-stream H.265 bitrate estimates:
+\begin{itemize}
+	\item Video feed: \qty{17}{\mega\bit\per\second}
+	\item Telemetry + commands: $<$\qty{1}{\mega\bit\per\second}
+\end{itemize}
+
+Worst-case total is about \qty{18}{\mega\bit\per\second}, leaving about 
+\qty{22}{\mega\bit\per\second} headroom (${\sim}55\%$ of estimated capacity).

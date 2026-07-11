@@ -1,6 +1,6 @@
 % =============================================================================
 % sections/03_final_design_description.tex  -  Section 3: Final Design Description
-% Teams: all / Status: STRUCTURE NOT YET DEFINED
+% Teams: all / Status: rover side scaffolded, drone side pending
 %
 % SCORING (0-40 pts):
 %   Rover structure (0-6): PT, WBS, OBS - both rover and drone (0-2);
@@ -12,21 +12,141 @@
 %     link (0-1); critical parts (0-1); innovations (0-1)
 %   Drone excellence (0-10; 0 pts if fully COTS drone)
 %
-% !! DO NOT add subsections or content here. The internal structure is
-% !! decided at the team session (IMPLEMENTATION_PLAN.md, Phase 3) and lands
-% !! as a single infra/design-tree PR. Binding inputs for that session:
-%   - FDD content rule: every leaf leads with evidence (photo of built
-%     hardware / dimensioned drawing / cross-section / schematic /
-%     calculation); renders only where hardware does not exist yet.
-%   - Jury feedback: detailed pictures of rover elements, cross-sections,
-%     overall dimensions; SHOW the drone (photos); drone data link budget
-%     was missing in the Preliminary.
-%   - Page budget: ~15 pages.
+% The drone side is an acknowledged gap: the subsections below exist
+% because the rubric requires them, but no leaf files exist yet since their
+% content hasn't been discussed.
+%
+% Ordering lives only here (ai_context/DECISIONS.md) - leaf files under
+% sections/design/ have stable, unnumbered names and contain body content
+% only, no \subsection/\subsubsection commands of their own.
 % =============================================================================
 
 \section{Final Design Description}
 \label{sec:design}
 
-\todo[inline]{Structure pending the Phase 3 team session
-(IMPLEMENTATION\_PLAN.md). The agreed design tree lands as one
-\texttt{infra/design-tree} PR; content PRs start only after that.}
+\subsection{Product Tree, Work Breakdown Structure, and Organisation Breakdown Structure}
+\label{subsec:pt_wbs_obs}
+
+\subsubsection{Product Tree}
+\label{subsubsec:product_tree}
+\input{sections/design/breakdowns/product_tree}
+
+\subsubsection{Work Breakdown Structure}
+\label{subsubsec:wbs}
+\input{sections/design/breakdowns/wbs}
+
+\subsubsection{Organisation Breakdown Structure}
+\label{subsubsec:obs}
+\input{sections/design/breakdowns/obs}
+
+\subsection{Rover Design Description}
+\label{subsec:rover_design_description}
+
+\subsubsection[Rover's Design Overview]{Rover's Design Overview\exampleflag}
+\label{subsubsec:rover_design_overview}
+\input{sections/design/rover/design_overview}
+
+\subsubsection[Robotic Hand Overview]{Robotic Hand Overview\exampleflag}
+\label{subsubsec:robotic_hand_overview}
+\input{sections/design/rover/robotic_hand_overview}
+
+\subsubsection[Science Container]{Science Container\exampleflag}
+\label{subsubsec:science_container}
+\input{sections/design/rover/science_container}
+
+\subsubsection[Electronics Overview]{Electronics Overview\exampleflag}
+\label{subsubsec:rover_electronics_overview}
+\input{sections/design/rover/electronics_overview}
+
+\subsubsection[Ground Station Overview]{Ground Station Overview\exampleflag}
+\label{subsubsec:ground_station_overview}
+\input{sections/design/rover/ground_station_overview}
+
+\subsubsection[Hardware Overview]{Hardware Overview\exampleflag}
+\label{subsubsec:rover_hardware_overview}
+\input{sections/design/rover/hardware_overview}
+
+\subsubsection[Software Overview]{Software Overview\exampleflag}
+\label{subsubsec:rover_software_overview}
+\input{sections/design/rover/software_overview}
+
+\subsubsection[Communication Overview]{Communication Overview\exampleflag}
+\label{subsubsec:rover_communication_overview}
+\input{sections/design/rover/communication_overview}
+
+\subsubsection[Navigational Stack]{Navigational Stack\exampleflag}
+\label{subsubsec:navigational_stack}
+\input{sections/design/rover/navigational_stack}
+
+\subsection{Rover Technical Budget}
+\label{subsec:rover_technical_budget}
+
+\subsubsection{Mass Budget\exampleflag}
+\label{subsubsec:rover_mass_budget}
+\input{sections/design/rover/budgets/mass}
+
+\subsubsection{Power Budget\exampleflag}
+\label{subsubsec:rover_power_budget}
+\input{sections/design/rover/budgets/power}
+
+\subsubsection{Data Link Budget\exampleflag}
+\label{subsubsec:rover_data_link_budget}
+\input{sections/design/rover/budgets/data_link}
+
+\subsection{Critical Parts Required for On-Site ERC Tasks (Rover)}
+\label{subsec:rover_critical_parts}
+
+\subsubsection{Rocker-Only Suspension}
+\label{subsubsec:rocker_suspension}
+\input{sections/design/rover/critical_parts/rocker_suspension}
+
+\subsubsection{Wheels Design}
+\label{subsubsec:wheels_design}
+\input{sections/design/rover/critical_parts/wheels_design}
+
+\subsubsection{Gripper Design}
+\label{subsubsec:gripper_design}
+\input{sections/design/rover/critical_parts/gripper_design}
+
+\subsubsection{Astro-Bio Gripper}
+\label{subsubsec:astrobio_gripper}
+\input{sections/design/rover/critical_parts/astrobio_gripper}
+
+\subsubsection{6-DOF Manipulator}
+\label{subsubsec:manipulator_6dof}
+\input{sections/design/rover/critical_parts/manipulator_6dof}
+
+\subsection{Rover Innovative Design Solutions}
+\label{subsec:rover_innovations}
+
+\subsubsection{Unified Sample Gripper}
+\label{subsubsec:unified_sample_gripper}
+\input{sections/design/rover/innovations/unified_sample_gripper}
+
+\subsection{Drone Design Description}
+\label{subsec:drone_design_description}
+
+\todo[inline]{Drone design description. Not yet discussed by the team.
+Decompose into leaf files under sections/design/drone/ analogous to the
+Rover Design Description above once defined. Jury feedback (Preliminary):
+the drone was never actually shown despite an extensive description - lead
+with real photos.}
+
+\subsection{Drone Technical Budget}
+\label{subsec:drone_technical_budget}
+
+\todo[inline]{Drone technical budget: mass, power, data link. Not yet
+discussed - the Preliminary Report's drone budget was missing a data link
+figure entirely; the rubric scores mass + power + data link together.}
+
+\subsection{Critical Parts Required for On-Site ERC Tasks (Drone)}
+\label{subsec:drone_critical_parts}
+
+\todo[inline]{Drone critical parts for on-site ERC tasks. Not yet
+discussed.}
+
+\subsection{Drone Innovative Design Solutions}
+\label{subsec:drone_innovations}
+
+\todo[inline]{Drone innovative design solutions. Not yet discussed. Note:
+this subsection scores 0 pts if the drone is fully COTS.}

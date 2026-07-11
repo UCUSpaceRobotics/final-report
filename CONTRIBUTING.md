@@ -116,7 +116,13 @@ exception is the test table's *Req.* column, which the rubric scores.)
   figure cannot.
 - **Units:** `siunitx` everywhere — see README. Hand-written units fail review.
 - **Labels:** `\label{fig:...}` / `\label{tab:...}` on everything you add;
-  reference with `\autoref` (sections) or `\ref` (tables/figures).
+  reference with `\autoref` — always, everywhere. **`\ref` is forbidden**:
+  `\autoref` inserts the right name automatically ("Figure", "Table",
+  "§") so never type `Figure~`/`Table~` by hand before it (e.g.
+  `...shown in \autoref{fig:rover_scheme}...`, not
+  `Figure~\ref{fig:rover_scheme}`). **Every figure and table must be
+  referenced from the prose that surrounds it** - no orphan figures that
+  are labeled but never mentioned in the text.
 - **Diagrams:** drawn outside LaTeX, exported as PDF. Keep the editable
   source (e.g. `.drawio`) next to the export in the same figures folder.
 - **Figures:** `\includegraphics[width=...]{teams/arm/figures/gripper_v2}` —
@@ -129,7 +135,7 @@ exception is the test table's *Req.* column, which the rubric scores.)
 - [ ] Page count within budget — **CI warning** (hard fail at freeze)
 - [ ] Screenshot of the compiled section pasted into the PR — reviewer
 - [ ] Tiny contract updated — reviewer
-- [ ] Units via siunitx, labels present — reviewer
+- [ ] Units via siunitx, labels present and referenced in the text — reviewer
 
 ## Common mistakes
 
@@ -142,6 +148,8 @@ exception is the test table's *Req.* column, which the rubric scores.)
 | Inline TikZ in a section file | Draw outside LaTeX, export PDF, `\includegraphics` |
 | "Results: ok" | Measured value vs the pass criterion |
 | Duplicating a table in a second file | One table = one file in `tables/` |
+| A figure/table with a `\label` but never mentioned in the prose | Add an `\autoref` to it from the surrounding text |
+| `Figure~\ref{...}` / `Table~\ref{...}` | `\autoref{...}` — never `\ref`, it already inserts the name |
 
 ## Questions
 

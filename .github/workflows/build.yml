@@ -5,7 +5,7 @@
 #   pages : effective page count vs the 35-page limit (warn now, hard fail
 #           at freeze week - flip the marked line)
 #   lint  : placeholder patterns must not reach main ("\todo" joins the list
-#           at freeze week)
+#           at freeze week); bare \ref{} is forbidden, \autoref only
 # =============================================================================
 name: build
 
@@ -69,5 +69,15 @@ jobs:
             #   echo "::error file=${f}::\\todo left in content"
             #   fail=1
             # fi
+
+            # \ref is forbidden - always use \autoref instead (it inserts
+            # the name automatically: "Figure", "Table", "\S", ...).
+            # Strip allowed \autoref{...}/\pageref{...} first, then check
+            # whether a bare \ref{ remains.
+            scrubbed=$(printf '%s\n' "$stripped" | sed -E 's/\\(auto|page)ref\{[^}]*\}//g')
+            if printf '%s\n' "$scrubbed" | grep -Fq -- '\ref{'; then
+              echo "::error file=${f}::bare \\ref{} found - use \\autoref instead"
+              fail=1
+            fi
           done
           exit $fail

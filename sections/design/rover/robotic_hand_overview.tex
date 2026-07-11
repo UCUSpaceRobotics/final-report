@@ -1,0 +1,59 @@
+% =============================================================================
+% sections/design/rover/robotic_hand_overview.tex  -  Robotic Hand Overview
+% Teams: arm (best guess - unconfirmed) / Status: EXAMPLE (scope approximation)
+%
+% EXAMPLE CONTENT for scope/layout approximation - not final report text.
+% Marked with \exampleflag on its heading in the assembler.
+%
+% Scope: minimal prose, 4 pictures. What the hand is, what it's capable of,
+% its size - shown in action. Detailed kinematics, load analysis, actuator
+% selection, and end-effector specs are deferred to later/deeper sections
+% (likely critical_parts/manipulator_6dof.tex, owned by Martha) rather than
+% crammed into this overview.
+%
+% Images are placeholders (teams/arm/figures/manipulator_*.png) - swap them
+% for the real action shots by overwriting the same files. Three additional
+% end-effector close-up placeholders already exist in the same folder
+% (parallel-jaw_gripper.png, sample_end-effector.png,
+% astrobio_end-effector.png) for reuse once the detailed sections are written.
+% =============================================================================
+
+The rover's robotic hand is a 6-DOF articulated manipulator with a maximum
+reach of \qty{132}{\centi\meter} and a maximum payload of
+\qty{3}{\kilo\gram}, built as an anthropomorphic RRR arm with a spherical
+wrist. It performs deep and surface sample collection, bioscience probe
+handling, and equipment maintenance through a tool-less quick-change
+end-effector interface. The manipulator in action across these tasks is
+shown in \autoref{fig:manipulator_scenarios}.
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{teams/arm/figures/manipulator_deep_sampling}
+        \caption{Deep sampling}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{teams/arm/figures/manipulator_bioscience}
+        \caption{Bioscience}
+    \end{subfigure}
+
+    \vspace{0.5em}
+
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{teams/arm/figures/manipulator_probe_gathering}
+        \caption{Probe gathering}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{teams/arm/figures/manipulator_maintenance}
+        \caption{Maintenance}
+    \end{subfigure}
+
+    \caption{Manipulator configuration and operational scenarios}
+    \label{fig:manipulator_scenarios}
+\end{figure}

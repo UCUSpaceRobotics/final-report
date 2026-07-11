@@ -4,7 +4,7 @@
 
 ## Cross-references added or updated
 
-<!-- \autoref / \ref links to or from other sections, if any. Write "none" otherwise. -->
+<!-- \autoref links to or from other sections/figures/tables, if any. Write "none" otherwise. -->
 
 ## What remains
 

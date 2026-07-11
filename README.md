@@ -64,7 +64,10 @@ Teams: `arm`, `drone`, `electronics`, `ground_station`, `navigation`,
   hand (`10kg`, `1920x1080` are errors). New units → `\DeclareSIUnit` in
   `preamble.tex` only (existing: `\fps`, `\mAh`, `\pixel`).
 - **Labels**: `sec:` / `subsec:` / `subsubsec:` / `par:` / `tab:` / `fig:`;
-  reference sections with `\autoref{...}`.
+  reference everything with `\autoref{...}` — `\ref` is forbidden, since
+  `\autoref` inserts the name ("Figure", "Table", "§") automatically. Every
+  figure/table must be referenced from the surrounding prose — no orphan,
+  unmentioned figures.
 - **Diagrams are drawn outside LaTeX** (draw.io / EasyEDA / CAD / Figma) and
   exported as **PDF**: team assets → `teams/<team>/figures/`, shared →
   `figures/`. No inline TikZ.

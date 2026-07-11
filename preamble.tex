@@ -114,3 +114,12 @@
 \newcommand{\riskhigh}{\colorbox{red!40}{\textbf{High}}}
 \newcommand{\riskmedium}{\colorbox{orange!40}{\textbf{Medium}}}
 \newcommand{\risklow}{\colorbox{green!30}{\textbf{Low}}}
+
+% --- Example-section flag -----------------------------------------------------
+% Small badge marking a section as an example/placeholder used only for
+% scope approximation (page budget, layout, structure) - not real report
+% content. Use the ToC-safe optional-argument form of the sectioning
+% command so the badge doesn't leak into the table of contents or PDF
+% bookmarks:
+%   \subsubsection[Rover's Design Overview]{Rover's Design Overview\exampleflag}
+\newcommand{\exampleflag}{\,\colorbox{yellow!60}{\scriptsize\textbf{EXAMPLE}}}

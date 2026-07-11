@@ -1,0 +1,27 @@
+% =============================================================================
+% sections/design/rover/communication_overview.tex  -  Communication Overview
+% Teams: ground_station / navigation (best guess - unconfirmed) / Status: EXAMPLE (scope approximation)
+%
+% EXAMPLE CONTENT for scope/layout approximation - not final report text.
+% Adapted from the Preliminary Report's "Communication Architecture
+% Overview" subsection, trimmed to minimal prose. Marked with \exampleflag
+% on its heading in the assembler.
+%
+% Image is a placeholder (teams/ground_station/figures/communication_architecture.png)
+% - swap it for the real diagram by overwriting the same file.
+% =============================================================================
+
+All operator equipment is deployed inside the team zone within a dedicated
+ground station unit. Rover communication uses one primary Wi-Fi channel at
+\qty{5}{\giga\hertz} for video, telemetry, and commands, backed by a
+fallback transceiver and a separate e-stop link, both in the
+\qtyrange{430}{440}{\mega\hertz} band. The antenna mast hosts the mast
+computer, Wi-Fi adapter, and both backup links, connecting to the ground
+station as shown in \autoref{fig:communication_architecture}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.85\linewidth]{teams/ground_station/figures/communication_architecture}
+    \caption{Ground station communication architecture}
+    \label{fig:communication_architecture}
+\end{figure}
