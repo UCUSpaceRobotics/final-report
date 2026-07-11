@@ -1,21 +1,37 @@
 % =============================================================================
 % tables/test_plan.tex  -  Master test table (single source of truth)
-% Teams: test-plan owner / Status: stub (Phase 2 ports the 37 Preliminary tests)
+% Teams: test-plan owner / Status: draft (Phase 2 data ported; none executed yet)
+%
+% Rendered as a landscape appendix page (sections/appendix_test_plan.tex),
+% which widens \textwidth/\linewidth locally before \input-ing this file -
+% the pdflscape `landscape` environment only rotates the page, it does not
+% widen \linewidth on its own, and longtable's own \LTleft/\LTright margin
+% trick does not compose reliably with pdflscape (produces bogus overfull
+% warnings) - do not reintroduce it here.
 %
 % Columns follow the official Final Report template:
 %   No | Name | Description (incl. approach) | Req. | Pass/Fail | Results | Status
 % The Req. column is the ONLY place requirements are referenced in the report.
 %
+% Phase 2 (test/port-preliminary): the 37 rows below are carried over
+% verbatim from the Preliminary Report's test plan (Table 24), IDs and
+% descriptions unchanged. Results and Status are honestly "Not yet run." /
+% "Planned" for every row - the Preliminary explicitly deferred execution
+% ("results are omitted at this stage"), and no test has been re-run for
+% the Final Report yet either. This is exactly the gap the jury flagged:
+% "run the tests, report the achieved value against each criterion, add
+% results and status columns." Replace Results/Status per row as tests are
+% actually executed - do not leave this as the final content.
+%
 % OWNERSHIP: this table is edited directly by its owner - rows are inserted
 % all at once, grouped by team. Teams hand their results to the owner instead
 % of editing this file. Row shape (7 cells):
 %   ID & Name & Description & Req. & Pass/Fail criteria & Results & Status \\
-% Keep the Preliminary test IDs (SUS-01 ... DRO-07). Results = measured value
-% vs the criterion; Status = Passed / Failed / Planned.
 % =============================================================================
 
-\setlength{\tabcolsep}{3pt}
-\begin{longtable}{C{0.85cm} L{1.9cm} L{3.3cm} C{1.1cm} L{2.6cm} L{2.6cm} C{1.15cm}}
+\begingroup\footnotesize
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{C{1.1cm} L{2.5cm} L{7.2cm} C{2.4cm} L{5.9cm} L{2.2cm} C{1.2cm}}
     \caption{Final Test Plan}
     \label{tab:test_plan} \\
     \toprule
@@ -35,12 +51,56 @@
     \bottomrule
     \endlastfoot
 
-    % Phase 2 (test/port-preliminary) replaces this stub row with the 37
-    % tests carried over from the Preliminary, grouped like this:
-    %
-    % \multicolumn{7}{l}{\textbf{Suspension Team}} \\
-    % SUS-01 & Turning radius test & ... & FUN-030 & ... & ... & Planned \\
-    \multicolumn{7}{l}{\itshape Tests ported from the Preliminary in Phase 2.} \\
+    \multicolumn{7}{l}{\textbf{Suspension Team}} \\
+    SUS-01 & Turning radius test & Turns on sand surface in both directions forward and reverse; radius of outermost wheel-track circle measured. & FUN-030 & Turning radius does not exceed \qty{0.7}{\meter} in all tested directions. & Not yet run. & Planned \\
+    SUS-02 & Water splash test & Fully assembled rover/drone exposed to simulated moderate rain from all directions for \qty{10}{\minute}; arm cycled through full range of motion during exposure. & ENV-020 & Rover, arm, and drone operate nominally after exposure. & Not yet run. & Planned \\
+    SUS-03 & Dust \& mud test & Rover operated on dusty and muddy terrain for \qty{30}{\minute}; electronics compartments inspected for ingress after test. & ENV-030 & All systems operate nominally after exposure. & Not yet run. & Planned \\
+    SUS-04 & Wheel rigidity \& terrain test & Wheel placed vertically on hard flat surface, \qty{50}{\kilo\gram} radial load applied at wheel centre, deformation measured; rover operated on representative terrain types including gravel, sand, and steep slopes; wheel structural integrity inspected before and after each run. & DES-130; FUN-020 & No structural deformation or cracking observed; rover traverses all terrain types including slope. & Not yet run. & Planned \\
+
+    \multicolumn{7}{l}{\textbf{Robotic Arm Team}} \\
+    ARM-01 & Autonomous panel interfaces actuation & Trigger autonomous mode; CV detects panel interfaces; arm autonomously aligns and toggles lever and rotary switches; operate electromagnetic lock and detach; grasp, align, and fully insert IEC320 C14 plug; no team member interacts with the ground station. & DES-140; FUN-190,200,210 & Rover successfully actuates switches, operates the lock, and inserts the plug without operator intervention and without panel damage. & Not yet run. & Planned \\
+    ARM-02 & Manual teleoperation and swipe test & Utilize arm camera feed; operator manually aligns and toggles lever and rotary switches; manually swipe the card through the lock mechanism; grasp, align, and manually insert the plug. & DES-140; FUN-190,200,210 & Operator successfully manipulates all interfaces and performs the card swipe without panel damage. & Not yet run. & Planned \\
+    ARM-03 & Probing task operation test & Approach the defined probe; grasp it with the gripper; transport to target coordinates; insert into the container. & DES-140 & Probe successfully grasped, transported, and inserted into the designated target. & Not yet run. & Planned \\
+
+    \multicolumn{7}{l}{\textbf{Science Team}} \\
+    SCI-01 & Surface sample collection capability & Bucket jaw scoops regolith into the correct container and weighs the deposit on the onboard scale; bucket jaw grips a \qty{15}{\centi\meter} rock specimen. & FUN-080,090,110; DES-070,080,140 & At least \qty{100}{\gram} regolith deposited into correct container; \qty{15}{\centi\meter} rock secured. & Not yet run. & Planned \\
+    SCI-02 & Deep sample collection capability & Auger drills into analog soil (no rocks); penetration depth measured with a ruler after each of 3 runs; sample weighed after collection. & FUN-130; DES-090,140 & Auger reaches at least \qty{30}{\centi\meter} and retains at least \qty{100}{\gram} of deep-soil sample in all 3 runs. & Not yet run. & Planned \\
+    SCI-03 & Liquid sample collection capability & Intake tube submerged until bottom-contact sensor triggers; pump activated; tubing inspected for leaks; fill level checked after collection; pump auto-stop confirmed at target threshold. & DES-140; GEN-120 & At least \qty{100}{\milli\liter} collected into sealed vessel; no external leakage; pump stops automatically at target fill level. & Not yet run. & Planned \\
+    SCI-04 & Rock container validation & Insert a rock specimen of \qty{15}{\centi\meter} along its longest axis into the Rock Cup; verify fit; close lid and confirm latch engagement. & DES-080; FUN-080 & Rock specimen fits inside Rock Cup; lid closes and latches securely. & Not yet run. & Planned \\
+    SCI-05 & Regolith container validation & Transfer at least \qty{100}{\gram} of regolith from the bucket jaw into the Regolith Cup; inspect all cup surfaces and seams for material leakage after deposit. & DES-070; FUN-080,090 & At least \qty{100}{\gram} regolith in cup; no leakage at any seam. & Not yet run. & Planned \\
+    SCI-06 & Deep container validation & Discharge auger output into the Deep Cup opening; inspect cup and all seams for leakage after deposit. & DES-090; FUN-080,130 & At least \qty{100}{\gram} of auger output enters Deep Cup; no leakage at any seam. & Not yet run. & Planned \\
+    SCI-07 & Liquid container validation & Fill Astrobio container to target volume, seal it, and inspect all joints, tubing connections, and the pH port for leakage; confirm lid and seals latch after filling. & GEN-110,120 & Container holds at least \qty{100}{\milli\liter}; no leakage at any joint, tube, or pH port; lid latches securely. & Not yet run. & Planned \\
+    SCI-08 & Autonomous regolith and rock collection & Test the autonomous surface-sampling pipeline, in which the arm camera and gripper collect regolith and rock samples without operator input; no team member interacts with the ground station. & FUN-060,160 & Regolith at least \qty{100}{\gram} and rock at least \qty{15}{\centi\meter} placed in correct containers; lids latch; mass logged; no operator intervention. & Not yet run. & Planned \\
+    SCI-09 & Autonomous deep sample collection & Test the autonomous deep-sampling pipeline, in which the auger autonomously drills and deposits a soil core sample without operator input; no team member interacts with the ground station. & FUN-060,130,160 & Auger reaches at least \qty{30}{\centi\meter}; at least \qty{100}{\gram} in Deep Cup; mass logged; no operator intervention. & Not yet run. & Planned \\
+    SCI-10 & Autonomous sample collection pipeline & Test the autonomous liquid-sampling pipeline, in which the pump gripper autonomously collects a liquid sample and stops at the fill threshold without operator input; no team member interacts with the ground station. & FUN-060,160 & At least \qty{100}{\milli\liter} in Astrobio container; pump auto-stops; pH logged; no leakage; no operator intervention. & Not yet run. & Planned \\
+    SCI-11 & Weighing accuracy, repeatability, and tilt compensation & Place a certified \qty{100}{\gram} calibration weight on each of the three load cells and record measured mass; repeat measurements while rover is on different inclines; measured values displayed on ground station. & FUN-100,120,140 & All readings are within \qtyrange{99}{101}{\gram} for each container. & Not yet run. & Planned \\
+
+    \multicolumn{7}{l}{\textbf{Navigation Team}} \\
+    NAV-01 & Full autonomous traverse test & A start point and 5 ordered waypoints are provided to the system; the rover autonomously traverses across terrain with obstacles, hills, and slopes, and returns to the starting position; no team member interacts with the ground station. & OPS-050; FUN-060,220,240 & All waypoints, including the return to start, are reached in the correct order within \qty{1}{\meter} accuracy; no physical collisions. & Not yet run. & Planned \\
+    NAV-02 & Pre-motion warning timing test & Autonomous mode is activated for the rover/drone via the ground station. & OPS-080,090,100; FUN-070 & Rover/drone indicator lamp changes color and blinks for at least \qty{5}{\second} upon activation; zero movement occurs during this delay. & Not yet run. & Planned \\
+    NAV-03 & ArUco marker detection and pose estimation test & ArUco markers are placed at known ground-truth locations; marker detection and relative pose estimation is executed via static images and live feeds; calculated marker positions are compared against ground truth. & FUN-230 & Rover/drone calculates marker translation/orientation with errors at most \qty{5}{\centi\meter}/\ang{5} (at \qty{1}{\meter} distance or less) and at most \qty{20}{\centi\meter}/\ang{10} (at above \qty{1}{\meter} distance). & Not yet run. & Planned \\
+    NAV-04 & Dynamic obstacle avoidance test & Rover moves forward while another rover/obstacle approaches from varying angles across multiple runs. & FUN-240 & Zero collisions; rover halts at distance at least \qty{1}{\meter} from the other rover. & Not yet run. & Planned \\
+    NAV-05 & Long-range localization test & Rover traverses a \qty{150}{\meter} route; its estimated global pose and heading are compared against ground-truth RTK GPS and precision magnetometer measurements. & FUN-220 & Maximum positional error is below \qty{0.8}{\meter} and maximum absolute heading error is below \ang{8.0} relative to global North across the whole run. & Not yet run. & Planned \\
+    NAV-06 & Low-light conditions test & The following tests are performed in a dark environment with a predefined lighting level: SCI-08--10; NAV-01, 03--05; ARM-01--03; DRO-02, 06, 07. & ENV-040 & The pass criteria for all specified tests are successfully met under low-light conditions. & Not yet run. & Planned \\
+
+    \multicolumn{7}{l}{\textbf{General Electronics Team}} \\
+    ELE-01 & 60-minute mission profile test & Outdoor soil terrain; rover drives figure-8 for \qty{5}{\minute}, stops, arm moves continuously for \qty{5}{\minute}; repeat cycle; test ends after \qty{60}{\minute} or battery depletion; containers loaded before test; verify sample masses and container states after test. & OPS-140; FUN-150 & Test duration is at least \qty{60}{\minute}; mass loss of sample is at most \qty{5}{\gram} per cup. & Not yet run. & Planned \\
+    ELE-02 & Indicator visibility at \qty{10}{\meter} & Observer is positioned at a distance of \qty{10}{\meter} from the rover; indicator is activated in blinking mode; observer visually checks indicator visibility. & DES-060 & Blinking indicator is clearly visible from \qty{10}{\meter}. & Not yet run. & Planned \\
+    ELE-03 & Max speed verification & Rover is commanded to move forward and reverse at maximum speed; speed and position are measured using GPS and computed in real time by the control system; test is performed on flat terrain and on sloped terrain. & FUN-010 & Measured speed does not exceed \qty{1}{\meter\per\second}. & Not yet run. & Planned \\
+
+    \multicolumn{7}{l}{\textbf{Ground Station Team}} \\
+    GSU-01 & GS setup, failover, and E-stop test & Assemble Ground Station (mast, antenna, ETH/PoE); connect Wi-Fi to rover and verify drive, arm, cameras, and E-stop; disable router and confirm LoRa takeover within \qty{10}{\second}, then re-enable and confirm switchback within \qty{10}{\second}; connect wired controller and verify drive with no RF active; press E-stop and verify rover stops within \qty{1}{\second}, then press Start and verify recovery; arm drone, verify RC, FPV, and MAVLink on GS, and execute takeoff, hover, and land. & OPS-010,020,030,060,160; DES-150; GEN-060 & Rover is controllable over Wi-Fi, LoRa, and wired links; E-stop halts rover within \qty{1}{\second} with full recovery on Start; drone RC, FPV, and MAVLink are confirmed; setup completes within allocated prep time. & Not yet run. & Planned \\
+    GSU-02 & Range, non-line-of-sight, and interference test & Drive rover to \qty{100}{\meter} and verify \qty{5}{\giga\hertz} link; drive behind terrain obstacle and verify link holds for at least \qty{3}{\minute}; repeat both scenarios over \qty{433}{\mega\hertz} LoRa only; generate traffic simulating at least four competing teams and operate rover and drone communications simultaneously for at least \qty{5}{\minute} while verifying only declared streams are active. & FUN-040,050; DES-110; OPS-040 & For both links, packet loss remains below \qty{5}{\percent} and latency remains below \qty{500}{\milli\second} at \qty{100}{\meter} with and without LOS; no undeclared streams are detected; no communication dropout occurs under interference. & Not yet run. & Planned \\
+    GSU-03 & Full function and remote imaging test & Drive rover across an area with test-chart letters placed up to \qty{10}{\meter}; operate all rover functions from GS: drive in all directions and on slope, all cameras (cycle all feeds and capture one still photo per camera), each arm joint through full range, drill, science module, E-stop, and reset; identify all letters using live feeds only, without prior knowledge. & OPS-140,160; FUN-170,180 & All rover functions respond correctly; packet loss remains below \qty{5}{\percent}, latency remains below \qty{500}{\milli\second}, and no dropout occurs; all feeds become live within \qty{3}{\second} without restart; one still photo is saved per camera; all letters are correctly identified and screenshots are logged. & Not yet run. & Planned \\
+
+    \multicolumn{7}{l}{\textbf{Drone Team}} \\
+    DRO-01 & Hot/cold environmental functionality test & Place drone and rover in a temperature chamber; soak at \qty{30}{\celsius} and \qty{0}{\celsius} for \qty{30}{\minute}; verify full functionality (teleoperation, sensors, actuators, communication, and autonomy indicators). & ENV-010 & Drone and rover maintain full functionality (control, telemetry, video, movement, and indicators) after \qty{30}{\minute} exposure to both \qty{30}{\celsius} and \qty{0}{\celsius}. & Not yet run. & Planned \\
+    DRO-02 & Autonomous search and vision test & Command autonomous grid search with downward LED and autonomy indicator lamp active; use HDR camera processing; detect ArUco markers via CV pipeline; no team member interacts with the ground station. & FUN-060; OPS-050 & Autonomy indicator lamp remains visible without blinding cameras; stable position hold with no drift via optical flow plus LED; all ArUco markers continuously detected; no operator intervention. & Not yet run. & Planned \\
+    DRO-03 & Failsafe test & Maintain stable connection with Ground Station (GS); disconnect GS link from drone mid-maneuver to simulate total communication loss; observe emergency auto-land. & OPS-070 & Drone immediately performs safe emergency auto-land upon total communication loss. & Not yet run. & Planned \\
+    DRO-04 & Equipment failsafe test & Remotely steer and control the drone using an additional RC system and maintain communication through this backup control link. & GEN-070 & RC system successfully steers and controls the drone and maintains stable communication. & Not yet run. & Planned \\
+    DRO-05 & In-flight hardware redundancy test & Secure drone on test bench (propellers removed); disable primary IMU in real time; monitor Extended Kalman Filter (EKF) voting and attitude data; reinstall propellers and command autonomous waypoint flight. & DES-150 & EKF instantly switches to redundant IMUs with no loss of stability or orientation. & Not yet run. & Planned \\
+    DRO-06 & Localization test & Drone flies to a known position from lift-off; compute relative pose using IMU, optical flow, and GPS; compare calculated X/Y positions to ground truth. & FUN-220 & Relative position error is at most \qty{5}{\percent} versus ground truth. & Not yet run. & Planned \\
+    DRO-07 & Collision avoidance test & Drone flies forward toward an obstacle. & FUN-240 & Drone detects obstacle and stops at least \qty{1}{\meter} away without collision. & Not yet run. & Planned \\
 
 \end{longtable}
-\setlength{\tabcolsep}{6pt}
+\endgroup

@@ -1,22 +1,49 @@
 % =============================================================================
 % tables/rio_table.tex  -  RIO register (risks + opportunities + issues)
 %
-% Single table per the official Final Report template. 8 pt font is allowed
-% in RIO tables only (hence \footnotesize under the 10 pt document font).
+% Rendered as a landscape appendix page (sections/appendix_rio.tex), which
+% widens \textwidth/\linewidth locally before \input-ing this file - the
+% pdflscape `landscape` environment only rotates the page, it does not
+% widen \linewidth on its own, and longtable's own \LTleft/\LTright margin
+% trick does not compose reliably with pdflscape (produces bogus overfull
+% warnings) - do not reintroduce it here. Single table per the official
+% Final Report template. 8 pt font is allowed in RIO tables only (hence
+% \footnotesize under the 10 pt document font).
 % Owned centrally (PM) - IDs MUST match the Preliminary Report:
 %   R-01..R-10, O-01, I-01..I-03. Highlight and justify removals/additions.
-% L/S/RI are tracked for opportunities and issues too (jury ask).
+%
+% Phase 2 (rio/port-preliminary): rows below are carried over verbatim from
+% the Preliminary Report's risk register (Table 21) and opportunities/
+% issues registers (Tables 22-23), reshaped into this table's single-table
+% column set. Two things still need PM review before this counts as the
+% "second iteration" the rubric asks for:
+%   1. The "Impact type" column did not exist in the Preliminary (which
+%      only had a free-text Impact description). Values below are inferred
+%      from that description against the template's allowed list (Time,
+%      Cost, Scope, Quality, Resources, Economic, Managerial, Technical,
+%      Generic) - NOT team-assessed. Verify each one.
+%   2. L/S/RI for O-01 and I-01..I-03 are marked "?": the Preliminary
+%      never assessed likelihood/severity for opportunities or issues, only
+%      for risks. This is exactly the gap the jury flagged ("Issues and
+%      Opportunities should have their likelihood and severity tracked as
+%      well") - assign real L/S values before freeze, don't leave as "?".
+%   3. Risk descriptions/mitigations are otherwise unchanged from the
+%      Preliminary. The jury also flagged several as too generic
+%      (e.g. R-01: "determine which system you're considering as
+%      critical"). A low score follows if the majority of risks are
+%      unchanged between iterations - this table is a starting point for
+%      the second-iteration pass, not the finished assessment.
 %
 % Row shape (11 cells):
 %   ID & Name & Description & Category & Impact type & Owner
 %      & L & S & RI & Response & Actions \\
-% RI cell colour: \cellcolor{red!40} >=15, \cellcolor{orange!40} 6-14,
-%   \cellcolor{green!30} <=5.
+% RI cell colour: \riskhigh-equivalent \cellcolor{red!40} >=15,
+%   \cellcolor{orange!40} 6-14, \cellcolor{green!30} <=5.
 % =============================================================================
 
 \begingroup\footnotesize
-\setlength{\tabcolsep}{3pt}
-\begin{longtable}{C{0.8cm} L{1.5cm} L{2.3cm} C{0.95cm} C{1.1cm} L{1.4cm} C{0.35cm} C{0.35cm} C{0.5cm} L{1.45cm} L{2.6cm}}
+\setlength{\tabcolsep}{4pt}
+\begin{longtable}{C{1.0cm} L{2.3cm} L{5.05cm} L{1.7cm} C{1.6cm} L{1.9cm} C{0.6cm} C{0.6cm} C{0.8cm} L{2.0cm} L{4.1cm}}
     \caption{Qualitative risks, opportunities, and issues assessment (second iteration)}
     \label{tab:rio} \\
     \toprule
@@ -35,10 +62,20 @@
     \bottomrule
     \endlastfoot
 
-    % Phase 2 (rio/port-preliminary) replaces this stub row with
-    % R-01..R-10, O-01, I-01..I-03 carried over from the Preliminary.
-    \multicolumn{11}{l}{\itshape Register ported from the Preliminary in Phase 2.} \\
+    R-01 & Critical subsystem failure & Mechanical/electrical node failure during competition operation; functional capability loss and potential task interruption. & Risk & Technical & Engineer & 4 & 4 & \cellcolor{red!40}16 & Mitigate & Maintain spare-parts stock and prepared repair procedures. \\
+    R-02 & Transport defects & Shock and handling loads during transit to the competition site; physical damage to rover assemblies before operations. & Risk & Technical & Logistics Mgr. & 3 & 4 & \cellcolor{orange!40}12 & Mitigate & Use palletized transport and modular, disassemblable packaging. \\
+    R-03 & Overheating & Electronics/motors under high thermal load (ambient above \qty{30}{\celsius}); performance degradation and reliability reduction. & Risk & Technical & Hardware Eng. & 3 & 4 & \cellcolor{orange!40}12 & Mitigate & Sensor monitoring, power-saving mode, active cooling (designed for \qtyrange{40}{50}{\celsius}). \\
+    R-04 & Limited prior competition experience & First ERC participation and incomplete familiarity with rule nuances; lower execution efficiency and increased procedural errors. & Risk & Generic & Team Lead & 5 & 2 & \cellcolor{orange!40}10 & Accept & Regular consultations with domain specialists and mentors. \\
+    R-05 & Control-logic robustness issues & Singularities and hardcoded logic paths in autonomy/control software; operational instability and reduced task reliability. & Risk & Technical & Developer & 3 & 3 & \cellcolor{orange!40}9 & Mitigate & Refactor control logic and implement failsafe algorithms. \\
+    R-06 & Hardware incompatibility & Interface mismatch between companion computer, cameras, and sensors; functional integration loss in the perception/control pipeline. & Risk & Technical & Hardware Eng. & 3 & 3 & \cellcolor{orange!40}9 & Mitigate & Perform early cross-subsystem integration verification. \\
+    R-07 & Manufacturing quality variance & Fabricated parts deviating from nominal dimensions/specification; quality and fit issues during assembly and operations. & Risk & Quality & Engineer & 3 & 3 & \cellcolor{orange!40}9 & Mitigate & Prefer standard components and tolerance-robust design. \\
+    R-08 & Budget overrun risk & Cost growth or funding shortfall during build and integration; financial pressure affecting procurement and schedule. & Risk & Economic & Project Mgr. & 2 & 4 & \cellcolor{orange!40}8 & Mitigate & Keep contingency reserve and enforce strict expense tracking. \\
+    R-09 & Preparation power outage & Grid outage during preparation/testing activities; schedule disruption and reduced test throughput. & Risk & Time & Operations & 2 & 3 & \cellcolor{orange!40}6 & Mitigate & Use power banks and pre-charged batteries for critical work. \\
+    R-10 & Adverse weather conditions & Strong wind and unstable weather during outdoor operations; reduced drone operational envelope and mission interruption. & Risk & Generic & Drone Pilot & 2 & 3 & \cellcolor{orange!40}6 & Mitigate & Monitor weather forecast and adapt mission plan accordingly. \\
+    O-01 & New-team perspective & As a new team, we can approach design choices without legacy constraints and propose unconventional yet effective solutions. & Opportunity & Generic & Team Lead & ? & ? & ? & Enhance & Prioritise fast concept validation; keep an innovation track in design reviews. \\
+    I-01 & Time shortage & Limited available time across parallel development streams can delay verification and integration. & Issue & Time & Project Mgr. & ? & ? & ? & Mitigate & Reprioritise backlog weekly and protect integration/test windows. \\
+    I-02 & Motor delivery delay & Delayed motor shipment prevents suspension assembly start and shifts downstream integration milestones. & Issue & Time & Suspension Lead & ? & ? & ? & Mitigate & Re-sequence tasks, track suppliers daily, prepare alternate sourcing. \\
+    I-03 & Burned camera module & Failed camera hardware blocks early development and validation of vision algorithms. & Issue & Technical & Perception Lead & ? & ? & ? & Mitigate & Replace module, add electrical protection checks, continue with recorded datasets in parallel. \\
 
 \end{longtable}
-\setlength{\tabcolsep}{6pt}
 \endgroup

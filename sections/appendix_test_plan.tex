@@ -1,0 +1,34 @@
+% =============================================================================
+% sections/appendix_test_plan.tex  -  Test Plan appendix (landscape)
+% Teams: test-plan owner / Status: draft
+%
+% Landscape appendix holding the full tables/test_plan.tex register. Kept
+% separate from sections/02_test_plan.tex (which covers the intro and
+% timeline in portrait) so the wide table gets its own rotated page.
+% Not one of the template's fixed 7 sections - unnumbered heading, but
+% still added to the ToC/bookmarks for discoverability.
+% =============================================================================
+
+\clearpage
+\begin{landscape}
+\pagestyle{empty}
+% landscape only rotates the page; \textwidth/\linewidth stay at the
+% portrait value unless widened explicitly - borrow the (now unused)
+% portrait \textheight as the new width for this page only.
+\setlength{\textwidth}{\textheight}
+\setlength{\linewidth}{\textwidth}
+
+\phantomsection
+\addcontentsline{toc}{section}{Appendix: Test Plan}
+{\large\bfseries\color{ercblue} Appendix: Test Plan}
+
+\bigskip
+\noindent The full test plan (\autoref{subsec:tp_descriptions}), with
+descriptions, pass/fail criteria, and results, is provided in
+\autoref{tab:test_plan} below.
+
+\input{tables/test_plan}
+
+\end{landscape}
+\pagestyle{fancy}
+\clearpage
