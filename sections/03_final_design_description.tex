@@ -1,6 +1,6 @@
 % =============================================================================
 % sections/03_final_design_description.tex  -  Section 3: Final Design Description
-% Teams: all / Status: rover side scaffolded, drone side pending
+% Teams: all / Status: rover and drone sides scaffolded with EXAMPLE content
 %
 % SCORING (0-40 pts):
 %   Rover structure (0-6): PT, WBS, OBS - both rover and drone (0-2);
@@ -12,9 +12,14 @@
 %     link (0-1); critical parts (0-1); innovations (0-1)
 %   Drone excellence (0-10; 0 pts if fully COTS drone)
 %
-% The drone side is an acknowledged gap: the subsections below exist
-% because the rubric requires them, but no leaf files exist yet since their
-% content hasn't been discussed.
+% Drone side: subsections below are EXAMPLE content (\exampleflag) adapted
+% from the Preliminary Report (ai_context/preliminary_report.md §3.5-3.6),
+% for scope/layout approximation only - not final report text. Unlike the
+% rover side, no team notes exist for the drone yet
+% (ai_context/DESIGN_DESCRIPTION_DRAFT.md lists it as a gap), so the
+% Preliminary is the closest available source. The Drone Data Link Budget,
+% Critical Parts, and Innovations are genuine gaps (not in the Preliminary
+% at all) and remain \todo stubs without \exampleflag.
 %
 % Ordering lives only here (ai_context/DECISIONS.md) - leaf files under
 % sections/design/ have stable, unnumbered names and contain body content
@@ -126,27 +131,59 @@
 \subsection{Drone Design Description}
 \label{subsec:drone_design_description}
 
-\todo[inline]{Drone design description. Not yet discussed by the team.
-Decompose into leaf files under sections/design/drone/ analogous to the
-Rover Design Description above once defined. Jury feedback (Preliminary):
-the drone was never actually shown despite an extensive description - lead
-with real photos.}
+\subsubsection[Drone Overview]{Drone Overview\exampleflag}
+\label{subsubsec:drone_overview}
+\input{sections/design/drone/drone_overview}
+
+\subsubsection[Landing Platform]{Landing Platform\exampleflag}
+\label{subsubsec:drone_landing_platform}
+\input{sections/design/drone/landing_platform}
+
+\subsubsection[Avionics and Flight Control]{Avionics and Flight Control\exampleflag}
+\label{subsubsec:drone_avionics_flight_control}
+\input{sections/design/drone/avionics_flight_control}
+
+\subsubsection[Communications Overview]{Communications Overview\exampleflag}
+\label{subsubsec:drone_communications_overview}
+\input{sections/design/drone/communications_overview}
+
+\subsubsection[Navigation and Perception]{Navigation and Perception\exampleflag}
+\label{subsubsec:drone_navigation_perception}
+\input{sections/design/drone/navigation_perception}
 
 \subsection{Drone Technical Budget}
 \label{subsec:drone_technical_budget}
 
-\todo[inline]{Drone technical budget: mass, power, data link. Not yet
-discussed - the Preliminary Report's drone budget was missing a data link
-figure entirely; the rubric scores mass + power + data link together.}
+\subsubsection{Mass Budget\exampleflag}
+\label{subsubsec:drone_mass_budget}
+\input{sections/design/drone/budgets/mass}
+
+\subsubsection{Power Budget\exampleflag}
+\label{subsubsec:drone_power_budget}
+\input{sections/design/drone/budgets/power}
+
+\subsubsection{Data Link Budget}
+\label{subsubsec:drone_data_link_budget}
+\input{sections/design/drone/budgets/data_link}
 
 \subsection{Critical Parts Required for On-Site ERC Tasks (Drone)}
 \label{subsec:drone_critical_parts}
 
-\todo[inline]{Drone critical parts for on-site ERC tasks. Not yet
-discussed.}
+\subsubsection{Flight Controller}
+\label{subsubsec:drone_critical_flight_controller}
+\input{sections/design/drone/critical_parts/flight_controller}
+
+\subsubsection{Companion Computer}
+\label{subsubsec:drone_critical_companion_computer}
+\input{sections/design/drone/critical_parts/companion_computer}
+
+\subsubsection{Rover-Mounted Landing Platform}
+\label{subsubsec:drone_critical_landing_platform}
+\input{sections/design/drone/critical_parts/landing_platform}
 
 \subsection{Drone Innovative Design Solutions}
 \label{subsec:drone_innovations}
 
-\todo[inline]{Drone innovative design solutions. Not yet discussed. Note:
-this subsection scores 0 pts if the drone is fully COTS.}
+\subsubsection{Autonomous Landing Pipeline}
+\label{subsubsec:drone_innovation_autonomous_landing}
+\input{sections/design/drone/innovations/autonomous_landing_pipeline}

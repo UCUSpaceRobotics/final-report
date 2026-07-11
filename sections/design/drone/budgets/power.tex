@@ -1,0 +1,64 @@
+% =============================================================================
+% sections/design/drone/budgets/power.tex  -  Drone Power Budget
+% Teams: drone (best guess - unconfirmed) / Status: EXAMPLE (scope approximation)
+%
+% EXAMPLE CONTENT for scope/layout approximation - not final report text.
+% Adapted from the Preliminary Report's "Drone Power Budget" subsection.
+% Marked with \exampleflag on its heading in the assembler.
+% =============================================================================
+
+The power budget is evaluated for a single operating condition: \emph{hover}
+(propulsion with four rotors, attitude control, and baseline electronics),
+$P_{\text{hov}} = P_{\text{prop}} + P_{\text{control,avg}}$. Propulsion
+power is estimated from induced and profile power (momentum theory adapted
+for multicopter hover). For a quadcopter ($N_R = 4$), the total weight is
+shared equally among the rotors:
+\[
+    T_{\text{total}} = mg, \qquad
+    T_{\text{prop}} = \frac{T_{\text{total}}}{4}, \qquad
+    \sigma = \frac{Nc}{\pi R}, \qquad
+    P_{i,h} = k\,\frac{T_{\text{prop}}^{3/2}}{\sqrt{2\rho A}},
+\]
+\[
+    P_0 = \rho A\, V_{\text{tip}}^3\, \frac{\sigma c_{d0}}{8}, \qquad
+    P_{\text{mr,per}} = P_{i,h} + P_0, \qquad
+    P_{\text{mr}} = 4\,P_{\text{mr,per}}, \qquad
+    P_{\text{prop}} = P_{\text{mr}}.
+\]
+
+Assumptions: $m = \qty{2.75}{\kilo\gram}$ (total vehicle mass,
+\autoref{tab:drone_mass_budget}), $\rho = \qty{1.225}{\kilo\gram\per\meter\cubed}$
+(sea-level air density), $R = \qty{0.127}{\meter}$ (rotor radius per
+propeller), $A = \pi R^2 = \qty{0.0506}{\meter\squared}$ (disk area per
+rotor), $V_{\text{tip}} = \qty{118.1}{\meter\per\second}$ (tip speed,
+assumed \qty{11100}{\rpm}), $c_{d0} = 0.025$ (blade profile drag
+coefficient), $k = 1.1$ (induced-power correction factor, from a range of
+1.10--1.15).
+
+\begin{table}[!htbp]
+    \centering
+    \caption{Drone hover power budget}
+    \label{tab:drone_power_budget}
+    \begin{tabular}{L{5cm} L{4.5cm} R{2.5cm}}
+        \toprule
+        \textbf{Term} & \textbf{Expression / basis} & \textbf{Value} \\
+        \midrule
+        Induced power (per motor)   & $P_{i,h}$                                  & \qty{54.7}{\watt} \\
+        Rotor solidity $\sigma$     & $Nc/(\pi R)$                                & $0.0595$ \\
+        Profile power (per motor)   & $P_0$                                       & \qty{18.99}{\watt} \\
+        Mechanical rotor power      & $P_{\text{mr}} = 4(P_{i,h}+P_0)$           & \qty{294.76}{\watt} \\
+        Propulsion power            & $P_{\text{prop}} = P_{\text{mr}}$          & \qty{294.76}{\watt} \\
+        Control average             & $P_{\text{control,peak}} D$, $D \in [0.05,0.15]$ & \qty{20}{\watt} (nominal) \\
+        \textbf{Total hover power}  & $P_{\text{prop}} + P_{\text{control,avg}}$ & \textbf{\qty{314.76}{\watt}} \\
+        Hover energy (\qty{60}{\minute}) & $P_{\text{hov}} \cdot \qty{1}{\hour}$  & \qty{314.76}{\watt\hour} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+The Drone is powered by a 5S LiPo battery, sized to deliver the voltage and
+energy capacity required to complete the mission.
+
+\todo[inline]{Confirm the battery capacity actually selected covers the
+\qty{314.76}{\watt\hour} hourly hover energy with margin, and state that
+capacity explicitly (the Preliminary specified "a 5S LiPo battery" without
+a capacity figure).}

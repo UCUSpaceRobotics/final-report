@@ -1,0 +1,30 @@
+% =============================================================================
+% sections/design/drone/avionics_flight_control.tex  -  Avionics and Flight Control
+% Teams: drone (best guess - unconfirmed) / Status: EXAMPLE (scope approximation)
+%
+% EXAMPLE CONTENT for scope/layout approximation - not final report text.
+% Adapted from the Preliminary Report's "Core Computing and Flight Control"
+% / "System Redundancy" subsections, trimmed to minimal prose. Marked with
+% \exampleflag on its heading in the assembler.
+%
+% No separate figure - refers back to fig:drone_electronics_architecture
+% (Drone Overview) rather than duplicating it.
+% =============================================================================
+
+The flight controller handles real-time control (attitude stabilization,
+sensor fusion, failsafes) and directly processes \qty{2.4}{\giga\hertz}
+receiver input in manual mode, while the companion computer runs heavy
+autonomy tasks (computer vision, trajectory generation, state machine) and,
+in autonomous mode, sends motion commands that the flight controller
+safety-checks before motor actuation
+(\autoref{fig:drone_electronics_architecture}).
+
+To maximize reliability, the architecture incorporates the following
+redundancies: triple-redundant IMUs in the flight controller, using a
+voting algorithm to immediately isolate faulty data; a
+\qty{433}{\mega\hertz} telemetry link backing up the primary
+\qty{2.4}{\giga\hertz} RC link, with automatic failover verified via
+mid-flight signal-loss testing; and an onboard video switcher that toggles
+between the forward and downward cameras, ensuring continuous visual
+feedback if one perspective is compromised.
+
