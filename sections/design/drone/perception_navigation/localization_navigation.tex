@@ -1,15 +1,12 @@
 % =============================================================================
-% sections/design/drone/navigation_perception.tex  -  Navigation and Perception
+% sections/design/drone/perception_navigation/localization_navigation.tex  -  Localization and Autonomous Navigation Pipeline
 % Teams: drone (best guess - unconfirmed) / Status: EXAMPLE (scope approximation)
 %
 % EXAMPLE CONTENT for scope/layout approximation - not final report text.
-% Adapted from the Preliminary Report's "Autonomous Navigation Pipeline" /
-% "Localization" / "Computer Vision and Imagery" subsections, trimmed to
-% minimal prose. Marked with \exampleflag on its heading in the assembler.
-%
-% Image is a placeholder (teams/drone/figures/drone_navigation_dataflow.png,
-% cropped from the Preliminary Report PDF) - swap it for an updated diagram
-% by overwriting the same file.
+% Scope covers sensor fusion for state estimation and autonomous flight,
+% including GPS, Extended Kalman Filter (EKF), and optical flow integration
+% for stable positioning and navigation command execution. Marked with
+% \exampleflag on its heading in the assembler.
 % =============================================================================
 
 During the Droning Sub-Task, the Drone runs in fully autonomous mode. The
@@ -28,13 +25,6 @@ guaranteeing reliable Return-to-Launch (RTL) or Loiter flight modes.
 Micro-navigation depends on the optical flow sensor to track relative local
 coordinates and maintain stable hovering.
 
-The companion computer processes a downward-facing RGB stream for
-real-time imagery, ArUco detection, and relative localization. Marker pose
-from calibrated camera parameters is fused with flight-controller
-orientation data to transform measurements into the Drone local frame,
-sending landing commands to the flight controller while logging target
-probe positions relative to the start point.
-
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.7\linewidth]{teams/drone/figures/drone_navigation_dataflow}
@@ -47,3 +37,6 @@ probe positions relative to the start point.
 position error vs ground truth) and example CV detection output -
 currently descriptive only, no measured evidence, unlike the rover's
 navigational stack.}
+
+\todo[inline]{Autonomous landing pipeline as an innovative solution. See
+required content above.}

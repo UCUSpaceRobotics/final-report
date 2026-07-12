@@ -47,41 +47,55 @@
 \subsection{Rover Design Description}
 \label{subsec:rover_design_description}
 
-\subsubsection[Rover's Design Overview]{Rover's Design Overview\exampleflag}
-\label{subsubsec:rover_design_overview}
-\input{sections/design/rover/design_overview}
+\subsubsection[Rover Overview]{Rover Overview\exampleflag}
+\label{subsubsec:rover_overview}
+\input{sections/design/rover/rover_overview}
 
-\subsubsection[Robotic Hand Overview]{Robotic Hand Overview\exampleflag}
-\label{subsubsec:robotic_hand_overview}
-\input{sections/design/rover/robotic_hand_overview}
+\subsubsection[Robotic Arm Mechanical Architecture]{Robotic Arm Mechanical Architecture\exampleflag}
+\label{subsubsec:robotic_arm_mechanical_architecture}
+\input{sections/design/rover/robotic_arm_mechanical_architecture}
+
+\subsubsection{Robotic Arm Software Architecture}
+\label{subsubsec:robotic_arm_software_architecture}
+
+\paragraph{Vision System}
+\label{par:arm_vision_system}
+\input{sections/design/rover/arm_vision_system}
+
+\paragraph{Arm Control System}
+\label{par:arm_control_system}
+\input{sections/design/rover/arm_control_system}
 
 \subsubsection[Science Container]{Science Container\exampleflag}
 \label{subsubsec:science_container}
 \input{sections/design/rover/science_container}
 
-\subsubsection[Electronics Overview]{Electronics Overview\exampleflag}
-\label{subsubsec:rover_electronics_overview}
-\input{sections/design/rover/electronics_overview}
+\subsubsection[Electronics]{Electronics\exampleflag}
+\label{subsubsec:rover_electronics}
+\input{sections/design/rover/electronics}
 
-\subsubsection[Ground Station Overview]{Ground Station Overview\exampleflag}
-\label{subsubsec:ground_station_overview}
-\input{sections/design/rover/ground_station_overview}
+\subsubsection[Ground Station]{Ground Station\exampleflag}
+\label{subsubsec:ground_station}
+\input{sections/design/rover/ground_station}
 
-\subsubsection[Hardware Overview]{Hardware Overview\exampleflag}
-\label{subsubsec:rover_hardware_overview}
-\input{sections/design/rover/hardware_overview}
+\subsubsection{Operator's Camera Suite}
+\label{subsubsec:operators_camera_suite}
+\input{sections/design/rover/operators_camera_suite}
 
-\subsubsection[Software Overview]{Software Overview\exampleflag}
-\label{subsubsec:rover_software_overview}
-\input{sections/design/rover/software_overview}
-
-\subsubsection[Communication Overview]{Communication Overview\exampleflag}
-\label{subsubsec:rover_communication_overview}
-\input{sections/design/rover/communication_overview}
-
-\subsubsection[Navigational Stack]{Navigational Stack\exampleflag}
+\subsubsection{Navigational Stack}
 \label{subsubsec:navigational_stack}
-\input{sections/design/rover/navigational_stack}
+
+\paragraph{State Estimation and Localization}
+\label{par:state_estimation_localization}
+\input{sections/design/rover/state_estimation_localization}
+
+\paragraph{Autonomous Navigation and Collision Avoidance}
+\label{par:autonomous_navigation_collision_avoidance}
+\input{sections/design/rover/autonomous_navigation_collision_avoidance}
+
+\subsubsection[Communication Architecture]{Communication Architecture\exampleflag}
+\label{subsubsec:rover_communication_architecture}
+\input{sections/design/rover/communication_architecture}
 
 \subsection{Rover Technical Budget}
 \label{subsec:rover_technical_budget}
@@ -117,9 +131,9 @@
 \label{subsubsec:astrobio_gripper}
 \input{sections/design/rover/critical_parts/astrobio_gripper}
 
-\subsubsection{6-DOF Manipulator}
-\label{subsubsec:manipulator_6dof}
-\input{sections/design/rover/critical_parts/manipulator_6dof}
+\subsubsection{Navigation Sensor Suite}
+\label{subsubsec:navigation_sensor_suite}
+\input{sections/design/rover/critical_parts/navigation_sensor_suite}
 
 \subsection{Rover Innovative Design Solutions}
 \label{subsec:rover_innovations}
@@ -131,59 +145,61 @@
 \subsection{Drone Design Description}
 \label{subsec:drone_design_description}
 
-\subsubsection[Drone Overview]{Drone Overview\exampleflag}
-\label{subsubsec:drone_overview}
-\input{sections/design/drone/drone_overview}
+\subsubsection{Physical Design and Environmental Resilience}
+\label{subsubsec:drone_physical_design}
 
-\subsubsection[Landing Platform]{Landing Platform\exampleflag}
-\label{subsubsec:drone_landing_platform}
-\input{sections/design/drone/landing_platform}
+\paragraph{Drone Overview}
+\label{par:drone_overview}
+\input{sections/design/drone/physical_design/drone_overview}
 
-\subsubsection[Avionics and Flight Control]{Avionics and Flight Control\exampleflag}
-\label{subsubsec:drone_avionics_flight_control}
-\input{sections/design/drone/avionics_flight_control}
+\paragraph{Airframe and Landing Platform}
+\label{par:drone_airframe_landing_platform}
+\input{sections/design/drone/physical_design/airframe_landing_platform}
 
-\subsubsection[Communications Overview]{Communications Overview\exampleflag}
-\label{subsubsec:drone_communications_overview}
-\input{sections/design/drone/communications_overview}
 
-\subsubsection[Navigation and Perception]{Navigation and Perception\exampleflag}
-\label{subsubsec:drone_navigation_perception}
-\input{sections/design/drone/navigation_perception}
+\subsubsection{Avionics and Communications Infrastructure}
+\label{subsubsec:drone_avionics_communications}
 
-\subsection{Drone Technical Budget}
-\label{subsec:drone_technical_budget}
+\paragraph{Core Computing and Flight Control}
+\label{par:drone_core_computing_flight_control}
+\input{sections/design/drone/avionics_communications/core_computing_flight_control}
 
-\subsubsection{Mass Budget\exampleflag}
+\paragraph{Radio Frequency Architecture}
+\label{par:drone_rf_architecture}
+\input{sections/design/drone/avionics_communications/rf_architecture}
+
+\paragraph{System Redundancy}
+\label{par:drone_system_redundancy}
+\input{sections/design/drone/avionics_communications/system_redundancy}
+
+
+\subsubsection{Perception and Autonomous Navigation}
+\label{subsubsec:drone_perception_navigation}
+
+\paragraph{Localization and Autonomous Navigation Pipeline}
+\label{par:drone_localization_navigation}
+\input{sections/design/drone/perception_navigation/localization_navigation}
+
+\paragraph{Computer Vision and Imagery}
+\label{par:drone_computer_vision}
+\input{sections/design/drone/perception_navigation/computer_vision}
+
+
+\subsection{Drone Technical Budgets}
+\label{subsec:drone_technical_budgets}
+
+\subsubsection{Drone Mass Budget}
 \label{subsubsec:drone_mass_budget}
 \input{sections/design/drone/budgets/mass}
 
-\subsubsection{Power Budget\exampleflag}
+\subsubsection{Drone Power Budget}
 \label{subsubsec:drone_power_budget}
 \input{sections/design/drone/budgets/power}
 
-\subsubsection{Data Link Budget}
-\label{subsubsec:drone_data_link_budget}
-\input{sections/design/drone/budgets/data_link}
 
-\subsection{Critical Parts Required for On-Site ERC Tasks (Drone)}
-\label{subsec:drone_critical_parts}
+\subsection{Drone Safety Systems}
+\label{subsec:drone_safety_systems}
 
-\subsubsection{Flight Controller}
-\label{subsubsec:drone_critical_flight_controller}
-\input{sections/design/drone/critical_parts/flight_controller}
-
-\subsubsection{Companion Computer}
-\label{subsubsec:drone_critical_companion_computer}
-\input{sections/design/drone/critical_parts/companion_computer}
-
-\subsubsection{Rover-Mounted Landing Platform}
-\label{subsubsec:drone_critical_landing_platform}
-\input{sections/design/drone/critical_parts/landing_platform}
-
-\subsection{Drone Innovative Design Solutions}
-\label{subsec:drone_innovations}
-
-\subsubsection{Autonomous Landing Pipeline}
-\label{subsubsec:drone_innovation_autonomous_landing}
-\input{sections/design/drone/innovations/autonomous_landing_pipeline}
+\subsubsection{Failsafe Protocols}
+\label{subsubsec:drone_failsafe_protocols}
+\input{sections/design/drone/safety/failsafe_protocols}
