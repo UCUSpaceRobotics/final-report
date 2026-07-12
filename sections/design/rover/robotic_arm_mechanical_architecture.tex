@@ -5,11 +5,14 @@
 % EXAMPLE CONTENT for scope/layout approximation - not final report text.
 % Marked with \exampleflag on its heading in the assembler.
 %
-% Scope: minimal prose, 4 pictures. What the hand is, what it's capable of,
-% its size - shown in action. Detailed kinematics, load analysis, actuator
-% selection, and end-effector specs are deferred to later/deeper sections
-% (likely critical_parts/manipulator_6dof.tex, owned by Martha) rather than
-% crammed into this overview.
+% Scope (per rename to "Robotic Arm Mechanical Architecture"): present the
+% kinematic structure, joint layout, and material choices that allow the
+% arm to achieve the required payload and reach. Supersedes the earlier
+% "action-shots only" framing below - the existing prose/photos are a
+% starting point, not the finished section. Detailed load analysis,
+% actuator selection, and end-effector specs still likely belong in
+% deeper critical-parts sections rather than crammed in here - coordinate
+% to avoid duplication.
 %
 % Images are placeholders (teams/arm/figures/manipulator_*.png) - swap them
 % for the real action shots by overwriting the same files. Three additional
@@ -17,6 +20,11 @@
 % (parallel-jaw_gripper.png, sample_end-effector.png,
 % astrobio_end-effector.png) for reuse once the detailed sections are written.
 % =============================================================================
+
+\todo[inline]{This section needs to present the kinematic structure,
+joint layout, and material choices that allow us to achieve the required
+payload and reach --- the prose/photos below are a starting point, not
+this requirement.}
 
 The rover's robotic hand is a 6-DOF articulated manipulator with a maximum
 reach of \qty{132}{\centi\meter} and a maximum payload of
