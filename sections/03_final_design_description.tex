@@ -134,59 +134,61 @@
 \subsection{Drone Design Description}
 \label{subsec:drone_design_description}
 
-\subsubsection[Drone Overview]{Drone Overview\exampleflag}
-\label{subsubsec:drone_overview}
-\input{sections/design/drone/drone_overview}
+\subsubsection{Physical Design and Environmental Resilience}
+\label{subsubsec:drone_physical_design}
 
-\subsubsection[Landing Platform]{Landing Platform\exampleflag}
-\label{subsubsec:drone_landing_platform}
-\input{sections/design/drone/landing_platform}
+\paragraph{Drone Overview}
+\label{par:drone_overview}
+\input{sections/design/drone/physical_design/drone_overview}
 
-\subsubsection[Avionics and Flight Control]{Avionics and Flight Control\exampleflag}
-\label{subsubsec:drone_avionics_flight_control}
-\input{sections/design/drone/avionics_flight_control}
+\paragraph{Airframe and Landing Platform}
+\label{par:drone_airframe_landing_platform}
+\input{sections/design/drone/physical_design/airframe_landing_platform}
 
-\subsubsection[Radio Frequency Architecture]{Radio Frequency Architecture\exampleflag}
-\label{subsubsec:drone_rf_architecture}
-\input{sections/design/drone/rf_architecture}
 
-\subsubsection[Navigation and Perception]{Navigation and Perception\exampleflag}
-\label{subsubsec:drone_navigation_perception}
-\input{sections/design/drone/navigation_perception}
+\subsubsection{Avionics and Communications Infrastructure}
+\label{subsubsec:drone_avionics_communications}
 
-\subsection{Drone Technical Budget}
-\label{subsec:drone_technical_budget}
+\paragraph{Core Computing and Flight Control}
+\label{par:drone_core_computing_flight_control}
+\input{sections/design/drone/avionics_communications/core_computing_flight_control}
 
-\subsubsection{Mass Budget\exampleflag}
+\paragraph{Radio Frequency Architecture}
+\label{par:drone_rf_architecture}
+\input{sections/design/drone/avionics_communications/rf_architecture}
+
+\paragraph{System Redundancy}
+\label{par:drone_system_redundancy}
+\input{sections/design/drone/avionics_communications/system_redundancy}
+
+
+\subsubsection{Perception and Autonomous Navigation}
+\label{subsubsec:drone_perception_navigation}
+
+\paragraph{Localization and Autonomous Navigation Pipeline}
+\label{par:drone_localization_navigation}
+\input{sections/design/drone/perception_navigation/localization_navigation}
+
+\paragraph{Computer Vision and Imagery}
+\label{par:drone_computer_vision}
+\input{sections/design/drone/perception_navigation/computer_vision}
+
+
+\subsection{Drone Technical Budgets}
+\label{subsec:drone_technical_budgets}
+
+\subsubsection{Drone Mass Budget}
 \label{subsubsec:drone_mass_budget}
 \input{sections/design/drone/budgets/mass}
 
-\subsubsection{Power Budget\exampleflag}
+\subsubsection{Drone Power Budget}
 \label{subsubsec:drone_power_budget}
 \input{sections/design/drone/budgets/power}
 
-\subsubsection{Data Link Budget}
-\label{subsubsec:drone_data_link_budget}
-\input{sections/design/drone/budgets/data_link}
 
-\subsection{Critical Parts Required for On-Site ERC Tasks (Drone)}
-\label{subsec:drone_critical_parts}
+\subsection{Drone Safety Systems}
+\label{subsec:drone_safety_systems}
 
-\subsubsection{Flight Controller}
-\label{subsubsec:drone_critical_flight_controller}
-\input{sections/design/drone/critical_parts/flight_controller}
-
-\subsubsection{Companion Computer}
-\label{subsubsec:drone_critical_companion_computer}
-\input{sections/design/drone/critical_parts/companion_computer}
-
-\subsubsection{Rover-Mounted Landing Platform}
-\label{subsubsec:drone_critical_landing_platform}
-\input{sections/design/drone/critical_parts/landing_platform}
-
-\subsection{Drone Innovative Design Solutions}
-\label{subsec:drone_innovations}
-
-\subsubsection{Autonomous Landing Pipeline}
-\label{subsubsec:drone_innovation_autonomous_landing}
-\input{sections/design/drone/innovations/autonomous_landing_pipeline}
+\subsubsection{Failsafe Protocols}
+\label{subsubsec:drone_failsafe_protocols}
+\input{sections/design/drone/safety/failsafe_protocols}
