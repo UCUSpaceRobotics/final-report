@@ -1,6 +1,6 @@
 % =============================================================================
 % sections/04_safety_systems.tex  -  Section 4: Safety Systems
-% Teams: electronics + software / Status: STRUCTURE NOT YET DEFINED
+% Teams: electronics + software / Status: scaffolded with stub content
 %
 % SCORING (0-10 pts):
 %   1) Describe the safety system: architecture, time sequence, diagrams etc.
@@ -10,15 +10,22 @@
 %      the operator / an external actor hitting the emergency button.
 %      Ideally provide TEST RESULTS with figures/photos.
 %
-% !! DO NOT add subsections or content here. The internal structure is
-% !! decided at the team session (IMPLEMENTATION_PLAN.md, Phase 3), including
-% !! Mykola's emergency-esp pitch. Binding inputs for that session:
+% Binding inputs:
 %   - Jury feedback: the E-stop BUTTON CIRCUIT schematic was missing in the
-%     Preliminary - it must appear in this section.
+%     Preliminary - it must appear in this section (see Emergency Stop).
 %   - Page budget: ~3.5 pages.
+%
+% Ordering lives only here - leaf files under sections/design/safety/ have
+% stable, unnumbered names and contain body content only.
 % =============================================================================
 
 \section{Safety Systems}
 \label{sec:safety}
 
-\todo[inline]{To do}
+\subsection{Emergency Stop}
+\label{subsec:emergency_stop}
+\input{sections/design/safety/emergency_stop}
+
+\subsection{Software Safety Systems}
+\label{subsec:software_safety_systems}
+\input{sections/design/safety/software_safety}
