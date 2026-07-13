@@ -1,17 +1,27 @@
 # =============================================================================
 # CI for the ERC 2026 Final Report
-#   build : compile the PDF with latexmk, upload it as an artifact (reviewers
-#           can check the rest of the document beyond the PR's own screenshot)
-#   pages : effective page count vs the 35-page limit (warn now, hard fail
-#           at freeze week - flip the marked line)
-#   lint  : placeholder patterns must not reach main ("\todo" joins the list
-#           at freeze week); bare \ref{} is forbidden, \autoref only
+#   build      : compile the PDF with latexmk, upload it as an artifact
+#                (reviewers can check the rest of the document beyond the
+#                PR's own screenshot)
+#   page-count : effective page count vs the 35-page limit (warn now, hard
+#                fail at freeze week - flip the marked line)
+#   lint       : placeholder patterns must not reach main ("\todo" joins the
+#                list at freeze week); bare \ref{} is forbidden, \autoref only
+#   publish    : on push to main only (releases), publish the compiled PDF to
+#                GitHub Pages so there's always a stable URL for the latest
+#                released report. Requires a one-time manual step: repo
+#                Settings -> Pages -> Build and deployment -> Source ->
+#                "GitHub Actions".
 # =============================================================================
 name: build
 
 on:
   push:
   pull_request:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -81,3 +91,52 @@ jobs:
             fi
           done
           exit $fail
+
+  publish:
+    name: Publish PDF to GitHub Pages
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download compiled PDF
+        uses: actions/download-artifact@v4
+        with:
+          name: report-pdf
+          path: site
+
+      - name: Build Pages site
+        run: |
+          mv site/main.pdf site/report.pdf
+          cat > site/index.html <<EOF
+          <!doctype html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8">
+            <title>UCU Space Robotics - ERC 2026 Final Report</title>
+          </head>
+          <body>
+            <h1>ERC 2026 Final Report</h1>
+            <p>Latest release build (commit ${GITHUB_SHA}).</p>
+            <p><a href="report.pdf">Download PDF</a></p>
+            <iframe src="report.pdf" style="width:100%;height:90vh;border:none;"></iframe>
+          </body>
+          </html>
+          EOF
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
