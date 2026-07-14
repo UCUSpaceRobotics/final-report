@@ -40,7 +40,11 @@ commands, as shown in \autoref{fig:nav2_dataflow}.
 
   \item \textbf{Collision avoidance:} voxel, obstacle, and inflation
   layers project 3D perception into traversability on the costmap, with
-  a \qty{0.75}{\meter} inflation radius for obstacle clearance.
+  a \qty{0.75}{\meter} inflation radius for obstacle clearance. The
+  costmap integrates stereo, ToF cameras, and LiDAR data
+  (\autoref{subsubsec:navigation_sensor_suite}). 3D terrain geometry
+  (slope and surface variation) is projected onto the 2D costmap for
+  traversability estimation.
 
   \item \textbf{Task execution:} \texttt{bt\_navigator} coordinates
   goal execution and recovery, while \texttt{behavior\_server}
