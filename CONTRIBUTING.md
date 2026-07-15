@@ -127,6 +127,8 @@ exception is the test table's *Req.* column, which the rubric scores.)
   source (e.g. `.drawio`) next to the export in the same figures folder.
 - **Figures:** `\includegraphics[width=...]{teams/arm/figures/gripper_v2}` —
   no file extension needed.
+- **Electrical schematics:** follow [Electrical_Schematics.md](Electrical_Schematics.md)
+  for the shared EasyEDA, naming, and layout rules.
 
 ## Merge checklist (CI enforces the mechanical parts)
 
