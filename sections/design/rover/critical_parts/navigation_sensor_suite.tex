@@ -1,15 +1,22 @@
 % =============================================================================
 % sections/design/rover/critical_parts/navigation_sensor_suite.tex  -  Navigation Sensor Suite
-% Teams: navigation (best guess - unconfirmed) / Status: stub
+% Teams: navigation / Status: draft
 %
 % Content required: describe the sensors used for navigation as a bullet
 % list with three bullets - Stereo Camera, LiDAR, Wheel Encoders.
-% Note: ToF cameras may be omitted since they are not mandatory - undecided.
 % Target length: 1/3 - 1/2 page; if a diagram is added, up to 2/3 page.
 % =============================================================================
 
-\todo[inline]{Describe the sensors used for navigation as a bullet list
-with three bullets: Stereo Camera, LiDAR, Wheel Encoders. Note: it is not
-yet decided whether ToF cameras will be added, since they are not
-mandatory - they will likely be omitted from the report. Target length:
-1/3 -- 1/2 page, or up to 2/3 page if a diagram is added.}
+\todo[inline]{Rewrite text}
+
+The navigation sensor suite provides near-\ang{360} perception for simultaneous state estimation and collision avoidance.
+
+\begin{itemize}
+    \item \textbf{Front stereo camera (ZED 2i):} Mounted at the front of the rover, it provides RGB imagery and depth data at a resolution of \numproduct{1280 x 720}, a frame rate of \qty{60}{\fps}, a field of view of \ang{110}~$\times$~\ang{70} (H$\times$V) and an effective depth range of \qtyrange{0.3}{20}{\metre}, includes an integrated 6-axis IMU (\qty{400}{\hertz}).
+
+    \item \textbf{Top LiDAR (RPLIDAR S2):} Mounted at the top of the rover, it provides \ang{360} 2D scanning with \ang{0.12} angular resolution at \qty{10}{\hertz}, ensures reliable obstacle detection up to \qty{10}{\metre} across varying lighting and reflectivity conditions.
+
+    \item \textbf{Wheel odometry:} Odometry is provided by 14-bit single-turn absolute magnetic encoders on all 8 motors used for the swerve drive.
+\end{itemize}
+
+The stereo camera (specifically utilizing its depth and IMU data), LiDAR, and encoders provide input to state estimation and localization (\autoref{par:state_estimation_localization}), while all vision and ranging sensors support collision avoidance (\autoref{par:autonomous_navigation_collision_avoidance}). The RGB imagery from the ZED 2i is further utilized for teleoperation (\autoref{subsubsec:operators_camera_suite}).
