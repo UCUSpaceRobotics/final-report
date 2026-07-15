@@ -1,0 +1,115 @@
+\resizebox{\textwidth}{!}{%
+\begin{tikzpicture}[
+    node distance=0.3cm and 1.3cm, % Increased horizontal distance from 1.0cm to 1.3cm to prevent overlaps
+    box/.style={shape=rectangle, rounded corners, draw, thick, align=center, fill=gray!20, minimum height=0.8cm, font=\small\bfseries, inner sep=4pt},
+    subbox/.style={shape=rectangle, rounded corners, draw, thick, align=left, fill=white, minimum height=0.6cm, font=\footnotesize, inner sep=4pt},
+    sub1/.style={subbox, text width=3.2cm}, 
+    sub2/.style={subbox, text width=2.8cm},
+    sub3/.style={subbox, text width=2.8cm},
+    sub4/.style={subbox, text width=2.8cm},
+    sub5/.style={subbox, text width=3.2cm},
+    sub6/.style={subbox, text width=4.2cm},
+    line/.style={draw, thick}
+]
+
+% ==========================================
+% 1. TOP LEVEL ROOT & CATEGORIES
+% ==========================================
+
+\node[box, text width=2.4cm] (c1) {Control}; 
+\node[box, right=of c1, text width=2.2cm] (c2) {Propulsion};
+\node[box, right=of c2, text width=2.2cm] (c3) {Structure};
+\node[box, right=of c3, text width=2.2cm] (c4) {Power};
+\node[box, right=of c4, text width=2.4cm] (c5) {Perception};
+\node[box, right=of c5, text width=3.2cm] (c6) {Communication};
+
+% Calculate the center for the Drone root node
+\path (c1.north) -- (c6.north) coordinate[midway] (center);
+\node[box, fill=gray!40, above=1.5cm of center, text width=3cm] (root) {Drone};
+
+% Connect the Root to the 6 Categories
+\draw[line] (root.south) -- ++(0,-0.6cm) coordinate (hline);
+\draw[line] (c1.north) |- (hline) -| (c6.north);
+\draw[line] (c2.north) |- (hline);
+\draw[line] (c3.north) |- (hline);
+\draw[line] (c4.north) |- (hline);
+\draw[line] (c5.north) |- (hline);
+
+
+% ==========================================
+% 2. SUB-COMPONENTS (Folder Drop-down Style)
+% ==========================================
+
+% --- Control ---
+\node[sub1, below=0.6cm of c1.south, anchor=north west, xshift=0.2cm] (c1_1) {Flight controller\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.85cm}{\raggedright Pixhawk 6C}};
+\node[sub1, below=0.2cm of c1_1.south west, anchor=north west] (c1_2) {Companion computer\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.85cm}{\raggedright Raspberry Pi 5}};
+\node[sub1, below=0.2cm of c1_2.south west, anchor=north west] (c1_3) {GPS \& Compass\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.85cm}{\raggedright Holybro M10 GPS module}};
+\node[sub1, below=0.2cm of c1_3.south west, anchor=north west] (c1_4) {Optical flow\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.85cm}{\raggedright MicroAir MTF-01}};
+
+\draw[line] (c1.south) -- (c1.south |- c1_4.west);
+\draw[line] (c1.south |- c1_1.west) -- (c1_1.west);
+\draw[line] (c1.south |- c1_2.west) -- (c1_2.west);
+\draw[line] (c1.south |- c1_3.west) -- (c1_3.west);
+\draw[line] (c1.south |- c1_4.west) -- (c1_4.west);
+
+
+% --- Propulsion ---
+\node[sub2, below=0.6cm of c2.south, anchor=north west, xshift=0.2cm] (c2_1) {ESC};
+\node[sub2, below=0.2cm of c2_1.south west, anchor=north west] (c2_2) {Motors\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.45cm}{\raggedright DJI 2212 920KV brushless motors}};
+\node[sub2, below=0.2cm of c2_2.south west, anchor=north west] (c2_3) {Propellers};
+
+\draw[line] (c2.south) -- (c2.south |- c2_3.west);
+\draw[line] (c2.south |- c2_1.west) -- (c2_1.west);
+\draw[line] (c2.south |- c2_2.west) -- (c2_2.west);
+\draw[line] (c2.south |- c2_3.west) -- (c2_3.west);
+
+
+% --- Structure ---
+\node[sub3, below=0.6cm of c3.south, anchor=north west, xshift=0.2cm] (c3_1) {Frame\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.45cm}{\raggedright F450}};
+\node[sub3, below=0.2cm of c3_1.south west, anchor=north west] (c3_2) {Landing gear};
+\node[sub3, below=0.2cm of c3_2.south west, anchor=north west] (c3_3) {Propeller guards};
+
+\draw[line] (c3.south) -- (c3.south |- c3_3.west);
+\draw[line] (c3.south |- c3_1.west) -- (c3_1.west);
+\draw[line] (c3.south |- c3_2.west) -- (c3_2.west);
+\draw[line] (c3.south |- c3_3.west) -- (c3_3.west);
+
+
+% --- Power ---
+\node[sub4, below=0.6cm of c4.south, anchor=north west, xshift=0.2cm] (c4_1) {Battery\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.45cm}{\raggedright LiPo}};
+\node[sub4, below=0.2cm of c4_1.south west, anchor=north west] (c4_2) {DC-DC converters};
+\node[sub4, below=0.2cm of c4_2.south west, anchor=north west] (c4_3) {Power module};
+
+\draw[line] (c4.south) -- (c4.south |- c4_3.west);
+\draw[line] (c4.south |- c4_1.west) -- (c4_1.west);
+\draw[line] (c4.south |- c4_2.west) -- (c4_2.west);
+\draw[line] (c4.south |- c4_3.west) -- (c4_3.west);
+
+
+% --- Perception ---
+\node[sub5, below=0.6cm of c5.south, anchor=north west, xshift=0.2cm] (c5_1) {Forward camera\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.85cm}{\raggedright Foxeer Cat 4 Micro}};
+\node[sub5, below=0.2cm of c5_1.south west, anchor=north west] (c5_2) {Downward CV camera\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.85cm}{\raggedright Arducam IMX708 12MP HDR}};
+\node[sub5, below=0.2cm of c5_2.south west, anchor=north west] (c5_3) {Video transmitter\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.85cm}{\raggedright AKK Race Ranger 5.8GHz}};
+\node[sub5, below=0.2cm of c5_3.south west, anchor=north west] (c5_4) {Video switcher};
+
+\draw[line] (c5.south) -- (c5.south |- c5_4.west);
+\draw[line] (c5.south |- c5_1.west) -- (c5_1.west);
+\draw[line] (c5.south |- c5_2.west) -- (c5_2.west);
+\draw[line] (c5.south |- c5_3.west) -- (c5_3.west);
+\draw[line] (c5.south |- c5_4.west) -- (c5_4.west);
+
+
+% --- Communication ---
+\node[sub6, below=0.6cm of c6.south, anchor=north west, xshift=0.2cm] (c6_1) {RC receiver\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{3.85cm}{\raggedright RP1 V2 ExpressLRS 2.4GHz Nano Receiver}};
+\node[sub6, below=0.2cm of c6_1.south west, anchor=north west] (c6_2) {RC controller\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{3.85cm}{\raggedright TX16S}};
+\node[sub6, below=0.2cm of c6_2.south west, anchor=north west] (c6_3) {Telemetry module\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{3.85cm}{\raggedright B-CUBE V5 433 MHz Radio Telemetry}};
+\node[sub6, below=0.2cm of c6_3.south west, anchor=north west] (c6_4) {Ground station};
+
+\draw[line] (c6.south) -- (c6.south |- c6_4.west);
+\draw[line] (c6.south |- c6_1.west) -- (c6_1.west);
+\draw[line] (c6.south |- c6_2.west) -- (c6_2.west);
+\draw[line] (c6.south |- c6_3.west) -- (c6_3.west);
+\draw[line] (c6.south |- c6_4.west) -- (c6_4.west);
+
+\end{tikzpicture}%
+}
