@@ -7,17 +7,21 @@
 % focus on autonomous ArUco marker detection and tracking. Marked with
 % \exampleflag on its heading in the assembler.
 % =============================================================================
-\begin{subfigure}[b]{0.48\textwidth}
+\begin{figure}[!htbp]
     \centering
-    \includegraphics[height=5cm, keepaspectratio]{teams/suspension/figures/rocker_suspension_photo}
-    \caption{Photo from camera}
-\end{subfigure}
-\hfill
-\begin{subfigure}[b]{0.48\textwidth}
-    \centering
-    \includegraphics[height=5cm, keepaspectratio]{teams/suspension/figures/rocker_suspension_obstacle}
-    \caption{Sth with computer vision}
-\end{subfigure}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{teams/suspension/figures/rocker_suspension_photo}
+        \caption{Photo of platform}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{teams/suspension/figures/rocker_suspension_obstacle}
+        \caption{Photo of platform}
+    \end{subfigure}
+    \caption{Platform}\label{fig:rocker_suspension_operation}
+\end{figure}
 The companion computer processes a downward-facing RGB stream for
 real-time imagery, ArUco detection, and relative localization. Marker pose
 from calibrated camera parameters is fused with flight-controller
