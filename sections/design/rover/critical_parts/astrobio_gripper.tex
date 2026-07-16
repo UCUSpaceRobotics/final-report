@@ -1,6 +1,6 @@
 % =============================================================================
 % sections/design/rover/critical_parts/astrobio_gripper.tex  -  Astro-Bio Gripper
-% Teams: arm (best guess - unconfirmed) / Status: stub
+% Teams: arm / Status: draft
 %
 % Content required: same format as gripper_design.tex (characteristics,
 % size, capabilities; detailed scheme with named parts; photo of working
@@ -12,4 +12,28 @@
 % to avoid duplicate content.
 % =============================================================================
 
-\todo[inline]{Astro-bio gripper. Same format as Gripper Design.}
+\begin{figure}[!htbp]
+    \centering
+    \begin{minipage}[c]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=3.2cm,keepaspectratio]{teams/arm/figures/astrobio_gripper_scheme}
+        \caption{Placeholder schematic of the Astro-Bio gripper with the controller, pump module, and liquid-level sensing path.}
+        \label{fig:astrobio_gripper_scheme}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=3.2cm,keepaspectratio]{teams/arm/figures/astrobio_gripper_operation}
+        \caption{Placeholder view of the Astro-Bio gripper operating on the sampling panel.}
+        \label{fig:astrobio_gripper_operation}
+    \end{minipage}
+\end{figure}
+
+The gripper is designed to collect a defined volume of liquid from a cup on the
+ground and to measure its pH. Its main objective is to sample up to [TBD] mL while
+remaining within the defined capacity limit of [TBD] mL. The subsystem combines a gripper-side 
+controller, a non-contact liquid-level sensor, and an analog pH measurement board. 
+A peristaltic pump operates until the sensor confirms that the required volume has been reached. 
+Once the target level is detected, the pump stops and the pH measurement is transmitted to the 
+rover main computer and onward to the ground station. The schematic and operating concept 
+are shown in \autoref{fig:astrobio_gripper_scheme} and \autoref{fig:astrobio_gripper_operation}.
