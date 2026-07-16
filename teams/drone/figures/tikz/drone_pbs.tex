@@ -54,9 +54,9 @@
 
 
 % --- Propulsion ---
-\node[sub2, below=0.6cm of c2.south, anchor=north west, xshift=0.2cm] (c2_1) {ESC};
+\node[sub2, below=0.6cm of c2.south, anchor=north west, xshift=0.2cm] (c2_1) {ESC\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.45cm}{\raggedright 30A Brushless ESC}};
 \node[sub2, below=0.2cm of c2_1.south west, anchor=north west] (c2_2) {Motors\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.45cm}{\raggedright DJI 2212 920KV brushless motors}};
-\node[sub2, below=0.2cm of c2_2.south west, anchor=north west] (c2_3) {Propellers};
+\node[sub2, below=0.2cm of c2_2.south west, anchor=north west] (c2_3) {Propellers\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.45cm}{\raggedright 10-inch composite propellers}};
 
 \draw[line] (c2.south) -- (c2.south |- c2_3.west);
 \draw[line] (c2.south |- c2_1.west) -- (c2_1.west);
@@ -76,7 +76,7 @@
 
 
 % --- Power ---
-\node[sub4, below=0.6cm of c4.south, anchor=north west, xshift=0.2cm] (c4_1) {Battery\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.45cm}{\raggedright LiPo}};
+\node[sub4, below=0.6cm of c4.south, anchor=north west, xshift=0.2cm] (c4_1) {Battery\\[0.5ex] \makebox[0.35cm][l]{\textbullet}\parbox[t]{2.45cm}{\raggedright Li-ion}};
 \node[sub4, below=0.2cm of c4_1.south west, anchor=north west] (c4_2) {DC-DC converters};
 \node[sub4, below=0.2cm of c4_2.south west, anchor=north west] (c4_3) {Power module};
 
