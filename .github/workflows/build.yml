@@ -17,9 +17,6 @@ name: build
 
 on:
   push:
-    branches: [main] # only for the publish job (GitHub Pages on release) -
-                      # everything else runs off pull_request to avoid
-                      # double-running CI on a branch that also has an open PR
   pull_request:
 
 concurrency:
