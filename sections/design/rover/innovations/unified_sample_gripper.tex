@@ -1,10 +1,28 @@
 % =============================================================================
 % sections/design/rover/innovations/unified_sample_gripper.tex  -  Unified Sample Gripper
-% Teams: arm (best guess - unconfirmed) / Status: stub
+% Teams: arm, science / Status: draft
 %
-% Content required: not yet defined. No figure/content requirements have
-% been sketched yet.
+% Content required: characteristics, size, capabilities; detailed scheme with
+% named parts; photo of working on panel.
+% Evidence-first rule (ai_context/DECISIONS.md): lead with the scheme/photo,
+% keep prose to what the figures cannot say.
 % =============================================================================
 
-\todo[inline]{Unified sample gripper. Content requirements not yet
-defined.}
+The unified sample gripper replaces the standard gripper fingers with opposing bucket scoops while retaining the dual-linkage mechanism. The buckets provide a total volume of \qty{700}{\cubic\centi\meter} and collect at least \qty{200}{\gram} of regolith per pass. Rubber-lined rims and full wrist articulation enable secure handling of rocks up to \qty{15}{\centi\meter}. A perpendicular Archimedean auger, shoulder-driven and mounted as an end-effector component, has a length of \qty{335}{\milli\meter} and a diameter of \qty{35}{\milli\meter}. The auger tip is widened to prevent tube separation, and the internal screw is machined to be \qty{4}{\milli\meter} smaller in diameter than the tube inner radius, ensuring friction-free rotation. The auger length was selected to capture and hold approximately \qty{100}{\gram} of drilled soil, while enabling penetration beyond \qty{30}{\centi\meter} with minimal distal mass. The complete system is illustrated in \autoref{fig:unified_sample_gripper_scheme} and \autoref{fig:unified_sample_gripper_operation}.
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{minipage}[c]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=3.2cm,keepaspectratio]{teams/arm/figures/unified_sample_gripper_scheme}
+        \caption{Unified sample gripper: bucket scoops and Archimedean auger assembly.}
+        \label{fig:unified_sample_gripper_scheme}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\linewidth,height=3.2cm,keepaspectratio]{teams/arm/figures/unified_sample_gripper_operation}
+        \caption{Unified sample gripper in operation on the sampling panel.}
+        \label{fig:unified_sample_gripper_operation}
+    \end{minipage}
+\end{figure}
