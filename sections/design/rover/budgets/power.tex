@@ -5,101 +5,10 @@
 % Content required: amps, and other required electrical specs.
 % =============================================================================
 
-
-\textbf{Operating modes used in budget.}
-Two modes are evaluated: \textit{Locomotion} (drive, steering, baseline electronics) and \textit{Manipulator} (arm operation with interchangeable end-effectors: gripper, auger bucket, liquid-sampling module).
-
-\textbf{Mode 1: Locomotion (\autoref{tab:loc_power_estimate}).} Drive power is estimated from traction: \(
-P_{\mathrm{loc}} = P_{\mathrm{drive}} + P_{\mathrm{steer,avg}} + P_{\mathrm{base}}.
-\)
-
-\begin{align*}
-F_{\mathrm{trac}} &= mg(\sin\theta+\mu_r\cos\theta), &
-T_{\mathrm{wheel}} &= \frac{F_{\mathrm{trac}}r_w}{4}, &
-I_{\mathrm{drive}} &\approx 4I_{\mathrm{nom}}\frac{T_{\mathrm{wheel}}}{T_{\mathrm{nom}}}, &
-P_{\mathrm{drive}} &= UI_{\mathrm{drive}}.
-\end{align*}
-Assumptions from \autoref{tab:motor_torque}: \(r_w=\qty{0.15}{\meter}\), \(m=\qty{75}{\kilo\gram}\), \(\theta=\ang{15}\), with motor electrical parameters \(U=\qty{48}{\volt}\), \(T_{\mathrm{nom}}=\qty{40}{\newton\meter}\), \(I_{\mathrm{nom}}=\qty{23.5}{\ampere}\).
-
-\begin{table}[h!]
-\centering
-\caption{Locomotion power budget (preliminary)}
-\label{tab:loc_power_estimate}
-\begin{tabular}{lll}
-\toprule
-Term & Expression / basis & Value \\
-\midrule
-Drive power \(P_{\mathrm{drive}}\) &
-\makecell[l]{\(\mu_r=0.10\) (compact)\\\(\mu_r=0.25\) (softer terrain)} &
-\makecell[l]{\(\qty{1106}{\watt}\)\\\(\qty{1557}{\watt}\)} \\
-Steering average \(P_{\mathrm{steer,avg}}\) &
-\makecell[l]{\(P_{\mathrm{steer,peak}}D,\;P_{\mathrm{steer,peak}}=\qty{1636}{\watt}\)\\\(D=\numrange{0.05}{0.15}\)} &
-\makecell[l]{\(\qtyrange{81.8}{245.4}{\watt}\)\\nominal \(\qty{164}{\watt}\)} \\
-Baseline \(P_{\mathrm{base}}\) & conservative constant & \(\qty{96}{\watt}\) \\
-Total locomotion \(P_{\mathrm{loc}}\) &
-\(P_{\mathrm{drive}}+P_{\mathrm{steer,avg,nom}}+P_{\mathrm{base}}\) &
-\(\qtyrange{1366}{1817}{\watt}\) \\
-Locomotion energy for \(\qty{60}{\minute}\), \(E_{\mathrm{loc}}\) &
-\(P_{\mathrm{loc}}\cdot \qty{1}{\hour}\) &
-\(\qtyrange{1366}{1817}{\watt\hour}\) \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-\textbf{Mode 2: Manipulator (\autoref{tab:manipulator_power_budget}).}
-Manipulator-mode power is evaluated as base arm load plus end-effector increment. 
-All values are preliminary (\(\pm\qty{15}{\percent}\), pending bench validation). For \numrange{3}{4} battery modules,
-\[
-E_{\mathrm{bat}}=\qtyrange{1728}{2304}{\watt\hour},\qquad
-E_{\mathrm{loc},60}\approx\qtyrange{1366}{1817}{\watt\hour}.
-\]
-
-\begin{table}[!htbp]
-\centering
-\caption{Manipulator power budget (preliminary)}
-\label{tab:manipulator_power_budget}
-\small
-\setlength{\tabcolsep}{5pt}
-\renewcommand{\arraystretch}{0.95}
-\begin{tabular}{p{0.34\textwidth}p{0.31\textwidth}p{0.30\textwidth}}
-\toprule
-Configuration / term & Expression & Power \\
-\midrule
-Joint actuator group \(P_{\mathrm{joint}}\) &
-\(3\cdot \qty{48}{\volt}\cdot \qty{8.53}{\ampere}\) &
-\(\qty{1228}{\watt}\) \\
-Wrist actuator group \(P_{\mathrm{wrist}}\) &
-\(3\cdot \qty{48}{\volt}\cdot \qty{2.5}{\ampere}\) &
-\(\qty{360}{\watt}\) \\
-Base actuator power \(P_{\mathrm{arm,motors,base}}\) &
-\(P_{\mathrm{joint}}+P_{\mathrm{wrist}}\) &
-\(\qty{1588}{\watt}\) \\
-Auxiliary electronics \(P_{\mathrm{aux}}\) & constant & \(\qty{20}{\watt}\) \\
-Base manipulator power \(P_{\mathrm{arm,base}}\) &
-\(P_{\mathrm{arm,motors,base}}+P_{\mathrm{aux}}\) &
-\(\qty{1608}{\watt}\) \\
-\midrule
-Gripper attachment &
-\(\Delta P_{\mathrm{tool}}=\qtyrange{18}{36}{\watt}\) &
-\(P_{\mathrm{arm,total}}=\qtyrange{1626}{1644}{\watt}\) \\
-Auger bucket attachment &
-\(\Delta P_{\mathrm{tool}}=\qty{35}{\watt}\) nominal (\(\qty{247}{\watt}\) short peak) &
-\(P_{\mathrm{arm,total}}=\qty{1643}{\watt}\) nominal \\
-Liquid-sampling attachment &
-\(\Delta P_{\mathrm{liquid}}\approx\qty{20}{\watt}\) (preliminary) &
-\(P_{\mathrm{arm,total}}\approx\qty{1628}{\watt}\) \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-
-
-
-For the mixed \(\qty{60}{\minute}\) profile (\(t_{\mathrm{loc}}=\qty{30}{\minute}\), \(t_{\mathrm{grip}}=t_{\mathrm{auger}}=t_{\mathrm{liquid}}=\qty{10}{\minute}\)),
-\[
-E_{\mathrm{tot}}=
-\qty{0.5}{\hour}\,P_{\mathrm{loc}}
-+\qty{0.1667}{\hour}\,\bigl(P_{\mathrm{grip}}+P_{\mathrm{auger}}+P_{\mathrm{liquid}}\bigr).
-\]
-
-Using nominal values, \(E_{\mathrm{tot}}\approx\qty{1620}{\watt\hour}\). The liquid-sampling load does not change the battery-count conclusion: \num{3} modules provide limited margin, while \num{4} modules provide comfortable margin. These estimates indicate that the rover can sustain the required \(\qty{60}{\minute}\) mission duration under the considered operating profile.
+\todo[inline]{Overview of the rover power budget. 
+Describe the interchangeable 48\,V battery system and support for single- and dual-battery operation.
+Present measured average power consumption, estimated operating time for different rover configurations, 
+and endurance test results. 
+Target length(text): 1/2 page. 
+Figure required: current consumption plot. 
+Tables required: operating time estimates.}
