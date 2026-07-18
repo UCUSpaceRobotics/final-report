@@ -1,13 +1,28 @@
 % =============================================================================
 % sections/design/rover/arm_control_system.tex  -  Arm Control System
-% Teams: arm (best guess - unconfirmed) / Status: stub
+% Teams: arm (Marta)
+% Status: draft
 %
-% Nested under the "Robotic Arm Software Architecture" subsubsection
-% (paragraph level).
+% Image below is a placeholder
+% (teams/arm/figures/arm_control_architecture.png) - overwrite with the
+% draw.io PDF export (same basename, delete the png, keep the .drawio
+% source next to it), no need to touch the LaTeX layout.
 % =============================================================================
 
-\todo[inline]{Description of the control system driving the manipulator's
-joints: control architecture (e.g. joint-space vs. Cartesian control,
-trajectory planning, inverse kinematics), and the software/hardware stack
-used to execute commanded motions. Diagram of the control architecture
-recommended.}
+\todo[inline]{Write 1--2 short paragraphs, non-obvious items only:
+custom ros2\_control hardware interface speaking native CAN protocols to
+the two actuator families (SteadyWin q1--q3, Damiao wrist); MoveIt~2
+planning on the URDF/Xacro model (KDL IK, OMPL) feeding
+joint\_trajectory\_controller; teach-pose utility recording/replaying
+named joint-space waypoints. Skip generic ROS~2 / MoveIt explanations.}
+
+The control stack is summarized in
+\autoref{fig:arm_control_architecture}.
+
+\begin{figure}[!htbp]
+    \centering
+    \includegraphics[width=0.5\linewidth]{teams/arm/figures/arm_control_architecture}
+    \caption{Arm control architecture: MoveIt~2 planning, ros2\_control
+    execution, and the custom CAN hardware interface}
+    \label{fig:arm_control_architecture}
+\end{figure}
