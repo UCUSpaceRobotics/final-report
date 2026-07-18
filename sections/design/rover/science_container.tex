@@ -1,30 +1,24 @@
 % =============================================================================
 % sections/design/rover/science_container.tex  -  Science Container
-% Teams: science (best guess - unconfirmed) / Status: EXAMPLE (scope approximation)
+% Teams: science / Status: draft
 %
-% EXAMPLE CONTENT for scope/layout approximation - not final report text.
-% Adapted from the Preliminary Report's "Sample Storage and Weighing
-% System" subsection, trimmed to minimal prose. Detailed mechanism
-% (servo-driven lid, load-cell tilt-compensation formula, CAN transmission)
-% deferred to a later/deeper section rather than crammed in here.
-% Marked with \exampleflag on its heading in the assembler.
-%
-% Images are placeholders (teams/science/figures/*.png) - swap them for the
-% real scheme/photos by overwriting the same files.
-%
-% NOTE: this subsection is meant to fully cover the science container; do
-% not repeat this content elsewhere in the report.
+% Draft content for the science container subsystem. The structure reflects the
+% current design update: two side-by-side containers, no lids, and a compact
+% form factor intended to simplify handling and improve rover mobility.
 % =============================================================================
 
-The science container stores collected samples in three independent,
-load-cell-monitored cups -- regolith, rock, and deep-sample -- housed in a
-\qtyproduct{503 x 180 x 120}{\milli\meter} outer enclosure mounted on the
-front chassis, shown in \autoref{fig:science_container_scheme}. Rock
-specimens up to \qty{15}{\centi\meter} and the \qty{35}{\milli\meter} auger
-diameter are accommodated by dedicated cup geometries. Each cup weighs its
-contents to a resolution of $\pm\,$\qty{1}{\gram}, independent of rover
-tilt. The container in use is pictured in
-\autoref{fig:science_container_action}.
+The science container consists of two side-by-side compartments mounted on the
+front chassis. One compartment stores rock specimens, while the other stores
+surface and deep samples in two internal half-cells. The previous closing lids
+were removed to simplify the structure and avoid interference with the robotic
+arm during deployment. The design is kept compact, with the overall height
+reduced to approximately \qty{100}{\milli\meter}, improving mobility for both
+the arm and the central camera. Both compartments are equipped with load cells
+and provide mass measurement with the same resolution of $\pm\,$\qty{1}{\gram}.
+Each sample is weighed individually: after placement, its mass is recorded, the
+system is tared, and the next sample is measured in the same manner. The
+configuration is shown in \autoref{fig:science_container_scheme}, and its use is
+illustrated in \autoref{fig:science_container_action}.
 
 \begin{figure}[!htbp]
     \centering
