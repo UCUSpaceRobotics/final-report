@@ -24,6 +24,8 @@ on:
     branches:
       - main
       - develop
+  workflow_dispatch: # manual "Run workflow" button in the Actions tab -
+                      # e.g. to retry the publish job after a Pages settings change
 
 concurrency:
   group: "pages"
