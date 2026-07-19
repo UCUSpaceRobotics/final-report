@@ -1,18 +1,71 @@
 % =============================================================================
-% sections/design/rover/autonomous_navigation_collision_avoidance.tex  -  Autonomous Navigation and Collision Avoidance
-% Teams: navigation (best guess - unconfirmed) / Status: stub
-%
-% Nested under the "Navigational Stack" subsubsection (paragraph level).
-% Content required: the data used for collision avoidance, and the
-% architecture of Nav2 and the plugins/algorithms used (needs discussion,
-% see additional notes). Target length: 2/3 - 1 page. Diagrams required:
-% the implemented Nav2 architecture / node diagram (needs discussion, see
-% additional notes), and the behavior tree with recovery behaviors.
+% sections/design/rover/autonomous_navigation_collision_avoidance.tex
+% Autonomous Navigation and Collision Avoidance
+% Teams: Navigation
+% Status: draft
 % =============================================================================
 
-\todo[inline]{Description of the data we are using for collision
-avoidance. Architecture of Nav2 and used plugins, algorithms (needs
-discussion -- see additional notes). Target length: 2/3 -- 1 page.
-Diagrams required: implemented Nav2 architecture / node diagram (needs
-discussion -- see additional notes), and the behavior tree with recovery
-behaviors.}
+The navigation subsystem is built on the Nav2 framework, 
+configured for real-time, costmap-based collision avoidance. The stack combines perception,
+planning, control, and recovery into one flow from sensors to velocity
+commands, as shown in \autoref{fig:nav2_dataflow}.
+
+\begin{figure}[!htbp]
+  \centering
+  \fbox{%
+    \begin{minipage}[c][4.7cm][c]{0.94\linewidth}
+      \centering
+      \todo[inline]{
+        PLACEHOLDER FIGURE: architecture diagram showing the rover
+        navigation data flow from stereo / ToF / LiDAR inputs to the
+        traversability map, planner, controller, and recovery logic.
+        Highlight the rover-specific processing steps that convert 3D
+        terrain into driveable and blocked regions.
+      }
+    \end{minipage}%
+  }
+  \caption{Navigation data flow from terrain sensing to motion command generation.}
+  \label{fig:nav2_dataflow}
+\end{figure}
+
+\begin{itemize}
+  \item \textbf{Global planning:} \texttt{planner\_server} runs
+  \texttt{SmacPlanner2D} on a global costmap with \qty{0.05}{\meter}
+  resolution. Replanning is triggered when the active path becomes invalid or
+  blocked.
+
+  \item \textbf{Local control:} \texttt{controller\_server} runs
+  \texttt{MPPIController} with a \num{2000}-sample batch and generates
+  holonomic $(v_x, v_y, \omega)$ commands for the swerve-drive base.
+
+  \item \textbf{Collision avoidance:} voxel, obstacle, and inflation
+  layers project 3D perception into traversability on the costmap, with
+  a \qty{0.75}{\meter} inflation radius for obstacle clearance. The
+  costmap integrates stereo, ToF cameras, and LiDAR data
+  (\autoref{subsubsec:navigation_sensor_suite}). 3D terrain geometry
+  (slope and surface variation) is projected onto the 2D costmap for
+  traversability estimation.
+
+  \item \textbf{Task execution:} \texttt{bt\_navigator} coordinates
+  goal execution and recovery, while \texttt{behavior\_server}
+  provides the recovery actions \texttt{spin}, \texttt{backup},
+  \texttt{drive\_on\_heading}, and \texttt{wait}; the waypoint
+  follower stops on failure.
+\end{itemize}
+
+\begin{figure}[H]
+  \centering
+  \fbox{%
+    \begin{minipage}[c][4.1cm][c]{0.94\linewidth}
+      \centering
+      \todo[inline]{
+        PLACEHOLDER FIGURE: behavior tree with the rover mission flow.
+        Show goal received, path planning, path tracking, local recovery,
+        waypoint following, and fail-safe stop, with the blocked-path and
+        stuck-rover transitions.
+      }
+    \end{minipage}%
+  }
+  \caption{Navigation behavior tree and recovery sequence.}
+  \label{fig:nav_state_machine}
+\end{figure}
