@@ -1,16 +1,41 @@
 % =============================================================================
-% sections/design/rover/critical_parts/gripper_design.tex  -  Gripper Design
-% Teams: arm (best guess - unconfirmed) / Status: stub
+% sections/design/rover/critical_parts/gripper_design.tex - Jaw Gripper Design
+% Teams: arm
+% Status: draft
 %
-% Content required:
-%   - Covers: characteristics, size, capabilities
-%   - Detailed scheme with the names of parts
-%   - Photo of working on panel
-% Evidence-first rule (ai_context/DECISIONS.md): lead with the
-% scheme/photo, keep prose to what the figures cannot say.
+% Section title to be renamed by PM in the assembler: "Jaw Gripper Design".
 %
-% NOTE: possible overlap with rover/robotic_arm_mechanical_architecture.tex - coordinate
-% to avoid duplicate content.
+% Images below are placeholders (teams/arm/figures/gripper_scheme.png,
+% teams/arm/figures/gripper_panel_photo.png) - overwrite the same files
+% with the real labeled scheme (CAD cross-section with part names: stepper
+% motor, dual linkage, load sensors, rubber pads, quick-change interface)
+% and a photo of the gripper working on the panel, no need to touch the
+% LaTeX layout.
 % =============================================================================
 
-\todo[inline]{Gripper design. See required evidence above.}
+\todo[inline]{Write 1 short paragraph, non-obvious items only: why the
+jaw gripper is a critical part — every maintenance-panel operation
+(buttons, knobs, switches, card swipe, IEC~C14 plug) and probe handling
+go through it; parallel-motion opening, stepper
+drive with step-skipping overload protection, closed-loop force control
+via two load sensors (one hardware for both delicate probes and stiff
+connectors).}
+
+The gripper mechanism and its operation on the maintenance panel are
+shown in \autoref{fig:gripper_scheme_photo}.
+
+\begin{figure}[!htbp]
+    \centering
+    \begin{minipage}[c]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{teams/arm/figures/gripper_scheme}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[c]{0.40\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{teams/arm/figures/gripper_panel_photo}
+    \end{minipage}
+    \caption{Jaw gripper -- labeled scheme of the dual-linkage mechanism
+    (left) and operation on the maintenance panel (right)}
+    \label{fig:gripper_scheme_photo}
+\end{figure}
