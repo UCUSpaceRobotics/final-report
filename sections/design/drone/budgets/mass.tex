@@ -8,13 +8,12 @@
 % \exampleflag on its heading in the assembler.
 % =============================================================================
 
-The mass budget in \autoref{tab:drone_mass_budget} categorizes the Drone
-into dry mass, battery, and payload, with a lightweight frame and core
-avionics keeping baseline mass low. A \qty{15}{\percent} engineering margin
-is applied to the system subtotal to account for unmodeled items such as
-wiring, fasteners, and conformal coating, resulting in a calculated
-Maximum Take-Off Mass (MTOM) of \qty{2.75}{\kilo\gram}, which remains well
-below the \qty{5.0}{\kilo\gram} limit for the Droning Sub-Task.
+The mass budget in \autoref{tab:drone_mass_budget} summarizes the estimated mass 
+of all Drone components. The estimated system subtotal is \qty{2.791}{\kilogram}. 
+A 15\% engineering margin accounts for manufacturing tolerances, minor unlisted 
+hardware, and possible integration changes, resulting in a calculated 
+Maximum Take-Off Mass (MTOM) of \qty{3.210}{\kilogram}. This remains below the 
+\qty{5.0}{\kilogram} limit for the Droning Sub-Task.
 
 \begin{table}[!htbp]
     \centering
@@ -32,15 +31,14 @@ below the \qty{5.0}{\kilo\gram} limit for the Droning Sub-Task.
         \midrule
         Battery mass & Battery                            & \qty{800}{\gram} \\
         \midrule
-        Payload \& misc.\ & Vision sensors, antennas, wiring \& misc. & \qty{600}{\gram} \\
+        Mission equipment \ & Vision sensors, antennas, wiring \& misc. & \qty{600}{\gram} \\
         \midrule
-        \multicolumn{2}{l}{\textbf{System subtotal}}       & \textbf{\qty{2391}{\gram}} \\
-        \multicolumn{2}{l}{Engineering margin (\qty{15}{\percent})} & \qty{359}{\gram} \\
-        \multicolumn{2}{l}{\textbf{Calculated MTOM}}       & \textbf{\qty{2750}{\gram}} \\
+        Custom parts \ & Custom 3D-printed components & \qty{400}{\gram} \\
+        \midrule
+        \multicolumn{2}{l}{\textbf{System subtotal}}       & \textbf{\qty{2791}{\gram}} \\
+        \multicolumn{2}{l}{Engineering margin (\qty{15}{\percent})} & \qty{419}{\gram} \\
+        \multicolumn{2}{l}{\textbf{Calculated MTOM}}       & \textbf{\qty{3210}{\gram}} \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-\todo[inline]{Confirm these figures still reflect the as-built drone
-(Preliminary values were estimates); if any component changed, update the
-table and re-check the MTOM margin against the \qty{5.0}{\kilo\gram} limit.}
