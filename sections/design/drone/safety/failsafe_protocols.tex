@@ -8,3 +8,10 @@
 % critical failures such as GPS loss or telemetry disconnection. Marked with
 % \exampleflag on its heading in the assembler.
 % =============================================================================
+
+The flight controller runs ArduPilot, which provides the required flight-control 
+and failsafe functions. If the communication link is lost or a critical battery 
+condition is detected, the Drone aborts the mission and initiates an emergency landing. 
+A software geofence limits the permitted flight volume and prevents the Drone from 
+leaving the operational area. The RC transmitter also provides manual override switches, 
+allowing the operator to interrupt autonomous flight, regain manual control, and change flight modes.
