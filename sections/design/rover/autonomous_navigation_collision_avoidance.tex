@@ -42,19 +42,13 @@ commands, as shown in \autoref{fig:nav2_dataflow}.
   follower stops on failure.
 \end{itemize}
 
+As mapped in \autoref{fig:nav_state_machine}, solid lines trace the 
+nominal sequential execution flow, whereas dashed lines delineate 
+conditional fallback loops, recovery sequences, and event-driven fail-safe transitions.
+
 \begin{figure}[H]
   \centering
-  \fbox{%
-    \begin{minipage}[c][4.1cm][c]{0.94\linewidth}
-      \centering
-      \todo[inline]{
-        PLACEHOLDER FIGURE: behavior tree with the rover mission flow.
-        Show goal received, path planning, path tracking, local recovery,
-        waypoint following, and fail-safe stop, with the blocked-path and
-        stuck-rover transitions.
-      }
-    \end{minipage}%
-  }
+  \includegraphics[width=0.95\linewidth]{teams/navigation/figures/navigation_behavior_tree}
   \caption{Navigation behavior tree and recovery sequence.}
   \label{fig:nav_state_machine}
 \end{figure}
