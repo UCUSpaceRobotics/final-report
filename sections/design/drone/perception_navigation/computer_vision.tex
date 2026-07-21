@@ -12,19 +12,18 @@
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\linewidth]{teams/suspension/figures/rocker_suspension_photo}
-        \caption{Photo from camera}
+        \caption{Vision processing pipeline}
     \end{subfigure}
     \hfill
     \begin{subfigure}[b]{0.48\textwidth}
         \centering
         \includegraphics[width=\linewidth]{teams/suspension/figures/rocker_suspension_obstacle}
-        \caption{Photo from camera + cv}
+        \caption{ArUco detection output}
     \end{subfigure}
     \caption{CV}\label{fig:drone_computer_vision}
 \end{figure}
-The companion computer processes a downward-facing RGB stream for
-real-time imagery, ArUco detection, and relative localization. Marker pose
-from calibrated camera parameters is fused with flight-controller
-orientation data to transform measurements into the Drone local frame,
-sending landing commands to the flight controller while logging target
-probe positions relative to the start point. \autoref{fig:drone_computer_vision}
+The companion computer processes the downward-facing RGB camera stream, ArUco 
+marker detection, and relative localization. Marker poses obtained using the calibrated camera and transformed into the drone-local 
+coordinate frame. The system sends landing commands to the flight controller and logs target 
+positions relative to the take-off point. \autoref{fig:drone_computer_vision}
+
