@@ -17,13 +17,8 @@ safety-checks before motor actuation
 (\autoref{fig:drone_electronics_architecture}).
 
 To maximize reliability, the architecture incorporates the following
-redundancies: triple-redundant IMUs in the flight controller, using a
-voting algorithm to immediately isolate faulty data; a
+redundancies: triple IMUs; a
 \qty{433}{\mega\hertz} telemetry link backing up the primary
-\qty{2.4}{\giga\hertz} RC link, with automatic failover verified via
-mid-flight signal-loss testing; and an onboard video switcher that toggles
+\qty{2.4}{\giga\hertz} RC link; and a video switcher that toggles
 between the forward and downward cameras, ensuring continuous visual
-feedback if one perspective is compromised.
-
-\todo[inline]{Companion computer as a critical part. See required content above.}
-\todo[inline]{Flight controller as a critical part. See required content above.}
+feedback.
