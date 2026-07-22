@@ -129,6 +129,9 @@ exception is the test table's *Req.* column, which the rubric scores.)
   no file extension needed.
 - **Schematics:** follow [Schematics.md](Schematics.md)
   for the shared EasyEDA, naming, and layout rules.
+- **Blueprints:** follow [blueprint_instructions.md](blueprint_instructions.md)
+  for generating CAD drawings, filling out the title block, and the final
+  blueprint checklist.
 
 ## Merge checklist (CI enforces the mechanical parts)
 

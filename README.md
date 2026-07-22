@@ -51,7 +51,8 @@ teams/<team>/figures/    # team-owned figure assets (photos, exported PDFs)
 figures/                 # shared assets only (logos, system-level diagrams)
 appendix/                # MoC .xlsx (embedded into the PDF at release)
 ai_context/              # design record: proposal, implementation plan, feedback
-Schematics.md # shared diagram and schematic rules for all subteams
+Schematics.md             # shared diagram and schematic rules for all subteams
+blueprint_instructions.md # CAD blueprint creation, title block, and checklist
 ```
 
 Teams: `arm`, `drone`, `electronics`, `ground_station`, `navigation`,
