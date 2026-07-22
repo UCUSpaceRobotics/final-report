@@ -5,17 +5,15 @@
 % Nested under "Safety Systems" (section-level subsection).
 % =============================================================================
 
-\todo[inline]{Description of the emergency stop system: the E-stop button
-circuit schematic (jury feedback flagged this as missing in the
-Preliminary - it must appear here), the hardware/software architecture
-that cuts power/motion on trigger, and the time sequence from trigger to
-safe state. Cover all three trigger sources: the system itself, the
-operator, and an external actor hitting the emergency button. Include a
-reliability argument for the solution, and test results (figures/photos)
-if available.}
-
-\begin{figure}[!htbp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\linewidth, height=0.3\textheight, keepaspectratio]{figures/emergency_stop_scheme}
-    \caption{E-Stop button circuit scheme (placeholder)}\label{fig:emergency_stop_scheme}
+    \includegraphics[width=\linewidth]{teams/electronics/figures/hardware_safety.pdf}
+    \caption{Electrical schematic of the rover hardware safety system.}
+    \label{fig:hardware_safety}
 \end{figure}
+
+The rover uses a dedicated hardware safety system, including power switching and emergency shutdown, independent of the main control electronics (\autoref{fig:hardware_safety}). An INA-based module (D1) monitors battery voltage and current for state estimation and fault detection.
+
+Rover status is indicated by a 360° industrial signal lamp mounted at its highest point. Four colors represent the operating state: orange (power on), green (manual mode), red (autonomous mode), and blue (wireless connection established).
+
+The electronics enclosure is sealed with dedicated covers for removable modules, reducing dust and water ingress while ensuring reliable outdoor operation.
