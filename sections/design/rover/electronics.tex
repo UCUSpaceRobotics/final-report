@@ -4,14 +4,7 @@
 
 % =============================================================================
 
-The rover electronics are organized into independent subsystems for power, communication, navigation, and robotic arm control (Fig.~\ref{fig:rover_architecture}), enabling modular development, testing, and replacement.
-
-The rover is powered by one or two 48~V, 12~Ah Li-ion battery packs, with DC-DC converters providing regulated 12~V and 5~V supplies for the electronic modules.
-
-To improve modularity and simplify assembly and servicing, the electronics are distributed across dedicated PCBs, while standardized XT, JST, and terminal block connectors are used throughout the system.
-
-The CAN bus is the primary communication interface due to its reliability, EMI robustness, and widespread industrial use. USB is used for high-bandwidth peripherals such as cameras, Wi-Fi adapters, and communication modules (Fig.~\ref{fig:rover_architecture}).
-
+The rover electronics are organized into independent subsystems for power, communication, navigation, and robotic arm control (\autoref{fig:rover_architecture}). The modular design uses dedicated PCBs and standardized XT, JST, and terminal block connectors to simplify assembly, servicing, and module replacement. CAN serves as the primary communication interface, while USB is used for high-bandwidth peripherals.
 
 \begin{figure}[H]
     \centering
@@ -22,15 +15,9 @@ tion, data buses, and peripheral subsystems.}
 \end{figure}
 
 
-\begin{figure}[!htbp]
+\begin{figure}[H]
     \centering
-    \fbox{
-        \parbox[c][0.22\textheight][c]{0.55\textwidth}{
-            \centering
-            \Large Placeholder\\[0.8em]
-            Lighting PCB Render / Photo
-        }
-    }
-    \caption{Example of a custom PCB developed for the rover.}
-    \label{fig:lighting_pcb}
+    \includegraphics[width=0.8\textwidth]{teams/electronics/figures/pcb.pdf}
+    \caption{Custom PCBs for the rover lighting and gripper subsystems.}
+    \label{fig:pcb}
 \end{figure}
