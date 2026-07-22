@@ -12,7 +12,7 @@ commands, as shown in \autoref{fig:nav2_dataflow}.
 
 \begin{figure}[!htbp]
   \centering
-  \includegraphics[width=0.95\linewidth]{teams/navigation/figures/navigation_data_flow}
+  \includegraphics[width=1\linewidth]{teams/navigation/figures/navigation_data_flow}
   \caption{Navigation data flow from terrain sensing to motion command generation.}
   \label{fig:nav2_dataflow}
 \end{figure}
@@ -48,7 +48,14 @@ conditional fallback loops, recovery sequences, and event-driven fail-safe trans
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.95\linewidth]{teams/navigation/figures/navigation_behavior_tree}
+  \includegraphics[width=1\linewidth]{teams/navigation/figures/navigation_behavior_tree}
   \caption{Navigation behavior tree and recovery sequence.}
   \label{fig:nav_state_machine}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{teams/navigation/figures/nav2_work_rviz.png}
+  \caption{RViz visualization during real-world navigation, showing a safe path (green) on a costmap updated by 2D laser scans (red) and 3D pointclouds (yellow).}
+  \label{fig:nav2_work_rviz}
 \end{figure}
