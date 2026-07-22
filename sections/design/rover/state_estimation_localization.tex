@@ -5,35 +5,18 @@
 % Nested under the "Navigational Stack" subsubsection (paragraph level).
 % Content required: what data and algorithms are used for localization and
 % how they are combined. Target length: 2/3 - 1 page. Diagram required:
-% localization pipeline, possibly a ROS 2 node diagram.
+% localization pipeline
 % =============================================================================
 
-% Text will be rewritten but content and size will stay approximatelly the same
-\todo[inline]{Rewrite text}
 
-Based on competition rules, we defined the localization requirement as an absolute pose error below 0.8 m over a 150 m route. To satisfy this in variable lighting and feature-poor environments, we implemented the dual-layered pipeline illustrated in \autoref{fig:localization_pipeline}
+\todo[inline]{Fix diagram: fix integration of the ArUco markers into localization pipeline; update encoder pipeline to show our actual architecture; correct topic and node names}
 
-\begin{figure}[!htbp]
-    \centering
-    \includegraphics[width=0.85\linewidth]{teams/navigation/figures/localization_pipeline_temporary_image}
-    \caption{Localization pipeline}
-    \label{fig:localization_pipeline}
-\end{figure}
-
-
-The local Extended Kalman Filter (EKF) fuses visual-inertial and wheel data for smooth, high-frequency odometry. Global Simultaneous Localization and Mapping (SLAM) corrects drift via scan matching, anchoring the rover to the map without inducing local state jumps.
-
-The system achieves absolute positioning by detecting ArUco markers at known coordinates. Inverting the marker's 6D pose relative to \texttt{base\_link} and projecting it to the ground plane, the pipeline calculates a zero-drift global pose. This update is injected into the global layer to correct the map transform, ensuring precise navigation toward featureless waypoints.
-
-
-\todo[inline]{Add paragraph with results of the real localization tests. Note: I don't know whether there will be posibility to conduct real tests and recors the results. In case of compexities with the tests this paragraph may be not added}
+Based on competition rules, we defined the localization requirement as an absolute pose error below \qty{0.8}{\meter} over a \qty{150}{\meter} route. To satisfy this in variable lighting and feature-poor environments, we implemented the dual-layered pipeline illustrated in \autoref{fig:localization_pipeline}
 
 \begin{figure}[!htbp]
     \centering
-    \framebox(300, 200){
-        \begin{minipage}{200pt}
-            \centering Plot with some results of the real localization tests
-        \end{minipage}
-    }
-    \caption{Plot with some results of real the localization tests.}
+    \includegraphics[width=1.0\linewidth]{teams/navigation/figures/localization_pipeline}
+    \caption{Localization pipeline}\label{fig:localization_pipeline}
 \end{figure}
+
+The local Extended Kalman Filter (EKF) fuses visual-inertial and wheel data for smooth, high-frequency odometry. Global SLAM corrects drift via scan matching without inducing local state jumps. For absolute positioning, the system detects known ArUco markers; inverting their 6D pose relative to \texttt{base\_link} calculates a zero-drift global pose to correct the map transform.
