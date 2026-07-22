@@ -14,18 +14,16 @@ controller performs pose estimation, stabilization, and command execution.
 Detected anomalies activate the corresponding failsafe procedure described in
 \autoref{sec:safety}.
 
-The Extended Kalman Filter (EKF) combines IMU and optical-flow data. GPS provides global positioning
-for geofence enforcement, while optical flow supports stable local positioning for navigation.
+GPS provides global positioning for geofence enforcement, while optical flow supports stable local positioning for navigation.
 The measured localization performance was
 \emph{[Placeholder: provide position error, test conditions, reference ground
 truth, and number of trials]}.
 
-After take-off, the Drone follows an outward search pattern until the
-downward-facing camera detects the ArUco landing marker. The companion computer
+After take-off, the Drone follows asearch pattern until the
+detection of the ArUco landing marker. The companion computer
 estimates the marker pose, transforms it into the Drone local frame using the
 camera calibration and flight-controller orientation, and generates alignment
-and descent commands. This allows the system to transition from local-based
-area navigation to vision-guided precision landing without operator input.
+and descent commands.
 
 \todo[inline]{Populate placeholder with the measurements}
 
