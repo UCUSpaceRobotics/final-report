@@ -5,17 +5,168 @@
 % Nested under "Safety Systems" (section-level subsection).
 % =============================================================================
 
-\todo[inline]{Description of the emergency stop system: the E-stop button
-circuit schematic (jury feedback flagged this as missing in the
-Preliminary - it must appear here), the hardware/software architecture
-that cuts power/motion on trigger, and the time sequence from trigger to
-safe state. Cover all three trigger sources: the system itself, the
-operator, and an external actor hitting the emergency button. Include a
-reliability argument for the solution, and test results (figures/photos)
-if available.}
+% \todo[inline]{Description of the emergency stop system: the E-stop button
+% circuit schematic (jury feedback flagged this as missing in the
+% Preliminary - it must appear here), the hardware/software architecture
+% that cuts power/motion on trigger, and the time sequence from trigger to
+% safe state. Cover all three trigger sources: the system itself, the
+% operator, and an external actor hitting the emergency button. Include a
+% reliability argument for the solution, and test results (figures/photos)
+% if available.}
 
-\begin{figure}[!htbp]
+% \begin{figure}[!htbp]
+%     \centering
+%     \includegraphics[width=0.9\linewidth, height=0.3\textheight, keepaspectratio]{figures/emergency_stop_scheme}
+%     \caption{E-Stop button circuit scheme (placeholder)}\label{fig:emergency_stop_scheme}
+% \end{figure}
+
+The Emergency Stop (E-Stop) system is responsible for immediately and
+unconditionally removing power from the rover's actuation systems,
+independent of the state of the onboard software. Two independent
+trigger paths converge on the same power-cutting hardware, described in
+Section~\ref{sec:estop-hw}.
+
+\subsubsection{Trigger Sources}
+\label{sec:estop-triggers}
+
+Table~\ref{tab:estop-triggers} summarizes the trigger sources for the
+emergency stop, as required by the competition rules.
+
+\begin{table}[h]
     \centering
-    \includegraphics[width=0.9\linewidth, height=0.3\textheight, keepaspectratio]{figures/emergency_stop_scheme}
-    \caption{E-Stop button circuit scheme (placeholder)}\label{fig:emergency_stop_scheme}
+    \caption{Emergency stop trigger sources}
+    \label{tab:estop-triggers}
+    \begin{tabular}{p{3.2cm} p{5cm} p{5cm}}
+        \toprule
+        \textbf{Trigger source} & \textbf{Mechanism} & \textbf{Notes} \\
+        \midrule
+        External actor (physical) &
+        Large red physical E-Stop button mounted on the rover chassis,
+        directly interrupting the main power path via a relay/transistor
+        circuit (see Fig.~\ref{fig:estop-schematic}) &
+        Accessible to any person near the rover; does not require any
+        electronics to be functioning to take effect \\
+        \addlinespace
+        Operator (remote) &
+        Dedicated emergency RF channel, separate from the primary
+        control link, sends a command directly to a standalone ESP
+        module, which triggers the same power-cutting relay as the
+        physical button &
+        Independent frequency/channel from nominal telemetry/control
+        link, so it remains available even if the main control link is
+        jammed, lost, or saturated \\
+        \addlinespace
+        System itself &
+        % TODO: currently the only "self-triggered" protections are
+        % software-level (CAN watchdog rampdown, per-wheel overcurrent
+        % cutoff — see Section 4.2). Decide whether any condition
+        % (e.g. critical fault detected by the main computer) should
+        % also command a full hardware E-Stop via the emergency RF
+        % channel, and document it here.
+        \textit{TODO: describe any condition under which the rover
+        autonomously triggers a full hardware E-Stop (vs. the
+        software-level soft-stop mechanisms in Section~\ref{sec:sw-safety})} &
+        \textit{TODO} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection{Hardware Architecture}
+\label{sec:estop-hw}
+
+% TODO: 2-3 paragraphs describing the circuit: relay(s), transistor(s),
+% which power rail(s) are cut (motor power only, or all electronics?),
+% why the design is fail-safe (e.g. normally-closed relay so that loss
+% of control signal / power also results in the safe/open state).
+
+Figure~\ref{fig:estop-schematic} shows the electrical schematic of the
+emergency stop circuit, including the relay and transistor stage that
+physically interrupts the power line upon activation from either
+trigger path described above.
+
+\begin{figure}[h]
+    \centering
+    % TODO: replace with actual schematic export (KiCad/Fritzing/etc.)
+    \includegraphics[width=0.8\textwidth]{figures/software_safety_schematic.png}
+    \caption{Emergency stop circuit schematic (relay/transistor stage).}
+    \label{fig:estop-schematic}
 \end{figure}
+
+\subsubsection{Time Sequence: Trigger to Safe State}
+\label{sec:estop-timing}
+
+Table~\ref{tab:estop-timing} outlines the sequence of events from
+trigger activation to the rover reaching a fully safe (de-energized)
+state.
+
+\begin{table}[h]
+    \centering
+    \caption{Emergency stop timing sequence}
+    \label{tab:estop-timing}
+    \begin{tabular}{p{1.2cm} p{6.5cm} p{3.5cm}}
+        \toprule
+        \textbf{Step} & \textbf{Event} & \textbf{Approx. time} \\
+        \midrule
+        1 & Trigger event occurs (button press or emergency RF command
+            received by ESP) & $t_0$ \\
+        2 & Relay/transistor stage de-energizes main power rail(s) &
+            % TODO: fill in actual measured delay for the relay switching stage
+            $t_0 + \text{TODO ms}$ \\
+        3 & Motor drivers lose power, rover comes to a complete
+            mechanical stop &
+            $\sim t_0 + 1\,\text{s}$ (varies with rover's speed
+            % TODO: give a range, e.g. min/max stopping distance or
+            % time at nominal vs. maximum driving speed
+            at the moment of triggering) \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% TODO (optional): add a TikZ timeline/sequence diagram visualizing
+% t0 -> relay switch -> motors de-energized -> mechanical stop.
+
+\subsubsection{Reliability Argument}
+\label{sec:estop-reliability}
+
+The emergency stop design provides reliability through the following
+properties:
+
+\begin{itemize}
+    \item \textbf{Hardware independence:} the power-cutting path
+    (relay/transistor stage) does not depend on the main onboard
+    computer or any software being operational. A full software
+    crash or main-computer failure does not prevent the E-Stop from
+    functioning.
+    \item \textbf{Dual, independent trigger paths:} both the physical
+    button and the dedicated emergency RF channel are able to trigger
+    the same power-cutting hardware independently of one another,
+    providing redundancy — failure of one path (e.g. RF interference)
+    does not disable the other.
+    \item \textbf{Dedicated communication channel:} the remote trigger
+    path uses a frequency/channel reserved exclusively for emergency
+    signalling, decoupled from the nominal control/telemetry link, so
+    it remains available even if the primary link is degraded or lost.
+    % TODO: confirm/expand — is the emergency channel monitored
+    % continuously by the ESP regardless of main link state?
+    \item \textbf{Fail-safe behaviour:}
+    % TODO: confirm this is true of your relay design — i.e. that loss
+    % of control signal to the relay also results in power being cut
+    % (normally-open vs normally-closed configuration), which
+    % strengthens the reliability argument considerably.
+    \textit{TODO: state whether the relay is configured such that any
+    loss of control signal defaults to the safe (power-off) state.}
+\end{itemize}
+
+\subsubsection{Test Results}
+\label{sec:estop-tests}
+
+% TODO: include photos/screenshots/video stills demonstrating:
+%  - physical button test (before/after power cut)
+%  - remote emergency-channel trigger test
+%  - measured stopping time/distance at a given speed
+% If not yet available, state this is planned before the final
+% on-site demonstration.
+
+\textit{TODO: add test evidence (figures/photos/logs) for each trigger
+path, or note that this validation is planned prior to the on-site
+competition run.}

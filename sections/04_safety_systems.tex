@@ -22,6 +22,13 @@
 \section{Safety Systems}
 \label{sec:safety}
 
+The rover implements a layered, defense-in-depth safety architecture
+combining independent hardware and software mechanisms. Hardware-level
+protection (Section~\ref{sec:estop}) is designed to remain functional
+even in the event of a full software or main-computer failure, while
+software-level mechanisms (Section~\ref{sec:sw-safety}) provide graceful
+degradation before a hard shutdown becomes necessary.
+
 \subsection{Emergency Stop}
 \label{subsec:emergency_stop}
 \input{sections/design/safety/emergency_stop}
