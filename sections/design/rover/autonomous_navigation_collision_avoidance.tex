@@ -12,18 +12,7 @@ commands, as shown in \autoref{fig:nav2_dataflow}.
 
 \begin{figure}[!htbp]
   \centering
-  \fbox{%
-    \begin{minipage}[c][4.7cm][c]{0.94\linewidth}
-      \centering
-      \todo[inline]{
-        PLACEHOLDER FIGURE: architecture diagram showing the rover
-        navigation data flow from stereo / ToF / LiDAR inputs to the
-        traversability map, planner, controller, and recovery logic.
-        Highlight the rover-specific processing steps that convert 3D
-        terrain into driveable and blocked regions.
-      }
-    \end{minipage}%
-  }
+  \includegraphics[width=1\linewidth]{teams/navigation/figures/navigation_data_flow}
   \caption{Navigation data flow from terrain sensing to motion command generation.}
   \label{fig:nav2_dataflow}
 \end{figure}
@@ -53,19 +42,20 @@ commands, as shown in \autoref{fig:nav2_dataflow}.
   follower stops on failure.
 \end{itemize}
 
+As mapped in \autoref{fig:nav_state_machine}, solid lines trace the 
+nominal sequential execution flow, whereas dashed lines delineate 
+conditional fallback loops, recovery sequences, and event-driven fail-safe transitions.
+
 \begin{figure}[H]
   \centering
-  \fbox{%
-    \begin{minipage}[c][4.1cm][c]{0.94\linewidth}
-      \centering
-      \todo[inline]{
-        PLACEHOLDER FIGURE: behavior tree with the rover mission flow.
-        Show goal received, path planning, path tracking, local recovery,
-        waypoint following, and fail-safe stop, with the blocked-path and
-        stuck-rover transitions.
-      }
-    \end{minipage}%
-  }
+  \includegraphics[width=1\linewidth]{teams/navigation/figures/navigation_behavior_tree}
   \caption{Navigation behavior tree and recovery sequence.}
   \label{fig:nav_state_machine}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.75\linewidth]{teams/navigation/figures/nav2_work_rviz.png}
+  \caption{RViz visualization during real-world navigation, showing a safe path (green) on a costmap updated by 2D laser scans (red) and 3D pointclouds (yellow).}
+  \label{fig:nav2_work_rviz}
 \end{figure}

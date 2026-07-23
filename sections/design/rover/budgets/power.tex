@@ -5,25 +5,12 @@
 % Content required: amps, and other required electrical specs.
 % =============================================================================
 
-\todo[inline]{Overview of the rover power budget. 
-Describe the interchangeable 48\,V battery system and support for single- and dual-battery operation.
-Present measured average power consumption, estimated operating time for different rover configurations, 
-and endurance test results. 
-Target length(text): 1/2 page. 
-Figure required: current consumption plot. 
-Tables required: operating time estimates.}
+Based on the measured current consumption during the 60-minute mission profile, the rover has an average current draw of approximately 4.5–5.2 A, depending on terrain conditions. With a single 48 V, 12 Ah battery pack, the estimated operating time is 2.3–2.7 h, while two battery packs extend the mission duration to approximately 4.6–5.3 h. These values provide sufficient endurance for the planned 60-minute mission profile with a significant energy reserve.
 
-\begin{figure}[!htbp]
+
+\begin{figure}[H]
     \centering
-
-    \fbox{
-        \parbox[c][0.35\textheight][c]{0.95\textwidth}{
-            \centering
-            Placeholder\\[0.5em]
-            Current consumption during field testing
-        }
-    }
-
+    \includegraphics[width=\textwidth]{teams/electronics/figures/power_consumption.pdf}
     \caption{Measured rover current consumption during endurance testing.}
     \label{fig:power_consumption}
 \end{figure}
