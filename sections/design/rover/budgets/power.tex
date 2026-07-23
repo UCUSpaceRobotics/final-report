@@ -7,6 +7,41 @@
 
 Based on the measured current consumption during the 60-minute mission profile, the rover has an average current draw of approximately 4.5–5.2 A, depending on terrain conditions. With a single 48 V, 12 Ah battery pack, the estimated operating time is 2.3–2.7 h, while two battery packs extend the mission duration to approximately 4.6–5.3 h. These values provide sufficient endurance for the planned 60-minute mission profile with a significant energy reserve.
 
+\begin{table}[H]
+\centering
+\caption{Measured rover power budget.}
+\label{tab:power_budget}
+\begin{tabular}{lcccc}
+\hline
+\textbf{Operating mode} &
+\textbf{Current} &
+\textbf{Power} &
+\textbf{1$\times$12 Ah} &
+\textbf{2$\times$12 Ah} \\
+&
+(A) &
+(W) &
+(h) &
+(h) \\
+\hline
+Idle (motors off)          & 0.5        & 24  & 24.0 & 48.0 \\
+Idle (motors on)           & 1.0        & 48  & 12.0 & 24.0 \\
+Flat terrain driving       & 2--3       & 96--144 & 4.0--6.0 & 8.0--12.0 \\
+Uphill driving$^{*}$       & 6--8       & 288--384 & 1.5--2.0 & 3.0--4.0 \\
+Arm operation              & 1.5        & 72  & 8.0 & 16.0 \\
+Auxiliary modules          & +2.0       & +96 & -- & -- \\
+\hline
+\textbf{60-min mission profile} &
+\textbf{4.5--5.2} &
+\textbf{216--250} &
+\textbf{2.3--2.7} &
+\textbf{4.6--5.3} \\
+\hline
+\end{tabular}
+
+\vspace{2mm}
+\footnotesize{$^{*}$Measured on a slope of 30$^\circ$.}
+\end{table}
 
 \begin{figure}[H]
     \centering
