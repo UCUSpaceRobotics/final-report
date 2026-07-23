@@ -1,9 +1,95 @@
 % =============================================================================
 % sections/design/breakdowns/wbs.tex  -  Work Breakdown Structure
-% Teams: PM / Status: stub (diagram not yet drawn)
+% Teams: PM / Status: figure + dictionary integrated
 %
 % =============================================================================
 
-\todo[inline]{Work Breakdown Structure diagram. New content - no prior
-version to update. Draw outside LaTeX and export it to replace the
-placeholder at \autoref{fig:wbs_diagram}.}
+\begin{figure}[h]
+	\centering
+		\includegraphics[width=0.8\textwidth]{sections/design/breakdowns/wbs_diagram.png}%
+	\caption{Work Breakdown Structure}
+	\label{fig:wbs}
+\end{figure}
+
+\renewcommand{\arraystretch}{0.85}
+\begin{table}[h]
+\centering
+\begin{minipage}[t]{0.48\textwidth}
+\tiny
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{ID} & \textbf{Element} \\
+\midrule
+\textbf{1.0} & \textbf{Project Mgmt \& Sys. Eng.} \\
+1.1 & Project Planning \& Control \\
+1.2 & Risk / Issue / Opportunity Mgmt. \\
+1.3 & Requirements \& Compliance Mgmt. \\
+1.4 & Systems Integration Engineering \\
+1.5 & Mentorship Liaison \\
+1.6 & Reporting \& Documentation \\
+1.7 & Procurement \& Budget Admin. \\
+\textbf{2.0} & \textbf{Rover System} \\
+2.1 & Chassis Subsystem \\
+\quad 2.1.1 & Suspension \\
+\quad 2.1.2 & Chassis Software \\
+\quad 2.1.3 & Safety Systems \\
+2.2 & Manipulation Subsystem \\
+\quad 2.2.1 & Arm Mechanical Design \\
+\quad 2.2.2 & Arm Software \\
+\quad 2.2.3 & Gripper \& End-Effectors \\
+\quad 2.2.4 & Mounting Bracket \\
+\quad 2.2.5 & Test \& Maintenance Panel \\
+2.3 & Rover Electronics \\
+\quad 2.3.1 & Battery Management System \\
+\quad 2.3.2 & Power Distribution \& Lighting \\
+\quad 2.3.3 & E-Stop Electronics \\
+\quad 2.3.4 & Electronics Procurement Plan \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\tiny
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{ID} & \textbf{Element} \\
+\midrule
+\textbf{3.0} & \textbf{Aerial System (Drone)} \\
+3.1 & Airframe, Propulsion \& Landing \\
+\quad 3.1.1 & Airframe \& Propulsion \\
+\quad 3.1.2 & Landing Platform \\
+3.2 & Perception \& Autonomy \\
+\quad 3.2.1 & CV Subsystem \\
+\quad 3.2.2 & Localization Subsystem \\
+3.3 & Drone Electronics \& Power \\
+\quad 3.3.1 & Battery \& Power Distribution \\
+\quad 3.3.2 & Flight Controller Integration \\
+\textbf{4.0} & \textbf{Navigation \& Communications} \\
+4.1 & Navigation Subsystem \\
+4.2 & Ground Control Subsystem \\
+\textbf{5.0} & \textbf{Science \& Payload} \\
+5.1 & Science Instrument Development \\
+5.2 & Sample Handling Systems \\
+5.3 & Pre-Competition Deliverables \\
+5.4 & On-Site Deliverables \\
+5.5 & Science Reporting \\
+\textbf{6.0} & \textbf{Operations \& Test} \\
+6.1 & Test Planning \\
+6.2 & Test Execution \& Reporting \\
+6.3 & Requirements Verification \\
+6.4 & Mission Operations Logistics \\
+6.5 & Media \& Outreach \\
+\textbf{7.0} & \textbf{Logistics \& Travel} \\
+7.1 & Transport \\
+7.2 & Accommodation \\
+7.3 & Food \\
+7.4 & Site Logistics \\
+\bottomrule
+\end{tabular}
+\end{minipage}
+\caption{WBS Dictionary -- Levels 3-4 (Rover \& Aerial expanded to work-package level for consistency)}
+\label{tab:wbs-dict}
+\end{table}
+\renewcommand{\arraystretch}{1}
