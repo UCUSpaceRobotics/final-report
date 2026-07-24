@@ -3,7 +3,7 @@
 % Teams: PM (best guess - unconfirmed) / Status: draft
 %
 % Content required:
-%   - Rover's scheme with sizes
+%   - Rover's annotated photo (major elements called out with arrows/labels)
 %   - Rover's photo #1
 %   - Rover's photo #2
 % Evidence-first rule (ai_context/DECISIONS.md): lead with the
@@ -11,24 +11,27 @@
 %
 % Images below are placeholders (figures/rover_scheme.png,
 % figures/rover_photo_1.png, figures/rover_photo_2.png) - swap them for the
-% real scheme/photos by overwriting the same files, no need to touch the
-% LaTeX layout.
+% real annotated photo/photos by overwriting the same files, no need to
+% touch the LaTeX layout.
 % =============================================================================
 
 The chassis is the rover structural platform integrating all major
-subsystems in a four-wheel rocker-bogie layout built from aluminium
-profiles, shown in \autoref{fig:rover_scheme}. An external differential
-link couples the rocker arms and balances left-right terrain loads for
-stability. Preliminary dimensions are approximately
-\qtyproduct{1.2 x 0.8 x 0.7}{\meter} (L $\times$ W $\times$ H), subject to
-refinement during detailed design. All four wheels are driven and steered,
-each with a full \ang{360} steering range. The assembled rover is pictured
-in \autoref{fig:rover_photos}.
+subsystems in a four-wheel rocker-only layout built from laser-cut and
+welded 3~mm steel plates, shown in \autoref{fig:rover_scheme}. An external
+double differential link system couples the rocker arms and balances
+left-right terrain loads for stability. Final chassis dimensions are
+\todo{PLACEHOLDER --- confirm final value}\qtyproduct{1.2 x 0.8 x
+0.7}{\meter} (L $\times$ W $\times$ H). All four wheels are driven and
+steered, each with a full \ang{360} steering range, enabling a full
+swerve-drive mode. The assembled rover is pictured in
+\autoref{fig:rover_photos}.
+
+The main computing unit of the rover is an NVIDIA Jetson Orin NX 16 GB. It acts as the direct interface for high-level sensors and peripherals, while distributed microcontrollers manage localized hardware control and auxiliary data collection across the rover's subsystems. The core framework of the software architecture is ROS 2 Humble.
 
 \begin{figure}[!htbp]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/rover_scheme}
-    \caption{Indomitus rover -- structural scheme with dimensions}
+    \caption{Indomitus rover -- annotated photo highlighting major elements}
     \label{fig:rover_scheme}
 \end{figure}
 
@@ -49,5 +52,3 @@ in \autoref{fig:rover_photos}.
     \caption{Indomitus rover -- assembled system, photo \#1 (left) and photo \#2 (right)}
     \label{fig:rover_photos}
 \end{figure}
-
-The main computing unit of the rover is an NVIDIA Jetson Orin NX 16 GB. It acts as the direct interface for high-level sensors and peripherals, while distributed microcontrollers manage localized hardware control and auxiliary data collection across the rover's subsystems. The core framework of the software architecture is ROS 2 Humble.
