@@ -3,6 +3,8 @@
 % Teams: electronics + software (best guess - unconfirmed) / Status: stub
 %
 % Nested under "Safety Systems" (section-level subsection).
+% Requires \usepackage{tikz} (base tikz only, no extra libraries) and
+% \usepackage{tabularx} for compact tables.
 % =============================================================================
 
 \begin{figure}[H]
@@ -12,8 +14,59 @@
     \label{fig:hardware_safety}
 \end{figure}
 
-The rover uses a dedicated hardware safety system, including power switching and emergency shutdown, independent of the main control electronics (\autoref{fig:hardware_safety}). An INA-based module (D1) monitors battery voltage and current for state estimation and fault detection.
+A dedicated hardware safety system handles power switching and emergency shutdown independently of the main control electronics (\autoref{fig:hardware_safety}); an INA-based module (D1) monitors voltage/current for fault detection, and the normally-closed relay is fail-safe by default.
 
-Rover status is indicated by a 360° industrial signal lamp mounted at its highest point. Four colors represent the operating state: orange (power on), green (manual mode), red (autonomous mode), and blue (wireless connection established).
+Rover status is indicated by a 360\textdegree{} industrial signal lamp mounted at its highest point. Four colors represent the operating state: orange (power on), green (manual mode), red (autonomous mode), and blue (wireless connection established).
 
 The electronics enclosure is sealed with dedicated covers for removable modules, reducing dust and water ingress while ensuring reliable outdoor operation.
+
+The Emergency Stop (E-Stop) system removes power from the rover's actuation systems immediately and unconditionally, independent of onboard software state. Two independent trigger paths converge on the power-cutting hardware shown above.
+
+\subsubsection{Trigger Sources}
+\label{sec:estop-triggers}
+
+\begin{table}[h]
+    \footnotesize
+    \centering
+    \caption{Emergency stop trigger sources}
+    \label{tab:estop-triggers}
+    \begin{tabularx}{\linewidth}{@{}p{2.6cm} X@{}}
+        \toprule
+        \textbf{Source} & \textbf{Mechanism} \\
+        \midrule
+        External actor & Physical red E-Stop button on chassis; cuts power via relay/transistor stage (\autoref{fig:hardware_safety}). Works with all electronics off. \\
+        Operator (remote) & Command over dedicated emergency RF channel $\rightarrow$ standalone ESP $\rightarrow$ same relay. Independent of main control link. \\
+        System itself & Critical main-computer fault $\rightarrow$ software soft-stop / immediate STOP state (\autoref{subsec:software_safety_systems}), not a hardware power cut. \textit{Planned, not yet implemented.} \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\subsubsection{Time Sequence: Trigger to Safe State}
+\label{sec:estop-timing}
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}[every node/.style={font=\footnotesize}]
+        \draw[thick, ->] (0,0) -- (9.5,0);
+        \foreach \x/\lbl/\t in {
+            0/{Trigger\\(button / RF cmd)}/{$t_0$},
+            4.5/{Relay closes}/{$t_0+10~\si{\milli\second}$},
+            9/{Rover fully stopped}/{$\sim t_0+\SI{1}{\second}$}
+        }{
+            \draw (\x,0.08) -- (\x,-0.08);
+            \node[align=center, above=2pt] at (\x,0.08) {\lbl};
+            \node[align=center, below=2pt] at (\x,-0.08) {\t};
+        }
+    \end{tikzpicture}
+    \caption{Emergency stop timeline: trigger to safe state.}
+    \label{fig:estop-timeline}
+\end{figure}
+
+\subsubsection{Reliability Argument}
+\label{sec:estop-reliability}
+
+The design is reliable because the power-cutting path is purely hardware and does not depend on the main computer or any software, both trigger paths (button and dedicated RF channel) act on the same relay independently of each other, and the emergency RF channel is separate from the nominal control link so it stays available if that link is jammed or lost.
+
+The E-Stop has been triggered repeatedly during testing (via both the physical button and the emergency RF channel) and has activated correctly every time.
+
+Test evidence for each trigger path is reported together with the overall test campaign in \autoref{sec:test_plan}
