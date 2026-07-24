@@ -1,18 +1,43 @@
 % =============================================================================
 % sections/design/rover/ground_station.tex  -  Ground Station
-% Teams: ground_station (best guess - unconfirmed) / Status: EXAMPLE (scope approximation)
+% Teams: ground_station / Status: draft
 %
-% EXAMPLE CONTENT for scope/layout approximation - not final report text.
-% Adapted from the Preliminary Report's "Ground Station Setup and
-% Equipment" subsection, trimmed to minimal prose. Marked with \exampleflag
-% on its heading in the assembler.
+% Physical operator station only. Communication channels and the camera
+% suite are covered in the two following paragraphs
+% (communication_architecture.tex, operators_camera_suite.tex) - do not
+% duplicate them here.
 %
 % Images are placeholders (teams/ground_station/figures/gs_*.png) - swap
-% them for the real scheme/photo by overwriting the same files.
+% them for the real photo/scheme by overwriting the same files.
 % =============================================================================
 
-\todo[inline]{Description of the ground station setup and equipment used for teleoperation and situational awareness: operator station, monitors,
-joysticks, computers, network equipment, etc. Photo of the ground station with two operators. 1/2 - 2/3 page.}
+The ground station is the fixed operator post from which the rover is
+teleoperated. It is deployed inside the team zone and stays within a
+\qty{20}{\meter} radius of the directional antenna it feeds. The station is
+crewed by two operators (\autoref{fig:gs_operators}) working
+interchangeably: either operator can drive the rover or command the
+manipulator, and the two roles are reassigned between them as each task
+demands.
+
+Its core equipment comprises:
+\begin{itemize}
+    \item \textbf{Ground station PC} --- a desktop workstation that drives
+    both monitors, decodes the incoming video streams, and displays
+    telemetry; it hosts the operator UI and the \texttt{rosbridge} client
+    that carries commands to the rover.
+    \item \textbf{Displays} --- two monitors, one dedicated to live camera
+    feeds and one to the telemetry and mission dashboard.
+    \item \textbf{Manual controls} --- a custom operator console that
+    combines three joysticks with physical buttons and switches for driving,
+    subsystem toggles, and control-mode selection.
+    \item \textbf{Network equipment} --- Mast Computer links the
+    workstation with the tripod-mounted directional antenna over an Ethernet
+    (PoE) run; the antenna carries the primary \qty{5}{\giga\hertz} Wi-Fi
+    link, detailed in the following section.
+\end{itemize}
+
+The physical footprint and dimensions of the station are shown in
+\autoref{fig:gs_sizes_scheme}.
 
 \begin{figure}[!htbp]
     \centering
@@ -31,4 +56,5 @@ joysticks, computers, network equipment, etc. Photo of the ground station with t
         \label{fig:gs_sizes_scheme}
     \end{subfigure}
 
+    \caption{}
 \end{figure}
