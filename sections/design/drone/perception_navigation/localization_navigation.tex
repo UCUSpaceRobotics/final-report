@@ -1,42 +1,37 @@
 % =============================================================================
 % sections/design/drone/perception_navigation/localization_navigation.tex  -  Localization and Autonomous Navigation Pipeline
-% Teams: drone (best guess - unconfirmed) / Status: EXAMPLE (scope approximation)
+% Teams: drone / Status: has placeholder (scope approximation)
 %
 % EXAMPLE CONTENT for scope/layout approximation - not final report text.
-% Scope covers sensor fusion for state estimation and autonomous flight,
-% including GPS, Extended Kalman Filter (EKF), and optical flow integration
-% for stable positioning and navigation command execution. Marked with
-% \exampleflag on its heading in the assembler.
+% Scope covers sensor fusion, autonomous search, marker localization, and
+% precision landing. Marked with \exampleflag on its heading in the assembler.
 % =============================================================================
 
-During the Droning Sub-Task, the Drone runs in fully autonomous mode. The
-companion computer handles mission logic and vision processing, while
-control commands are executed through the architecture shown in
-\autoref{fig:drone_navigation_dataflow}. Any detected anomaly triggers the
-relevant failsafe procedure (\autoref{sec:safety}). After start, the
-vehicle performs an outward search pattern; once the ArUco marker is
-detected, it immediately switches to alignment and landing.
+During the Droning Sub-Task, the Drone operates autonomously using the
+architecture shown in \autoref{fig:drone_navigation_dataflow}. The companion
+computer manages mission logic and vision processing, while the flight
+controller performs pose estimation, stabilization, and command execution.
+Detected anomalies activate the corresponding failsafe procedure described in
+\autoref{sec:safety}.
 
-The Drone utilizes an Extended Kalman Filter (EKF) to fuse Global
-Navigation Satellite System (GNSS), optical flow, and IMU data into a
-robust, dual-layered navigation system. Macro-navigation relies on the GNSS
-module for absolute global positioning, enforcing operational geofences and
-guaranteeing reliable Return-to-Launch (RTL) or Loiter flight modes.
-Micro-navigation depends on the optical flow sensor to track relative local
-coordinates and maintain stable hovering.
+GPS provides global positioning for geofence enforcement, while optical flow supports stable local positioning for navigation.
+The measured localization performance was
+\emph{[Placeholder: provide position error, test conditions, reference ground
+truth, and number of trials]}.
+
+After take-off, the Drone follows asearch pattern until the
+detection of the ArUco landing marker. The companion computer
+estimates the marker pose, transforms it into the Drone local frame using the
+camera calibration and flight-controller orientation, and generates alignment
+and descent commands.
+
+\todo[inline]{Populate placeholder with the measurements}
 
 \begin{figure}[!htbp]
     \centering
-    \includegraphics[width=0.7\linewidth]{teams/drone/figures/drone_navigation_dataflow}
+    \includegraphics[width=0.7\linewidth]
+        {teams/drone/figures/drone_navigation_dataflow}
     \caption{Drone dataflow and control architecture for autonomous
              navigation and task execution}
     \label{fig:drone_navigation_dataflow}
 \end{figure}
-
-\todo[inline]{Add the localization accuracy achieved in testing (e.g.
-position error vs ground truth) and example CV detection output -
-currently descriptive only, no measured evidence, unlike the rover's
-navigational stack.}
-
-\todo[inline]{Autonomous landing pipeline as an innovative solution. See
-required content above.}
