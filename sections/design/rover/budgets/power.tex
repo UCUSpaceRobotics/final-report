@@ -5,25 +5,50 @@
 % Content required: amps, and other required electrical specs.
 % =============================================================================
 
-\todo[inline]{Overview of the rover power budget. 
-Describe the interchangeable 48\,V battery system and support for single- and dual-battery operation.
-Present measured average power consumption, estimated operating time for different rover configurations, 
-and endurance test results. 
-Target length(text): 1/2 page. 
-Figure required: current consumption plot. 
-Tables required: operating time estimates.}
+The rover can be equipped with one or two 48~V, 12~Ah Li-ion battery packs, depending on the mission requirements. The power budget was estimated from measured current consumption in the main operating modes and a representative 60-minute mission profile. The estimated operating times for both battery configurations are summarized in \autoref{tab:power_budget}.
 
-\begin{figure}[!htbp]
+\begin{table}[H]
+\centering
+\caption{Measured current consumption and estimated operating time.}
+\label{tab:power_budget}
+\begin{tabular}{lcccc}
+\hline
+\textbf{Operating mode} &
+\textbf{Current} &
+\textbf{Power} &
+\textbf{Runtime} &
+\textbf{Runtime} \\
+&
+(A) &
+(W) &
+\textbf{(1 battery)} &
+\textbf{(2 batteries)} \\
+\hline
+Idle (motors off)          & 0.5      & 24        & 24.0 h     & 48.0 h \\
+Idle (motors on)           & 1.0      & 48        & 12.0 h     & 24.0 h \\
+Flat-terrain driving       & 2--3     & 96--144   & 4.0--6.0 h & 8.0--12.0 h \\
+Uphill driving$^{*}$       & 6--8     & 288--384  & 1.5--2.0 h & 3.0--4.0 h \\
+Manipulator operation      & 1.5      & 72        & 8.0 h      & 16.0 h \\
+Auxiliary modules          & +2.0     & +96       & --         & -- \\
+\hline
+\textbf{60-minute mission profile**} &
+\textbf{4.5--5.2} &
+\textbf{216--250} &
+\textbf{2.3--2.7 h} &
+\textbf{4.6--5.3 h} \\
+\hline
+\end{tabular}
+
+\vspace{2mm}
+\footnotesize
+$^{*}$Measured on a 30$^\circ$ slope. 
+
+$^{**}$The mission profile consists of alternating 5-minute locomotion and 5-minute manipulator operation cycles with auxiliary modules enabled.
+\end{table}
+
+\begin{figure}[H]
     \centering
-
-    \fbox{
-        \parbox[c][0.35\textheight][c]{0.95\textwidth}{
-            \centering
-            Placeholder\\[0.5em]
-            Current consumption during field testing
-        }
-    }
-
+    \includegraphics[width=\textwidth]{teams/electronics/figures/power_consumption.pdf}
     \caption{Measured rover current consumption during endurance testing.}
     \label{fig:power_consumption}
 \end{figure}

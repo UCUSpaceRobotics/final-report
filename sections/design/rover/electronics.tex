@@ -4,42 +4,20 @@
 
 % =============================================================================
 
-\todo[inline]{Overview of the rover electronics architecture 
-and the main hardware design decisions. Describe the modular design, 
-CAN-based communication, custom PCBs, connector strategy for rapid subsystem replacement, 
-configurable 48\,V power architecture, and low-level hardware safety implementation. 
-Target length(text): 1/2 page. 
-Figures required: overall electronics architecture diagram (A3) 
-and one custom PCB render/photo (Lighting PCB).}
+The rover electronics are organized into independent subsystems for power, communication, navigation, and robotic arm control (\autoref{fig:rover_architecture}). The modular design uses dedicated PCBs and standardized XT, JST, and terminal block connectors to simplify assembly, servicing, and module replacement. CAN serves as the primary communication interface, while USB is used for high-bandwidth peripherals.
 
-
-\begin{figure}[!htbp]
+\begin{figure}[H]
     \centering
-    \fbox{
-        \parbox[c][0.22\textheight][c]{0.55\textwidth}{
-            \centering
-            \Large Placeholder\\[0.8em]
-            Lighting PCB Render / Photo
-        }
-    }
-    \caption{Example of a custom PCB developed for the rover.}
-    \label{fig:lighting_pcb}
+    \includegraphics[width=\textwidth]{teams/electronics/figures/rover_electronics_architecture.pdf}
+    \caption{Block diagram of the modular rover electronic architecture, showing power distribu-
+tion, data buses, and peripheral subsystems.}
+    \label{fig:rover_architecture}
 \end{figure}
 
-\clearpage
 
-\begin{figure}[p]
+\begin{figure}[H]
     \centering
-    \fbox{
-        \parbox[c][0.88\textheight][c]{0.98\textwidth}{
-            \centering
-            \Huge Placeholder\\[1.5em]
-            Overall Rover Electronics Architecture\\[0.5em]
-            \Large (A3 Fold-out Diagram)
-        }
-    }
-    \caption{Overall rover electronics architecture. The final report will include this figure as an A3 fold-out.}
-    \label{fig:electronics_architecture}
+    \includegraphics[width=0.9\textwidth]{teams/electronics/figures/pcb.pdf}
+    \caption{Custom PCBs for the rover lighting and gripper subsystems.}
+    \label{fig:pcb}
 \end{figure}
-
-\clearpage

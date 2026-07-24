@@ -1,15 +1,13 @@
 % =============================================================================
-% sections/appendix_breakdowns.tex  -  Product Tree, WBS & OBS appendix (landscape)
-% Teams: PM / Status: draft (Product Tree ported; WBS/OBS diagrams pending)
+% sections/appendix_breakdowns.tex  -  Product Tree appendix (landscape)
+% Teams: PM / Status: draft (Product Tree ported)
 %
 % Landscape appendix holding the full rover/drone Product Tree diagrams
-% (ported from the Preliminary Report), plus the Work Breakdown Structure
-% and Organisation Breakdown Structure diagrams (new for the Final Report,
-% currently placeholders pending the real drawings). Kept out of the body
-% subsubsections (sections/design/breakdowns/{product_tree,wbs,obs}.tex)
-% since the diagrams only fit legibly at full landscape-page size.
-% Not one of the template's fixed 7 sections - unnumbered heading, but
-% still added to the ToC/bookmarks for discoverability.
+% (ported from the Preliminary Report). Kept out of the body subsection
+% (sections/design/breakdowns/product_tree.tex) since the diagrams only fit
+% legibly at full landscape-page size. Not one of the template's fixed
+% 7 sections - unnumbered heading, but still added to the ToC/bookmarks
+% for discoverability.
 % =============================================================================
 
 \clearpage
@@ -22,21 +20,13 @@
 \setlength{\linewidth}{\textwidth}
 
 \phantomsection
-\addcontentsline{toc}{section}{Appendix: Product Tree, WBS \& OBS}
-{\large\bfseries\color{ercblue} Appendix: Product Tree, WBS \& OBS}
-
-\bigskip
-\noindent The Product Tree (\autoref{subsubsec:product_tree}), Work
-Breakdown Structure (\autoref{subsubsec:wbs}), and Organisation Breakdown
-Structure (\autoref{subsubsec:obs}) diagrams are provided below.
-
+\addcontentsline{toc}{section}{Appendix: Product Tree}
+{\large\bfseries\color{ercblue} Appendix: Product Tree}
+\noindent The Product Tree (\autoref{subsubsec:product_tree}) diagrams are
+provided below.
 \input{sections/design/breakdowns/product_tree_drone}
 \clearpage
 \input{sections/design/breakdowns/product_tree_rover}
-\clearpage
-\input{sections/design/breakdowns/wbs_diagram}
-\clearpage
-\input{sections/design/breakdowns/obs_diagram}
 
 \end{landscape}
 \pagestyle{fancy}
