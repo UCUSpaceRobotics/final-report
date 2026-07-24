@@ -11,9 +11,24 @@
 % - swap it for the real diagram by overwriting the same file.
 % =============================================================================
 
-\todo[inline]{Description of the communication architecture between the rover and the ground station,
-including the primary and backup communication channels, data protocols, and error handling mechanisms. 
-Diagram of the communication flow recommended. Target length: 1/3 - 2/3 page.}
+The rover and Ground Station (GS) communicate over three independent radio links: primary, fallback,
+and E-Stop.
+ 
+The \textbf{primary link} is 5\,GHz 802.11ac Wi-Fi (Alfa AWUS036ACH on the rover, hostapd AP on a
+mast-mounted mast computer with Alfa AWUS036ACH ), bridged over Ethernet + PoE to the GS Mini~PC. The rover runs ROS~2, and
+the GS Mini~PC has ROS~2 nodes on the same network, communicating directly with the rover's nodes --
+no bridging software layer is used.
+ 
+If the primary link is lost, the system automatically switches, after a timeout to the 
+\textbf{fallback link}: 430--440\,MHz LoRa (Ebyte E32-433T30D), carrying a
+lightweight binary frame with essential motion commands 
+ 
+The \textbf{E-Stop link} is a separate, dedicated 433.92 \,MHz channel that carries only the
+emergency-stop signal triggered by a physical E-Stop button on the GS. It is made the simpliest possible 
+to minimize the risk of failure, and is not used for any other purpose. 
+The E-Stop link is always active, even if the primary and fallback links are down.
+
+
 
 \begin{figure}[!htbp]
     \centering
