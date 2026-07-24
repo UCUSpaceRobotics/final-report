@@ -12,28 +12,38 @@
 % =============================================================================
 
 The ground station is the fixed operator post from which the rover is
-teleoperated. It is deployed inside the team zone and stays within a
-\qty{20}{\meter} radius of the directional antenna it feeds. The station is
-crewed by two operators (\autoref{fig:gs_operators}) working
-interchangeably: either operator can drive the rover or command the
-manipulator, and the two roles are reassigned between them as each task
-demands.
+driven, its subsystems commanded, and its autonomous runs monitored. It is connected to the tripod-mounted
+directional antenna by an Ethernet (PoE) run of up to \qty{20}{\meter}.
+The complete station is housed in a ruggedised flip-lid case
+with integrated displays and a dedicated electronics bay,
+allowing setup in 30 minutes without external assembly.
+
+The station is crewed by two operators (\autoref{fig:gs_operators}). The
+primary operator drives the rover and commands the manipulator; the second
+operator monitors link health, telemetry, and mission state, and holds the
+emergency stop. Both are trained on both roles, and they swap according to
+task.
 
 Its core equipment comprises:
 \begin{itemize}
-    \item \textbf{Ground station PC} --- a desktop workstation that drives
-    both monitors, decodes the incoming video streams, and displays
-    telemetry; it hosts the operator UI and the \texttt{rosbridge} client
-    that carries commands to the rover.
-    \item \textbf{Displays} --- two monitors, one dedicated to live camera
-    feeds and one to the telemetry and mission dashboard.
-    \item \textbf{Manual controls} --- a custom operator console that
-    combines three joysticks with physical buttons and switches for driving,
-    subsystem toggles, and control-mode selection.
-    \item \textbf{Network equipment} --- Mast Computer links the
-    workstation with the tripod-mounted directional antenna over an Ethernet
-    (PoE) run; the antenna carries the primary \qty{5}{\giga\hertz} Wi-Fi
-    link, detailed in the following section.
+\item \textbf{Ground station PC} --- workstation that decodes the
+    incoming video streams, hosts the browser-based operator UI in kiosk
+    mode, and runs the \texttt{rosbridge} server that carries operator
+    commands into the ROS~2 graph. A backup laptop can assume this role
+    within 30 minutes.
+\item \textbf{Displays} --- two monitors, one dedicated to live camera
+    feeds and one to telemetry and the system-health dashboard, which
+    surfaces DDS discovery status, E-stop link heartbeat, time
+    synchronisation offset, and enclosure temperature.
+\item \textbf{Manual controls} --- a custom operator console combining
+    three joysticks with physical buttons and switches for driving,
+    subsystem toggles, and control-mode selection. Console state is
+    published to the ROS~2 graph by a dedicated serial bridge with link
+    supervision, so a dead console is distinguishable from an idle one.
+\item \textbf{Emergency stop} --- a clearly marked latching button on the
+    console, wired to an independent \qty{433}{\mega\hertz} LoRa
+    transceiver. This path does not traverse Wi-Fi, the ROS~2 graph, or the
+    ground station PC, and remains functional if any of them fail.
 \end{itemize}
 
 The physical footprint and dimensions of the station are shown in
