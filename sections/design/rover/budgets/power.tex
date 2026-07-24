@@ -5,8 +5,46 @@
 % Content required: amps, and other required electrical specs.
 % =============================================================================
 
-Based on the measured current consumption during the 60-minute mission profile, the rover has an average current draw of approximately 4.5–5.2 A, depending on terrain conditions. With a single 48 V, 12 Ah battery pack, the estimated operating time is 2.3–2.7 h, while two battery packs extend the mission duration to approximately 4.6–5.3 h. These values provide sufficient endurance for the planned 60-minute mission profile with a significant energy reserve.
+The rover can be equipped with one or two 48~V, 12~Ah Li-ion battery packs, depending on the mission requirements. The power budget was estimated from measured current consumption in the main operating modes and a representative 60-minute mission profile. The estimated operating times for both battery configurations are summarized in \autoref{tab:power_budget}.
 
+\begin{table}[H]
+\centering
+\caption{Measured current consumption and estimated operating time.}
+\label{tab:power_budget}
+\begin{tabular}{lcccc}
+\hline
+\textbf{Operating mode} &
+\textbf{Current} &
+\textbf{Power} &
+\textbf{Runtime} &
+\textbf{Runtime} \\
+&
+(A) &
+(W) &
+\textbf{(1 battery)} &
+\textbf{(2 batteries)} \\
+\hline
+Idle (motors off)          & 0.5      & 24        & 24.0 h     & 48.0 h \\
+Idle (motors on)           & 1.0      & 48        & 12.0 h     & 24.0 h \\
+Flat-terrain driving       & 2--3     & 96--144   & 4.0--6.0 h & 8.0--12.0 h \\
+Uphill driving$^{*}$       & 6--8     & 288--384  & 1.5--2.0 h & 3.0--4.0 h \\
+Manipulator operation      & 1.5      & 72        & 8.0 h      & 16.0 h \\
+Auxiliary modules          & +2.0     & +96       & --         & -- \\
+\hline
+\textbf{60-minute mission profile**} &
+\textbf{4.5--5.2} &
+\textbf{216--250} &
+\textbf{2.3--2.7 h} &
+\textbf{4.6--5.3 h} \\
+\hline
+\end{tabular}
+
+\vspace{2mm}
+\footnotesize
+$^{*}$Measured on a 30$^\circ$ slope. 
+
+$^{**}$The mission profile consists of alternating 5-minute locomotion and 5-minute manipulator operation cycles with auxiliary modules enabled.
+\end{table}
 
 \begin{figure}[H]
     \centering
