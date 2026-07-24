@@ -21,7 +21,7 @@ In addition to the hardware E-Stop, the rover implements layered software safety
         Remote motor lock & Operator command locks motion; power/telemetry retained & Operator command \\
         Comms-loss rampdown & Bounded deceleration to zero speed & Control link lost \\
         CAN watchdog (ESP) & ESP takes over and stops rover if no motor commands seen within timeout & Main computer / SW fault \\
-        Overcurrent cutoff & Wheel driver deactivates above TODO\,\si{\ampere} & Stall / collision \\
+        Overcurrent cutoff & Wheel driver deactivates above 5\,\si{\ampere} & Stall / collision \\
         Shock detection & Current-spike + IMU based impact detection & \textit{Planned, not yet implemented} \\
         \bottomrule
     \end{tabularx}
