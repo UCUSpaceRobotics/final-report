@@ -32,9 +32,7 @@ In addition to the hardware E-Stop, the rover implements layered software safety
 
 \paragraph{CAN bus watchdog.} A dedicated ESP monitors the CAN bus for periodic motor speed commands from the main computer. If none arrive within a timeout window of 200\,\si{\milli\second}, the ESP assumes a main-computer/software fault, takes over motor control authority, and decelerates the rover to a stop.
 
-\paragraph{Communication-loss detection.}
-\textit{TODO: describe detection mechanism and deceleration profile used when the control link is lost.}
-\todo[inline]{Describe the comms-loss detection mechanism (e.g. heartbeat timeout) and the deceleration profile (target acceleration, time-to-stop).}
+\paragraph{Communication-loss detection.} The ground station sends a periodic heartbeat message every 100\,\si{\milli\second}; if no heartbeat is received within a timeout window, the rover assumes the control link is lost and initiates a controlled deceleration. The target deceleration is \SI{1.2}{\meter\per\second\squared} -- a compromise between stopping quickly and avoiding excessive mechanical stress on the rover's heavy chassis and extended robotic arm.
 
 \subsubsection{Safe-State Transitions / Safety State Machine}
 \label{sec:sw-state-machine}
