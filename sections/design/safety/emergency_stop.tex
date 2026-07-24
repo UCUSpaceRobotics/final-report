@@ -41,9 +41,9 @@ The Emergency Stop (E-Stop) system removes power from the rover's actuation syst
         \toprule
         \textbf{Source} & \textbf{Mechanism} \\
         \midrule
-        External actor & Physical red E-Stop button on chassis; cuts power via relay/transistor stage (Fig.~\ref{fig:estop-scheme}). Works with all electronics off. \\
+        External actor & Physical red E-Stop button on chassis; cuts power via relay/transistor stage (\autoref{fig:estop-scheme}). Works with all electronics off. \\
         Operator (remote) & Command over dedicated emergency RF channel $\rightarrow$ standalone ESP $\rightarrow$ same relay. Independent of main control link. \\
-        System itself & Critical main-computer fault $\rightarrow$ software soft-stop / immediate STOP state (Sec.~\ref{sec:sw-safety}), not a hardware power cut. \textit{Planned, not yet implemented.} \\
+        System itself & Critical main-computer fault $\rightarrow$ software soft-stop / immediate STOP state (\autoref{subsec:software_safety_systems}), not a hardware power cut. \textit{Planned, not yet implemented.} \\
         \bottomrule
     \end{tabularx}
 \end{table}
@@ -76,4 +76,4 @@ The design is reliable because the power-cutting path is purely hardware and doe
 
 The E-Stop has been triggered repeatedly during testing (via both the physical button and the emergency RF channel) and has activated correctly every time.
 
-Test evidence for each trigger path is reported together with the overall test campaign in Section~\ref{sec:test_plan}
+Test evidence for each trigger path is reported together with the overall test campaign in \autoref{sec:test_plan}

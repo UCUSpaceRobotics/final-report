@@ -7,7 +7,7 @@
 % \usepackage{tabularx} for compact tables.
 % =============================================================================
 
-In addition to the hardware E-Stop, the rover implements layered software safety mechanisms that provide graceful degradation before a hard power cut is needed (Table~\ref{tab:sw-safety-overview}).
+In addition to the hardware E-Stop, the rover implements layered software safety mechanisms that provide graceful degradation before a hard power cut is needed (\autoref{tab:sw-safety-overview}).
 
 \begin{table}[h]
     \footnotesize
@@ -32,14 +32,15 @@ In addition to the hardware E-Stop, the rover implements layered software safety
 
 \paragraph{CAN bus watchdog.} A dedicated ESP monitors the CAN bus for periodic motor speed commands from the main computer. If none arrive within a timeout window of 200\,\si{\milli\second}, the ESP assumes a main-computer/software fault, takes over motor control authority, and decelerates the rover to a stop.
 
-\paragraph{Communication-loss detection.} The ground station sends a periodic heartbeat message every 100\,\si{\milli\second}; if no heartbeat is received within a timeout window, the rover assumes the control link is lost and initiates a controlled deceleration. The target deceleration is \SI{1.2}{\meter\per\second\squared} -- a compromise between stopping quickly and avoiding excessive mechanical stress on the rover's heavy chassis and extended robotic arm.
+\paragraph{Communication-loss detection.} The ground station sends a periodic heartbeat message every 100\,\si{\milli\second}; if no heartbeat is received within a timeout window, the rover assumes the control link is lost and initiates a controlled deceleration. When the rover is instead controlled via a joystick, loss of the joystick connection causes the corresponding ROS2 node to die and stop publishing commands; the absence of these commands is detected the same way and triggers the same deceleration response. The target deceleration is \SI{1.2}{\meter\per\second\squared} -- a compromise between stopping quickly and avoiding excessive mechanical stress on the rover's heavy chassis and extended robotic arm.
+\todo[inline]{Confirm the resulting timeout threshold (based on the 100\,ms heartbeat), and the joystick-node timeout used to detect its disconnection.}
 
 \subsubsection{Safe-State Transitions / Safety State Machine}
 \label{sec:sw-state-machine}
 
 \todo[inline]{This state machine is not yet implemented -- review, adjust, and implement before final submission, or clearly mark as a planned improvement.}
 
-A supervisory state machine is proposed (Fig.~\ref{fig:safety-fsm}), implemented as a ROS2 node (\texttt{safety\_manager}) publishing the current safety state; motor-command nodes gate their output on this state, and leaving \texttt{SOFT\_STOP}/\texttt{RAMPDOWN} requires an explicit operator resume call, preventing unintended autonomous resumption.
+A supervisory state machine is proposed (\autoref{fig:safety-fsm}), implemented as a ROS2 node (\texttt{safety\_manager}) publishing the current safety state; motor-command nodes gate their output on this state, and leaving \texttt{SOFT\_STOP}/\texttt{RAMPDOWN} requires an explicit operator resume call, preventing unintended autonomous resumption.
 
 \begin{figure}[h]
     \centering
@@ -79,5 +80,5 @@ An impact-detection mechanism based on current-spike monitoring (main/arm sensor
 \subsubsection{Reliability Argument}
 \label{sec:sw-reliability}
 
-Reliability comes from layered, partially-independent mechanisms: the ESP-based CAN watchdog operates independently of the main computer, so a software crash still results in a safe stop; graceful software responses (lock, rampdown, watchdog takeover) handle non-critical faults without invoking the hardware E-Stop; and if any software mechanism fails to trigger, the hardware E-Stop (Sec.~\ref{subsec:emergency_stop}) remains as an independent fallback.
+Reliability comes from layered, partially-independent mechanisms: the ESP-based CAN watchdog operates independently of the main computer, so a software crash still results in a safe stop; graceful software responses (lock, rampdown, watchdog takeover) handle non-critical faults without invoking the hardware E-Stop; and if any software mechanism fails to trigger, the hardware E-Stop (\autoref{subsec:emergency_stop}) remains as an independent fallback.
 \todo[inline]{Add quantitative evidence if fault-injection tests were run, e.g. killing the main computer process and confirming watchdog engagement within the expected timeout.}
