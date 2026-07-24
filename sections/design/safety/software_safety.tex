@@ -10,21 +10,21 @@
 In addition to the hardware E-Stop, the rover implements layered software safety mechanisms that provide graceful degradation before a hard power cut is needed (\autoref{tab:sw-safety-overview}).
 
 \begin{table}[h]
-    \footnotesize
-    \centering
-    \caption{Overview of software safety mechanisms}
-    \label{tab:sw-safety-overview}
-    \begin{tabularx}{\linewidth}{@{}p{3cm} X p{3cm}@{}}
-        \toprule
-        \textbf{Mechanism} & \textbf{Behaviour} & \textbf{Trigger} \\
-        \midrule
-        Remote motor lock & Operator command locks motion; power/telemetry retained & Operator command \\
-        Comms-loss rampdown & Bounded deceleration to zero speed & Control link lost \\
-        CAN watchdog (ESP) & ESP takes over and stops rover if no motor commands seen within timeout & Main computer / SW fault \\
-        Overcurrent cutoff & Wheel driver deactivates above 5\,\si{\ampere} & Stall / collision \\
-        Shock detection & Current-spike + IMU based impact detection & \textit{Planned, not yet implemented} \\
-        \bottomrule
-    \end{tabularx}
+	\footnotesize
+	\centering
+	\caption{Overview of software safety mechanisms}
+	\label{tab:sw-safety-overview}
+	\begin{tabularx}{\linewidth}{@{}p{3cm} X p{3cm}@{}}
+		\toprule
+		\textbf{Mechanism} & \textbf{Behaviour} & \textbf{Trigger} \\
+		\midrule
+		Remote motor lock & Operator command locks motion; power/telemetry retained & Operator command \\
+		Comms-loss rampdown & Bounded deceleration to zero speed & Control link lost \\
+		CAN watchdog (ESP) & ESP takes over and stops rover if no motor commands seen within timeout & Main computer / SW fault \\
+		Overcurrent cutoff & Wheel driver deactivates above 5\,\si{\ampere} & Stall / collision \\
+		Shock detection & Current-spike + IMU based impact detection & Esp with current sensor and IMU \\
+		\bottomrule
+	\end{tabularx}
 \end{table}
 
 \subsubsection{Watchdogs and Fault Detection}
@@ -43,42 +43,13 @@ In addition to the hardware E-Stop, the rover implements layered software safety
 A supervisory state machine is proposed (\autoref{fig:safety-fsm}), implemented as a ROS2 node (\texttt{safety\_manager}) publishing the current safety state; motor-command nodes gate their output on this state, and leaving \texttt{SOFT\_STOP}/\texttt{RAMPDOWN} requires an explicit operator resume call, preventing unintended autonomous resumption.
 
 \begin{figure}[h]
-    \centering
-    \begin{tikzpicture}[
-        every node/.style={font=\footnotesize},
-        state/.style={draw, rounded corners, minimum width=2.4cm, minimum height=0.8cm, align=center}
-    ]
-        \node[state] (nominal) at (0,0)     {NOMINAL};
-        \node[state] (soft)    at (3.4,0)   {SOFT\_STOP};
-        \node[state] (ramp)    at (0,-2)    {RAMPDOWN};
-        \node[state] (hard)    at (3.4,-2)  {HARD\_ESTOP};
-
-        \draw[->] (nominal) to[bend left=15] node[above,font=\scriptsize]{lock} (soft);
-        \draw[->] (soft) to[bend left=15] node[below,font=\scriptsize]{resume} (nominal);
-        \draw[->] (nominal) to[bend right=15] node[left,font=\scriptsize]{comms lost} (ramp);
-        \draw[->] (ramp) to[bend right=15] node[right,font=\scriptsize]{resume} (nominal);
-        \draw[->] (nominal) -- node[font=\scriptsize,sloped,above]{E-Stop} (hard);
-        \draw[->] (soft) -- (hard);
-        \draw[->] (ramp) -- (hard);
-    \end{tikzpicture}
-    \caption{Proposed software safety state machine.}
-    \label{fig:safety-fsm}
+	\centering
+	\includegraphics[width=0.6\linewidth]{teams/suspension/figures/safety_state_machine.png}
+	\caption{Proposed software safety state machine.}
+	\label{fig:safety-fsm}
 \end{figure}
 
-\subsubsection{Behaviour on Communication / Telemetry Loss}
-\label{sec:sw-comm-loss}
+\subsubsection{Additional Safeguards and Reliability}
+\label{sec:sw-safeguards}
 
-Loss of the operator control link triggers a controlled deceleration rather than an abrupt halt, avoiding instability (e.g. tip-over) at speed.
-
-\subsubsection{Collision-Avoidance / Overcurrent Stop Conditions}
-\label{sec:sw-overcurrent}
-
-Each wheel driver auto-deactivates above 5\,\si{\ampere}, protecting against stalls, obstructions, or terrain collisions.
-
-An impact-detection mechanism based on current-spike monitoring (main/arm sensors) combined with IMU data is under evaluation, since current alone spikes during normal high-load events (rocks, slopes, aggressive manoeuvres) as well as impacts. \textit{Status: under consideration, not yet implemented.}
-
-\subsubsection{Reliability Argument}
-\label{sec:sw-reliability}
-
-Reliability comes from layered, partially-independent mechanisms: the ESP-based CAN watchdog operates independently of the main computer, so a software crash still results in a safe stop; graceful software responses (lock, rampdown, watchdog takeover) handle non-critical faults without invoking the hardware E-Stop; and if any software mechanism fails to trigger, the hardware E-Stop (\autoref{subsec:emergency_stop}) remains as an independent fallback.
-\todo[inline]{Add quantitative evidence if fault-injection tests were run, e.g. killing the main computer process and confirming watchdog engagement within the expected timeout.}
+Loss of the control link triggers a controlled deceleration rather than an abrupt halt, avoiding instability (e.g. tip-over) at speed. Each wheel driver additionally auto-deactivates above 5\,\si{\ampere}, protecting against stalls, obstructions, or terrain collisions; an impact-detection mechanism combining current-spike monitoring with IMU data is under evaluation but not yet implemented. Together with the CAN watchdog (\autoref{sec:sw-watchdog}), these graceful software responses handle non-critical faults without invoking the hardware E-Stop, which remains available as an independent fallback (\autoref{subsec:emergency_stop}) should any of them fail to trigger.

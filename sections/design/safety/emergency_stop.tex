@@ -14,7 +14,7 @@
     \label{fig:hardware_safety}
 \end{figure}
 
-The rover uses a dedicated hardware safety system, including power switching and emergency shutdown, independent of the main control electronics (\autoref{fig:hardware_safety}). An INA-based module (D1) monitors battery voltage and current for state estimation and fault detection. The switching relay is normally-closed, so any loss of control signal also defaults to the safe, power-off state.
+A dedicated hardware safety system handles power switching and emergency shutdown independently of the main control electronics (\autoref{fig:hardware_safety}); an INA-based module (D1) monitors voltage/current for fault detection, and the normally-closed relay is fail-safe by default.
 
 Rover status is indicated by a 360\textdegree{} industrial signal lamp mounted at its highest point. Four colors represent the operating state: orange (power on), green (manual mode), red (autonomous mode), and blue (wireless connection established).
 
@@ -22,17 +22,10 @@ The electronics enclosure is sealed with dedicated covers for removable modules,
 
 The Emergency Stop (E-Stop) system removes power from the rover's actuation systems immediately and unconditionally, independent of onboard software state. Two independent trigger paths converge on the power-cutting hardware shown above.
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.8\linewidth]{figures/emergency_stop_scheme.png}
-    \caption{E-Stop button circuit schematic.}
-    \label{fig:estop-scheme}
-\end{figure}
-
 \subsubsection{Trigger Sources}
 \label{sec:estop-triggers}
 
-\begin{table}[H]
+\begin{table}[h]
     \footnotesize
     \centering
     \caption{Emergency stop trigger sources}
@@ -41,7 +34,7 @@ The Emergency Stop (E-Stop) system removes power from the rover's actuation syst
         \toprule
         \textbf{Source} & \textbf{Mechanism} \\
         \midrule
-        External actor & Physical red E-Stop button on chassis; cuts power via relay/transistor stage (\autoref{fig:estop-scheme}). Works with all electronics off. \\
+        External actor & Physical red E-Stop button on chassis; cuts power via relay/transistor stage (\autoref{fig:hardware_safety}). Works with all electronics off. \\
         Operator (remote) & Command over dedicated emergency RF channel $\rightarrow$ standalone ESP $\rightarrow$ same relay. Independent of main control link. \\
         System itself & Critical main-computer fault $\rightarrow$ software soft-stop / immediate STOP state (\autoref{subsec:software_safety_systems}), not a hardware power cut. \textit{Planned, not yet implemented.} \\
         \bottomrule
@@ -51,7 +44,7 @@ The Emergency Stop (E-Stop) system removes power from the rover's actuation syst
 \subsubsection{Time Sequence: Trigger to Safe State}
 \label{sec:estop-timing}
 
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \begin{tikzpicture}[every node/.style={font=\footnotesize}]
         \draw[thick, ->] (0,0) -- (9.5,0);
