@@ -11,43 +11,23 @@
 % them for the real photo/scheme by overwriting the same files.
 % =============================================================================
 
-The ground station is the fixed operator post from which the rover is
-driven, its subsystems commanded, and its autonomous runs monitored. It is connected to the tripod-mounted
-directional antenna by an Ethernet (PoE) run of up to \qty{20}{\meter}.
-The complete station is housed in a ruggedised flip-lid case
-with integrated displays and a dedicated electronics bay,
-allowing setup in 30 minutes without external assembly.
+The ground station is the fixed operator post for driving the rover,
+commanding its subsystems, and monitoring autonomous runs. It links to the
+tripod-mounted directional antenna over an Ethernet (PoE) run of up to
+\qty{20}{\meter} and packs into a ruggedised flip-lid case
+(\autoref{fig:gs_sizes_scheme}) deployable in \qty{30}{\minute}.
 
-The station is crewed by two operators (\autoref{fig:gs_operators}). The
-primary operator drives the rover and commands the manipulator; the second
-operator monitors link health, telemetry, and mission state, and holds the
-emergency stop. Both are trained on both roles, and they swap according to
-task.
-
-Its core equipment comprises:
-\begin{itemize}
-\item \textbf{Ground station PC} --- workstation that decodes the
-    incoming video streams, hosts the browser-based operator UI in kiosk
-    mode, and runs the \texttt{rosbridge} server that carries operator
-    commands into the ROS~2 graph. A backup laptop can assume this role
-    within 30 minutes.
-\item \textbf{Displays} --- two monitors, one dedicated to live camera
-    feeds and one to telemetry and the system-health dashboard, which
-    surfaces DDS discovery status, E-stop link heartbeat, time
-    synchronisation offset, and enclosure temperature.
-\item \textbf{Manual controls} --- a custom operator console combining
-    three joysticks with physical buttons and switches for driving,
-    subsystem toggles, and control-mode selection. Console state is
-    published to the ROS~2 graph by a dedicated serial bridge with link
-    supervision, so a dead console is distinguishable from an idle one.
-\item \textbf{Emergency stop} --- a clearly marked latching button on the
-    console, wired to an independent \qty{433}{\mega\hertz} LoRa
-    transceiver. This path does not traverse Wi-Fi, the ROS~2 graph, or the
-    ground station PC, and remains functional if any of them fail.
-\end{itemize}
-
-The physical footprint and dimensions of the station are shown in
-\autoref{fig:gs_sizes_scheme}.
+Two operators crew the station (\autoref{fig:gs_operators}): the primary
+drives and commands the manipulator, the second monitors telemetry and holds
+the emergency stop; both are cross-trained and swap by task. A workstation
+decodes the video streams, hosts the browser-based operator UI, and runs the
+\texttt{rosbridge} server into the ROS~2 graph, with a backup laptop able to
+take over within \qty{30}{\minute}. Two monitors carry the camera feeds and
+the telemetry and system-health view, while manual input comes from a custom
+console of three joysticks plus buttons and switches for driving, subsystem
+toggles, and mode selection. A latching emergency-stop button is wired to an
+independent \qty{433}{\mega\hertz} LoRa transceiver that bypasses Wi-Fi,
+ROS~2, and the station PC, surviving their failure.
 
 \begin{figure}[!htbp]
     \centering
