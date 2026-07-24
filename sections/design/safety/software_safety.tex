@@ -3,105 +3,65 @@
 % Teams: software (best guess - unconfirmed) / Status: stub
 %
 % Nested under "Safety Systems" (section-level subsection).
+% Requires \usepackage{tikz} (base tikz only, no extra libraries) and
+% \usepackage{tabularx} for compact tables.
 % =============================================================================
 
-In addition to the hardware E-Stop, the rover implements several
-software-level safety mechanisms that provide graceful degradation
-before a hard power cut is necessary. These mechanisms are summarized
-in Table~\ref{tab:sw-safety-overview} and detailed in the following
-subsections.
+In addition to the hardware E-Stop, the rover implements layered software safety mechanisms that provide graceful degradation before a hard power cut is needed (Table~\ref{tab:sw-safety-overview}).
 
 \begin{table}[h]
+    \footnotesize
     \centering
     \caption{Overview of software safety mechanisms}
     \label{tab:sw-safety-overview}
-    \begin{tabular}{p{3.5cm} p{5.5cm} p{4cm}}
+    \begin{tabularx}{\linewidth}{@{}p{3cm} X p{3cm}@{}}
         \toprule
-        \textbf{Mechanism} & \textbf{Behaviour} & \textbf{Trigger condition} \\
+        \textbf{Mechanism} & \textbf{Behaviour} & \textbf{Trigger} \\
         \midrule
-        Remote motor lock &
-        Operator command from joystick / ground station disables motor
-        motion while retaining system power and control &
-        Operator command \\
-        \addlinespace
-        Communication-loss rampdown &
-        Main computer / motor control software gradually decelerates
-        the rover to zero speed with a bounded deceleration profile &
-        Loss of control link \\
-        \addlinespace
-        CAN watchdog (ESP) &
-        ESP monitors CAN bus for periodic motor speed commands from the
-        main computer; if none are received within a timeout, ESP takes
-        over motor control and gradually stops the rover &
-        Main computer / software fault \\
-        \addlinespace
-        Per-wheel overcurrent cutoff &
-        Wheel motor drivers deactivate automatically when consumed
-        current exceeds a defined threshold &
-        Motor stall / collision / obstruction \\
-        \addlinespace
-        Shock detection (planned) &
-        Current-draw spike monitoring on main and arm current sensors,
-        combined with IMU data, to detect impacts &
-        \textit{Under consideration — not yet implemented} \\
+        Remote motor lock & Operator command locks motion; power/telemetry retained & Operator command \\
+        Comms-loss rampdown & Bounded deceleration to zero speed & Control link lost \\
+        CAN watchdog (ESP) & ESP takes over and stops rover if no motor commands seen within timeout & Main computer / SW fault \\
+        Overcurrent cutoff & Wheel driver deactivates above TODO\,\si{\ampere} & Stall / collision \\
+        Shock detection & Current-spike + IMU based impact detection & \textit{Planned, not yet implemented} \\
         \bottomrule
-    \end{tabular}
+    \end{tabularx}
 \end{table}
 
 \subsubsection{Watchdogs and Fault Detection}
 \label{sec:sw-watchdog}
 
-\paragraph{CAN bus watchdog.}
-All motor controllers communicate over a CAN bus, to which a dedicated
-ESP module is also connected. The ESP continuously monitors the bus for
-periodic motor speed commands issued by the main onboard computer. If
-no such command is observed within a defined timeout window
-% TODO: state the exact timeout value (ms) and how it was chosen
-(\textit{TODO: timeout value}), the ESP interprets this as a failure of
-the main computer or control software, takes over motor control
-authority, and commands a gradual deceleration to zero speed.
+\paragraph{CAN bus watchdog.} A dedicated ESP monitors the CAN bus for periodic motor speed commands from the main computer. If none arrive within a timeout window of 200\,\si{\milli\second}, the ESP assumes a main-computer/software fault, takes over motor control authority, and decelerates the rover to a stop.
 
 \paragraph{Communication-loss detection.}
-% TODO: describe how loss of the ground-station/operator link is
-% detected on the main computer side (e.g. heartbeat timeout on the
-% radio link) and the resulting deceleration profile
-\textit{TODO: describe the detection mechanism and deceleration profile
-(e.g. target acceleration, time-to-stop) used when control link is
-lost.}
+\textit{TODO: describe detection mechanism and deceleration profile used when the control link is lost.}
+\todo[inline]{Describe the comms-loss detection mechanism (e.g. heartbeat timeout) and the deceleration profile (target acceleration, time-to-stop).}
 
 \subsubsection{Safe-State Transitions / Safety State Machine}
 \label{sec:sw-state-machine}
 
-% TODO: this subsystem does not yet have an explicit safe-state /
-% supervisory state machine. The proposed design below should be
-% reviewed, adjusted, and implemented before the final report is
-% submitted (or clearly marked as a planned improvement).
+\todo[inline]{This state machine is not yet implemented -- review, adjust, and implement before final submission, or clearly mark as a planned improvement.}
 
-To consolidate the mechanisms above into a coherent safety behaviour, a
-supervisory state machine is proposed (Fig.~\ref{fig:safety-fsm}),
-implemented as a dedicated ROS2 node (\texttt{safety\_manager}) that
-publishes the current safety state on a topic. Downstream nodes
-responsible for motor command generation gate their outputs on this
-state, and recovery from a degraded/stopped state requires an explicit
-operator-issued resume command (service call), preventing unintended
-autonomous resumption of motion.
-
-\begin{itemize}
-    \item \textbf{NOMINAL} — normal operation, motor commands passed
-    through unrestricted.
-    \item \textbf{SOFT\_STOP} — motor motion locked by explicit operator
-    command; power and telemetry remain active.
-    \item \textbf{RAMPDOWN} — communication with operator or main
-    computer lost; bounded deceleration to zero speed in progress.
-    \item \textbf{HARD\_ESTOP} — hardware emergency stop triggered
-    (button or emergency RF channel); power removed from actuators.
-\end{itemize}
+A supervisory state machine is proposed (Fig.~\ref{fig:safety-fsm}), implemented as a ROS2 node (\texttt{safety\_manager}) publishing the current safety state; motor-command nodes gate their output on this state, and leaving \texttt{SOFT\_STOP}/\texttt{RAMPDOWN} requires an explicit operator resume call, preventing unintended autonomous resumption.
 
 \begin{figure}[h]
     \centering
-    % TODO: replace with an actual state-machine diagram (TikZ or
-    % exported figure) showing states above and their transitions.
-    \includegraphics[width=0.8\textwidth]{figures/software_safety_schematic.png}
+    \begin{tikzpicture}[
+        every node/.style={font=\footnotesize},
+        state/.style={draw, rounded corners, minimum width=2.4cm, minimum height=0.8cm, align=center}
+    ]
+        \node[state] (nominal) at (0,0)     {NOMINAL};
+        \node[state] (soft)    at (3.4,0)   {SOFT\_STOP};
+        \node[state] (ramp)    at (0,-2)    {RAMPDOWN};
+        \node[state] (hard)    at (3.4,-2)  {HARD\_ESTOP};
+
+        \draw[->] (nominal) to[bend left=15] node[above,font=\scriptsize]{lock} (soft);
+        \draw[->] (soft) to[bend left=15] node[below,font=\scriptsize]{resume} (nominal);
+        \draw[->] (nominal) to[bend right=15] node[left,font=\scriptsize]{comms lost} (ramp);
+        \draw[->] (ramp) to[bend right=15] node[right,font=\scriptsize]{resume} (nominal);
+        \draw[->] (nominal) -- node[font=\scriptsize,sloped,above]{E-Stop} (hard);
+        \draw[->] (soft) -- (hard);
+        \draw[->] (ramp) -- (hard);
+    \end{tikzpicture}
     \caption{Proposed software safety state machine.}
     \label{fig:safety-fsm}
 \end{figure}
@@ -109,56 +69,17 @@ autonomous resumption of motion.
 \subsubsection{Behaviour on Communication / Telemetry Loss}
 \label{sec:sw-comm-loss}
 
-As described in Section~\ref{sec:sw-watchdog}, loss of the operator
-control link results in a controlled deceleration to a full stop rather
-than an abrupt halt, avoiding potential instability (e.g. tip-over) at
-speed.
-% TODO: state whether telemetry loss (as opposed to control-command
-% loss) triggers any distinct behaviour, and whether the rover attempts
-% to re-establish the link before resuming, or requires operator
-% intervention (ties into the SAFE state discussion above).
+Loss of the operator control link triggers a controlled deceleration rather than an abrupt halt, avoiding instability (e.g. tip-over) at speed.
 
 \subsubsection{Collision-Avoidance / Overcurrent Stop Conditions}
 \label{sec:sw-overcurrent}
 
-Each wheel motor driver includes a built-in overcurrent protection
-function that automatically deactivates the motor if measured current
-exceeds a defined threshold, protecting against stalls, obstructions,
-or collisions with terrain features.
-% TODO: state the exact current threshold and reset behaviour (manual
-% vs. automatic re-enable).
+Each wheel driver auto-deactivates above 5\,\si{\ampere}, protecting against stalls, obstructions, or terrain collisions.
 
-In addition, the team is evaluating an impact-detection mechanism based
-on monitoring rapid current spikes from the main bus and arm current
-sensors. As current draw alone can also spike due to legitimate
-high-load events (e.g. driving over rocks, climbing slopes, aggressive
-manoeuvres), this approach is being considered in combination with IMU
-(accelerometer/gyroscope) data to more reliably distinguish genuine
-impacts from normal high-load operation.
-% TODO: mark clearly whether this is implemented, in progress, or
-% future work by the time of final submission.
+An impact-detection mechanism based on current-spike monitoring (main/arm sensors) combined with IMU data is under evaluation, since current alone spikes during normal high-load events (rocks, slopes, aggressive manoeuvres) as well as impacts. \textit{Status: under consideration, not yet implemented.}
 
 \subsubsection{Reliability Argument}
 \label{sec:sw-reliability}
 
-The software safety architecture provides reliability through layered,
-partially-independent mechanisms:
-
-\begin{itemize}
-    \item \textbf{Independence of the CAN watchdog from the main
-    computer:} the ESP-based watchdog operates independently of the
-    main onboard computer, so a software crash or freeze on the main
-    computer does not prevent a safe stop.
-    \item \textbf{Graceful degradation before hard shutdown:} multiple
-    software-level responses (motor lock, rampdown, watchdog takeover)
-    handle non-critical faults without requiring the hardware E-Stop,
-    reducing wear and avoiding abrupt, potentially unstable stops.
-    \item \textbf{Defense in depth:} even if one software mechanism
-    fails to trigger (e.g. a bug in fault detection logic), the
-    hardware E-Stop (Section~\ref{sec:estop}) remains available as a
-    final, independent fallback.
-    % TODO: add any quantitative argument, e.g. results from fault
-    % injection tests (deliberately killing the main computer process
-    % and confirming the ESP watchdog engages within the expected
-    % timeout).
-\end{itemize}
+Reliability comes from layered, partially-independent mechanisms: the ESP-based CAN watchdog operates independently of the main computer, so a software crash still results in a safe stop; graceful software responses (lock, rampdown, watchdog takeover) handle non-critical faults without invoking the hardware E-Stop; and if any software mechanism fails to trigger, the hardware E-Stop (Sec.~\ref{subsec:emergency_stop}) remains as an independent fallback.
+\todo[inline]{Add quantitative evidence if fault-injection tests were run, e.g. killing the main computer process and confirming watchdog engagement within the expected timeout.}
