@@ -1,18 +1,33 @@
 % =============================================================================
 % sections/design/rover/ground_station.tex  -  Ground Station
-% Teams: ground_station (best guess - unconfirmed) / Status: EXAMPLE (scope approximation)
+% Teams: ground_station / Status: draft
 %
-% EXAMPLE CONTENT for scope/layout approximation - not final report text.
-% Adapted from the Preliminary Report's "Ground Station Setup and
-% Equipment" subsection, trimmed to minimal prose. Marked with \exampleflag
-% on its heading in the assembler.
+% Physical operator station only. Communication channels and the camera
+% suite are covered in the two following paragraphs
+% (communication_architecture.tex, operators_camera_suite.tex) - do not
+% duplicate them here.
 %
 % Images are placeholders (teams/ground_station/figures/gs_*.png) - swap
-% them for the real scheme/photo by overwriting the same files.
+% them for the real photo/scheme by overwriting the same files.
 % =============================================================================
 
-\todo[inline]{Description of the ground station setup and equipment used for teleoperation and situational awareness: operator station, monitors,
-joysticks, computers, network equipment, etc. Photo of the ground station with two operators. 1/2 - 2/3 page.}
+The ground station is the fixed operator post for driving the rover,
+commanding its subsystems, and monitoring autonomous runs. It links to the
+tripod-mounted directional antenna over an Ethernet (PoE) run of up to
+\qty{20}{\meter} and packs into a ruggedised flip-lid case
+(\autoref{fig:gs_sizes_scheme}) deployable in \qty{30}{\minute}.
+
+Two operators crew the station (\autoref{fig:gs_operators}): the primary
+drives and commands the manipulator, the second monitors telemetry and holds
+the emergency stop; both are cross-trained and swap by task. A workstation
+decodes the video streams, hosts the browser-based operator UI, and runs the
+\texttt{rosbridge} server into the ROS~2 graph, with a backup laptop able to
+take over within \qty{30}{\minute}. Two monitors carry the camera feeds and
+the telemetry and system-health view, while manual input comes from a custom
+console of three joysticks plus buttons and switches for driving, subsystem
+toggles, and mode selection. A latching emergency-stop button is wired to an
+independent \qty{433}{\mega\hertz} LoRa transceiver that bypasses Wi-Fi,
+ROS~2, and the station PC, surviving their failure.
 
 \begin{figure}[!htbp]
     \centering
@@ -31,4 +46,5 @@ joysticks, computers, network equipment, etc. Photo of the ground station with t
         \label{fig:gs_sizes_scheme}
     \end{subfigure}
 
+    \caption{}
 \end{figure}
